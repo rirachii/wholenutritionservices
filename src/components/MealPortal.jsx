@@ -3,9 +3,54 @@ import { AlertCircle } from 'lucide-react';
 import { Alert, AlertDescription } from '../components/ui/alert';
 
 const DUMMY_MEALS = [
-  { id: 1, name: 'Gluten-Free Pancakes', type: 'breakfast', calories: 450, dietaryTags: ['gluten-free', 'vegetarian'] },
-  { id: 2, name: 'Nut-Free Chicken Salad', type: 'lunch', calories: 350, dietaryTags: ['nut-free', 'high-protein'] },
-  { id: 3, name: 'Vegan Buddha Bowl', type: 'dinner', calories: 500, dietaryTags: ['vegan', 'gluten-free'] },
+  { 
+    id: 1, 
+    name: 'Gluten-Free Pancakes', 
+    type: 'breakfast', 
+    calories: 450, 
+    dietaryTags: ['gluten-free', 'vegetarian'],
+    image: '/api/placeholder/200/200'
+  },
+  { 
+    id: 2, 
+    name: 'Nut-Free Chicken Salad', 
+    type: 'lunch', 
+    calories: 350, 
+    dietaryTags: ['nut-free', 'high-protein'],
+    image: '/api/placeholder/200/200'
+  },
+  { 
+    id: 3, 
+    name: 'Vegan Buddha Bowl', 
+    type: 'dinner', 
+    calories: 500, 
+    dietaryTags: ['vegan', 'gluten-free'],
+    image: '/api/placeholder/200/200'
+  },
+  { 
+    id: 4, 
+    name: 'Fruit Parfait', 
+    type: 'breakfast', 
+    calories: 300, 
+    dietaryTags: ['vegetarian', 'gluten-free'],
+    image: '/api/placeholder/200/200'
+  },
+  { 
+    id: 5, 
+    name: 'Mediterranean Wrap', 
+    type: 'lunch', 
+    calories: 450, 
+    dietaryTags: ['vegetarian'],
+    image: '/api/placeholder/200/200'
+  },
+  { 
+    id: 6, 
+    name: 'Chocolate Mousse', 
+    type: 'dessert', 
+    calories: 250, 
+    dietaryTags: ['gluten-free'],
+    image: '/api/placeholder/200/200'
+  }
 ];
 
 const DUMMY_USER = {
@@ -13,6 +58,8 @@ const DUMMY_USER = {
   password: 'password123',
   dietaryRestrictions: ['gluten-free']
 };
+
+const MEAL_TYPES = ['breakfast', 'lunch', 'dinner', 'dessert'];
 
 function MealPortal() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -33,6 +80,44 @@ function MealPortal() {
     } else {
       setError('Invalid credentials');
     }
+  };
+
+  const renderMealSection = (type) => {
+    const filteredMeals = meals.filter(meal => meal.type === type);
+    if (filteredMeals.length === 0) return null;
+
+    return (
+      <div key={type} className="mb-8">
+        <h2 className="text-2xl font-bold mb-4 capitalize">{type}</h2>
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {filteredMeals.map((meal) => (
+            <div key={meal.id} className="bg-white overflow-hidden shadow rounded-lg flex">
+              <div className="w-1/3">
+                <img 
+                  src={meal.image} 
+                  alt={meal.name}
+                  className="h-full w-full object-cover"
+                />
+              </div>
+              <div className="p-4 w-2/3">
+                <h3 className="text-lg font-medium">{meal.name}</h3>
+                <p className="mt-1 text-gray-500">{meal.calories} calories</p>
+                <div className="mt-2 flex flex-wrap gap-2">
+                  {meal.dietaryTags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
   };
 
   if (!isLoggedIn) {
@@ -122,26 +207,8 @@ function MealPortal() {
 
       <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
         {activeTab === 'meals' ? (
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {meals.map((meal) => (
-              <div key={meal.id} className="bg-white overflow-hidden shadow rounded-lg">
-                <div className="p-4">
-                  <h3 className="text-lg font-medium">{meal.name}</h3>
-                  <p className="mt-1 text-gray-500">{meal.type}</p>
-                  <p className="mt-1">{meal.calories} calories</p>
-                  <div className="mt-2 flex flex-wrap gap-2">
-                    {meal.dietaryTags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            ))}
+          <div>
+            {MEAL_TYPES.map(type => renderMealSection(type))}
           </div>
         ) : (
           <div className="bg-white shadow rounded-lg">
