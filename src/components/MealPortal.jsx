@@ -1,57 +1,7 @@
 import React, { useState } from 'react';
-import { AlertCircle } from 'lucide-react';
+import { AlertCircle, Filter } from 'lucide-react';
 import { Alert, AlertDescription } from '../components/ui/alert';
-
-const DUMMY_MEALS = [
-  { 
-    id: 1, 
-    name: 'Gluten-Free Pancakes', 
-    type: 'breakfast', 
-    calories: 450, 
-    dietaryTags: ['gluten-free', 'vegetarian'],
-    image: '/api/placeholder/200/200'
-  },
-  { 
-    id: 2, 
-    name: 'Nut-Free Chicken Salad', 
-    type: 'lunch', 
-    calories: 350, 
-    dietaryTags: ['nut-free', 'high-protein'],
-    image: '/api/placeholder/200/200'
-  },
-  { 
-    id: 3, 
-    name: 'Vegan Buddha Bowl', 
-    type: 'dinner', 
-    calories: 500, 
-    dietaryTags: ['vegan', 'gluten-free'],
-    image: '/api/placeholder/200/200'
-  },
-  { 
-    id: 4, 
-    name: 'Fruit Parfait', 
-    type: 'breakfast', 
-    calories: 300, 
-    dietaryTags: ['vegetarian', 'gluten-free'],
-    image: '/api/placeholder/200/200'
-  },
-  { 
-    id: 5, 
-    name: 'Mediterranean Wrap', 
-    type: 'lunch', 
-    calories: 450, 
-    dietaryTags: ['vegetarian'],
-    image: '/api/placeholder/200/200'
-  },
-  { 
-    id: 6, 
-    name: 'Chocolate Mousse', 
-    type: 'dessert', 
-    calories: 250, 
-    dietaryTags: ['gluten-free'],
-    image: '/api/placeholder/200/200'
-  }
-];
+import { MEAL_DATA } from '../data/meals';
 
 const DUMMY_USER = {
   email: 'home1@example.com',
@@ -59,58 +9,105 @@ const DUMMY_USER = {
   dietaryRestrictions: ['gluten-free']
 };
 
-const MEAL_TYPES = ['breakfast', 'lunch', 'dinner', 'dessert'];
+const SEASONS = ['Classic', 'Essential', 'Fall/Winter', 'Spring/Summer'];
 
 function MealPortal() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const [meals, setMeals] = useState(DUMMY_MEALS);
   const [activeTab, setActiveTab] = useState('meals');
+  const [selectedMealType, setSelectedMealType] = useState('all');
+  const [selectedSeason, setSelectedSeason] = useState('all');
+  const [showFilters, setShowFilters] = useState(false);
 
   const handleLogin = (e) => {
     e.preventDefault();
     if (email === DUMMY_USER.email && password === DUMMY_USER.password) {
       setIsLoggedIn(true);
       setError('');
-      setMeals(DUMMY_MEALS.filter(meal => 
-        meal.dietaryTags.some(tag => DUMMY_USER.dietaryRestrictions.includes(tag))
-      ));
     } else {
       setError('Invalid credentials');
     }
   };
 
+  const filterMeals = (meals) => {
+    return meals.filter(meal => {
+      // Filter by season
+      if (selectedSeason !== 'all' && meal.season !== selectedSeason) {
+        return false;
+      }
+
+      // Filter by dietary restrictions
+      if (DUMMY_USER.dietaryRestrictions.length > 0) {
+        return DUMMY_USER.dietaryRestrictions.every(restriction =>
+          meal.dietaryTags.some(tag => tag.includes(restriction))
+        );
+      }
+
+      return true;
+    });
+  };
+
   const renderMealSection = (type) => {
-    const filteredMeals = meals.filter(meal => meal.type === type);
-    if (filteredMeals.length === 0) return null;
+    let mealsToShow = MEAL_DATA[type] || [];
+    mealsToShow = filterMeals(mealsToShow);
+
+    if (mealsToShow.length === 0) return null;
 
     return (
-      <div key={type} className="mb-8">
-        <h2 className="text-2xl font-bold mb-4 capitalize">{type}</h2>
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {filteredMeals.map((meal) => (
-            <div key={meal.id} className="bg-white overflow-hidden shadow rounded-lg flex">
-              <div className="w-1/3">
+      <div key={type} className="mb-12">
+        <h2 className="text-2xl font-bold mb-6 capitalize border-b pb-2">
+          {type}
+          <span className="text-gray-500 text-sm ml-2">({mealsToShow.length} items)</span>
+        </h2>
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {mealsToShow.map((meal) => (
+            <div key={meal.id} className="bg-white overflow-hidden shadow-lg rounded-lg hover:shadow-xl transition-shadow">
+              <div className="h-48 overflow-hidden relative">
                 <img 
                   src={meal.image} 
                   alt={meal.name}
-                  className="h-full w-full object-cover"
+                  className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-200"
                 />
+                <span className="absolute top-2 right-2 bg-blue-500 text-white px-2 py-1 rounded-full text-sm">
+                  {meal.calories} cal
+                </span>
               </div>
-              <div className="p-4 w-2/3">
-                <h3 className="text-lg font-medium">{meal.name}</h3>
-                <p className="mt-1 text-gray-500">{meal.calories} calories</p>
+              <div className="p-4">
+                <div className="flex justify-between items-start mb-2">
+                  <h3 className="text-lg font-medium flex-1">{meal.name}</h3>
+                </div>
+                <div className="mb-2 text-sm text-gray-600">
+                  <div className="flex items-center mb-1">
+                    <span className="mr-3">{meal.prepTime}</span>
+                    <span>{meal.servings}</span>
+                  </div>
+                  <div className="text-sm text-blue-600">{meal.season}</div>
+                </div>
                 <div className="mt-2 flex flex-wrap gap-2">
                   {meal.dietaryTags.map((tag) => (
                     <span
                       key={tag}
-                      className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800"
+                      className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
+                        tag.includes('free') || tag === 'vegetarian' || tag === 'vegan'
+                          ? 'bg-green-100 text-green-800'
+                          : tag.includes('contains')
+                          ? 'bg-yellow-100 text-yellow-800'
+                          : 'bg-blue-100 text-blue-800'
+                      }`}
                     >
-                      {tag}
+                      {tag.replace(/-/g, ' ')}
                     </span>
                   ))}
+                </div>
+                <div className="mt-4 flex space-x-2">
+                  <button className="flex-1 bg-blue-600 text-white rounded-md py-2 hover:bg-blue-700 transition-colors">
+                    Add to Order
+                  </button>
+                  <button className="px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-50 transition-colors">
+                    Details
+                  </button>
                 </div>
               </div>
             </div>
@@ -193,7 +190,16 @@ function MealPortal() {
                 </button>
               </div>
             </div>
-            <div className="flex items-center">
+            <div className="flex items-center space-x-4">
+              <button
+                onClick={() => setShowFilters(!showFilters)}
+                className="p-2 text-gray-600 hover:text-gray-900"
+              >
+                <Filter className="h-5 w-5" />
+              </button>
+              <span className="text-gray-700">
+                Welcome, {DUMMY_USER.email}
+              </span>
               <button
                 onClick={() => setIsLoggedIn(false)}
                 className="text-gray-600 hover:text-gray-900"
@@ -208,20 +214,70 @@ function MealPortal() {
       <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
         {activeTab === 'meals' ? (
           <div>
-            {MEAL_TYPES.map(type => renderMealSection(type))}
+            <div className="mb-8">
+              <div className="flex justify-between items-center mb-6">
+                <h2 className="text-3xl font-bold">Weekly Menu</h2>
+                <div className="flex space-x-4">
+                  <select 
+                    className="border rounded-md px-3 py-2"
+                    value={selectedMealType}
+                    onChange={(e) => setSelectedMealType(e.target.value)}
+                  >
+                    <option value="all">All Meals</option>
+                    <option value="breakfast">Breakfast</option>
+                    <option value="lunch">Lunch</option>
+                    <option value="dinner">Dinner</option>
+                  </select>
+                  <select
+                    className="border rounded-md px-3 py-2"
+                    value={selectedSeason}
+                    onChange={(e) => setSelectedSeason(e.target.value)}
+                  >
+                    <option value="all">All Seasons</option>
+                    {SEASONS.map(season => (
+                      <option key={season} value={season}>{season}</option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+              <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
+                <p className="text-blue-800">
+                  Showing meals matching your dietary preferences: {DUMMY_USER.dietaryRestrictions.join(', ')}
+                </p>
+              </div>
+            </div>
+            {selectedMealType === 'all' ? (
+              <>
+                {renderMealSection('breakfast')}
+                {renderMealSection('lunch')}
+                {renderMealSection('dinner')}
+              </>
+            ) : (
+              renderMealSection(selectedMealType)
+            )}
           </div>
         ) : (
           <div className="bg-white shadow rounded-lg">
-            <div className="p-4">
-              <h2 className="text-lg font-medium">Account Settings</h2>
-              <div className="mt-4">
-                <p>Email: {DUMMY_USER.email}</p>
-                <p className="mt-2">Dietary Restrictions:</p>
-                <ul className="mt-1 list-disc list-inside">
-                  {DUMMY_USER.dietaryRestrictions.map((restriction) => (
-                    <li key={restriction}>{restriction}</li>
-                  ))}
-                </ul>
+            <div className="p-6">
+              <h2 className="text-2xl font-bold mb-6">Account Settings</h2>
+              <div className="space-y-4">
+                <div>
+                  <h3 className="text-lg font-medium mb-2">Email</h3>
+                  <p className="text-gray-600">{DUMMY_USER.email}</p>
+                </div>
+                <div>
+                  <h3 className="text-lg font-medium mb-2">Dietary Restrictions</h3>
+                  <div className="flex flex-wrap gap-2">
+                    {DUMMY_USER.dietaryRestrictions.map((restriction) => (
+                      <span
+                        key={restriction}
+                        className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800"
+                      >
+                        {restriction}
+                      </span>
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
           </div>
