@@ -1,0 +1,6984 @@
+{
+    "breakfast": [
+      {
+        "id": "apple-spice-oatmeal",
+        "name": "Apple Spice Oatmeal",
+        "type": "breakfast",
+        "calories": 400,
+        "prepTime": "20 min",
+        "servings": "4 servings",
+        "season": "Fall/Winter",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-optional",
+          "contains-tree-nuts",
+          "contains-almonds"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 5,
+        "carbs": 73
+      },
+      {
+        "id": "cherry-oat-crumble",
+        "name": "Cherry Oat Crumble",
+        "type": "breakfast",
+        "calories": 440,
+        "prepTime": "45 min",
+        "servings": "4 servings",
+        "season": "Spring/Summer",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 10,
+        "carbs": 79
+      },
+      {
+        "id": "apple-crisp",
+        "name": "Apple Crisp",
+        "type": "breakfast",
+        "calories": 500,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Fall/Winter",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 15,
+        "carbs": 71
+      },
+      {
+        "id": "banana-nut-oatmeal",
+        "name": "Banana Nut Oatmeal",
+        "type": "breakfast",
+        "calories": 360,
+        "prepTime": "10 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-optional",
+          "contains-tree-nuts"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 30,
+        "carbs": 65
+      },
+      {
+        "id": "breakfast-banana-splits",
+        "name": "Breakfast Banana Splits",
+        "type": "breakfast",
+        "calories": 390,
+        "prepTime": "5 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-optional"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 30,
+        "carbs": 98
+      },
+      {
+        "id": "breakfast-quinoa-with-berries",
+        "name": "Breakfast Quinoa with Berries",
+        "type": "breakfast",
+        "calories": 370,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Spring/Summer",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-optional"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 30,
+        "carbs": 50
+      },
+      {
+        "id": "chia-pudding",
+        "name": "Chia Pudding",
+        "type": "breakfast",
+        "calories": 350,
+        "prepTime": "overnight + 5min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "contains-dairy"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 50,
+        "carbs": 37
+      },
+      {
+        "id": "apricot-overnight-oats",
+        "name": "Apricot Overnight Oats",
+        "type": "breakfast",
+        "calories": 680,
+        "prepTime": "10 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "contains-dairy",
+          "contains-tree-nuts"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 65,
+        "carbs": 96
+      },
+      {
+        "id": "blueberry-tofu-smoothie",
+        "name": "Blueberry Tofu Smoothie",
+        "type": "breakfast",
+        "calories": 510,
+        "prepTime": "5 min",
+        "servings": "4 servings",
+        "season": "Spring/Summer",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-optional"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 65,
+        "carbs": 66
+      },
+      {
+        "id": "pb&j-overnight-oats",
+        "name": "PB&J Overnight Oats",
+        "type": "breakfast",
+        "calories": 440,
+        "prepTime": "Overnight + 5min",
+        "servings": "6 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-optional"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 65,
+        "carbs": 61
+      },
+      {
+        "id": "chocolate-chip-protein-overnight-oats",
+        "name": "Chocolate Chip Protein Overnight Oats",
+        "type": "breakfast",
+        "calories": 400,
+        "prepTime": "Overnight + 5min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "contains-dairy"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 70,
+        "carbs": 36
+      },
+      {
+        "id": "chai-spiced-waffles-and-berry-compote",
+        "name": "Chai Spiced Waffles and Berry Compote",
+        "type": "breakfast",
+        "calories": 440,
+        "prepTime": "15 min",
+        "servings": "4 servings",
+        "season": "Fall/Winter",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 75,
+        "carbs": 64
+      },
+      {
+        "id": "overnight-french-toast-casserole",
+        "name": "Overnight French Toast Casserole",
+        "type": "breakfast",
+        "calories": 310,
+        "prepTime": "Overnight",
+        "servings": "12 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 85,
+        "carbs": 39
+      },
+      {
+        "id": "lemon-blueberry-smoothie",
+        "name": "Lemon Blueberry Smoothie",
+        "type": "breakfast",
+        "calories": 330,
+        "prepTime": "5 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-optional"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 95,
+        "carbs": 50
+      },
+      {
+        "id": "pumpkin-pie-oatmeal",
+        "name": "Pumpkin Pie Oatmeal",
+        "type": "breakfast",
+        "calories": 610,
+        "prepTime": "10 min",
+        "servings": "4 servings",
+        "season": "Fall/Winter",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-optional"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 110,
+        "carbs": 102
+      },
+      {
+        "id": "blueberry-protein-porridge",
+        "name": "Blueberry Protein Porridge",
+        "type": "breakfast",
+        "calories": 530,
+        "prepTime": "10 min",
+        "servings": "4 servings",
+        "season": "Spring/Summer",
+        "dietaryTags": [
+          "gluten-free",
+          "contains-dairy"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 120,
+        "carbs": 66
+      },
+      {
+        "id": "yogurt-parfait",
+        "name": "Yogurt Parfait",
+        "type": "breakfast",
+        "calories": 480,
+        "prepTime": "5 min",
+        "servings": "4 servings",
+        "season": "Spring/Summer",
+        "dietaryTags": [
+          "dairy-optional",
+          "contains-tree-nuts",
+          "contains-almonds"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 130,
+        "carbs": 66
+      },
+      {
+        "id": "strawberry-overnight-oats",
+        "name": "Strawberry Overnight Oats",
+        "type": "breakfast",
+        "calories": 500,
+        "prepTime": "Overnight + 5min",
+        "servings": "4 servings",
+        "season": "Spring/Summer",
+        "dietaryTags": [
+          "gluten-free",
+          "contains-dairy"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 140,
+        "carbs": 47
+      },
+      {
+        "id": "peanut-butter-banana-smoothie",
+        "name": "Peanut Butter Banana Smoothie",
+        "type": "breakfast",
+        "calories": 330,
+        "prepTime": "5 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-optional"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 160,
+        "carbs": 42
+      },
+      {
+        "id": "blueberry-crisp",
+        "name": "Blueberry Crisp",
+        "type": "breakfast",
+        "calories": 520,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Spring/Summer",
+        "dietaryTags": [
+          "contains-gluten",
+          "dairy-optional"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 180,
+        "carbs": 92
+      },
+      {
+        "id": "almond-rice-pudding",
+        "name": "Almond Rice Pudding",
+        "type": "breakfast",
+        "calories": 420,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Spring/Summer",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-free",
+          "contains-tree-nuts",
+          "contains-almonds"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 190,
+        "carbs": 74
+      },
+      {
+        "id": "gf-lemon-blueberry-scones",
+        "name": "GF Lemon Blueberry Scones",
+        "type": "breakfast",
+        "calories": 390,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Spring/Summer",
+        "dietaryTags": [
+          "gluten-free",
+          "contains-dairy",
+          "contains-tree-nuts",
+          "contains-almonds",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 190,
+        "carbs": 48
+      },
+      {
+        "id": "avocado-toast",
+        "name": "Avocado Toast",
+        "type": "breakfast",
+        "calories": 520,
+        "prepTime": "10 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "dairy-free",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 200,
+        "carbs": 42
+      },
+      {
+        "id": "avocado-toast-gf",
+        "name": "Avocado Toast GF",
+        "type": "breakfast",
+        "calories": 520,
+        "prepTime": "10 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-free",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 200,
+        "carbs": 42
+      },
+      {
+        "id": "peanut-butter-chia-toast",
+        "name": "Peanut Butter Chia Toast",
+        "type": "breakfast",
+        "calories": 500,
+        "prepTime": "5 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "dairy-free"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 210,
+        "carbs": 63
+      },
+      {
+        "id": "peanut-butter-chia-toast-gf",
+        "name": "Peanut Butter Chia Toast GF",
+        "type": "breakfast",
+        "calories": 500,
+        "prepTime": "5 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-free"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 210,
+        "carbs": 63
+      },
+      {
+        "id": "pb&j-oatmeal-bake",
+        "name": "PB&J Oatmeal Bake",
+        "type": "breakfast",
+        "calories": 550,
+        "prepTime": "20 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "dairy-optional",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 220,
+        "carbs": 62
+      },
+      {
+        "id": "apple-bars",
+        "name": "Apple Bars",
+        "type": "breakfast",
+        "calories": 430,
+        "prepTime": "45 min",
+        "servings": "6 servings",
+        "season": "Fall/Winter",
+        "dietaryTags": [
+          "contains-gluten",
+          "dairy-optional"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 240,
+        "carbs": 68
+      },
+      {
+        "id": "berry-cheesecake-breakfast-parfait",
+        "name": "Berry Cheesecake Breakfast Parfait",
+        "type": "breakfast",
+        "calories": 330,
+        "prepTime": "5 min",
+        "servings": "4 servings",
+        "season": "Spring/Summer",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 240,
+        "carbs": 29
+      },
+      {
+        "id": "peach-cobbler",
+        "name": "Peach Cobbler",
+        "type": "breakfast",
+        "calories": 380,
+        "prepTime": "1 hour",
+        "servings": "8 servings",
+        "season": "Spring/Summer",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 250,
+        "carbs": 53
+      },
+      {
+        "id": "sausage-and-grits-casserole",
+        "name": "Sausage and Grits Casserole",
+        "type": "breakfast",
+        "calories": 570,
+        "prepTime": "45 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 250,
+        "carbs": 35
+      },
+      {
+        "id": "bacon,-eggs,-home-fries",
+        "name": "Bacon, Eggs, Home Fries",
+        "type": "breakfast",
+        "calories": 410,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Essential",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-free",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 260,
+        "carbs": 26
+      },
+      {
+        "id": "cherry-almond-pancake-bake",
+        "name": "Cherry Almond Pancake Bake",
+        "type": "breakfast",
+        "calories": 290,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "dairy-free",
+          "contains-almonds",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 260,
+        "carbs": 25
+      },
+      {
+        "id": "gf-apple-breakfast-cake",
+        "name": "GF Apple Breakfast Cake",
+        "type": "breakfast",
+        "calories": 400,
+        "prepTime": "45 min",
+        "servings": "4 servings",
+        "season": "Fall/Winter",
+        "dietaryTags": [
+          "gluten-free",
+          "contains-dairy",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 260,
+        "carbs": 65
+      },
+      {
+        "id": "spinach-and-mushroom-omelet",
+        "name": "Spinach and Mushroom Omelet",
+        "type": "breakfast",
+        "calories": 390,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-optional",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 260,
+        "carbs": 12
+      },
+      {
+        "id": "peanut-butter-banana-toast",
+        "name": "Peanut Butter Banana Toast",
+        "type": "breakfast",
+        "calories": 460,
+        "prepTime": "5 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "dairy-free"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 280,
+        "carbs": 62
+      },
+      {
+        "id": "peanut-butter-banana-toast-gf",
+        "name": "Peanut Butter Banana Toast GF",
+        "type": "breakfast",
+        "calories": 460,
+        "prepTime": "5 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-free"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 280,
+        "carbs": 62
+      },
+      {
+        "id": "ground-turkey-and-egg-muffins",
+        "name": "Ground Turkey and Egg Muffins",
+        "type": "breakfast",
+        "calories": 380,
+        "prepTime": "35 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-free",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 290,
+        "carbs": 9
+      },
+      {
+        "id": "chocolate-chip-zucchini-bread",
+        "name": "Chocolate Chip Zucchini Bread",
+        "type": "breakfast",
+        "calories": 430,
+        "prepTime": "90 min",
+        "servings": "8 servings",
+        "season": "Spring/Summer",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 300,
+        "carbs": 61
+      },
+      {
+        "id": "sweet-or-savory-crepes",
+        "name": "Sweet or Savory Crepes",
+        "type": "breakfast",
+        "calories": 300,
+        "prepTime": "30 min",
+        "servings": "6 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-optional",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 300,
+        "carbs": 25
+      },
+      {
+        "id": "blueberry-muffins",
+        "name": "Blueberry Muffins",
+        "type": "breakfast",
+        "calories": 320,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Spring/Summer",
+        "dietaryTags": [
+          "gluten-free",
+          "contains-dairy",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 310,
+        "carbs": 71
+      },
+      {
+        "id": "country-potato-breakfast",
+        "name": "Country Potato Breakfast",
+        "type": "breakfast",
+        "calories": 390,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-free",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 310,
+        "carbs": 33
+      },
+      {
+        "id": "strawberries-and-cream-french-toast",
+        "name": "Strawberries and Cream French Toast",
+        "type": "breakfast",
+        "calories": 550,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Spring/Summer",
+        "dietaryTags": [
+          "contains-gluten",
+          "dairy-optional",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 310,
+        "carbs": 37
+      },
+      {
+        "id": "blueberry-coconut-baked-oatmeal",
+        "name": "Blueberry Coconut Baked Oatmeal",
+        "type": "breakfast",
+        "calories": 480,
+        "prepTime": "60 min",
+        "servings": "6 servings",
+        "season": "Spring/Summer",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-optional",
+          "contains-tree-nuts",
+          "contains-almonds"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 320,
+        "carbs": 68
+      },
+      {
+        "id": "bacon,-eggs,-hashbrowns",
+        "name": "Bacon, Eggs, Hashbrowns",
+        "type": "breakfast",
+        "calories": 460,
+        "prepTime": "10 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-free",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 330,
+        "carbs": 35
+      },
+      {
+        "id": "applesauce-muffins-and-scrambled-eggs",
+        "name": "Applesauce Muffins and Scrambled Eggs",
+        "type": "breakfast",
+        "calories": 690,
+        "prepTime": "20 min",
+        "servings": "4 servings",
+        "season": "Fall/Winter",
+        "dietaryTags": [
+          "contains-gluten",
+          "dairy-optional",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 340,
+        "carbs": 28
+      },
+      {
+        "id": "scrambled-eggs-with-summer-vegetables",
+        "name": "Scrambled Eggs with Summer Vegetables",
+        "type": "breakfast",
+        "calories": 400,
+        "prepTime": "20 min",
+        "servings": "4 servings",
+        "season": "Spring/Summer",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-free",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 370,
+        "carbs": 30
+      },
+      {
+        "id": "gingerbread-pancakes",
+        "name": "Gingerbread Pancakes",
+        "type": "breakfast",
+        "calories": 582,
+        "prepTime": "10 min",
+        "servings": "4 servings",
+        "season": "Fall/Winter",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy",
+          "contains-tree-nuts",
+          "contains-almonds",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 380,
+        "carbs": 54
+      },
+      {
+        "id": "strawberry-shortcake",
+        "name": "Strawberry Shortcake",
+        "type": "breakfast",
+        "calories": 550,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Spring/Summer",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 380,
+        "carbs": 28
+      },
+      {
+        "id": "veggie-hashbrown-scramble",
+        "name": "Veggie Hashbrown Scramble",
+        "type": "breakfast",
+        "calories": 570,
+        "prepTime": "20 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-optional",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 380,
+        "carbs": 59
+      },
+      {
+        "id": "bell-pepper-cheddar-omelet",
+        "name": "Bell Pepper Cheddar Omelet",
+        "type": "breakfast",
+        "calories": 360,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "contains-dairy",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 400,
+        "carbs": 10
+      },
+      {
+        "id": "mexican-eggs-benedict",
+        "name": "Mexican Eggs Benedict",
+        "type": "breakfast",
+        "calories": 450,
+        "prepTime": "45 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "contains-dairy",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 400,
+        "carbs": 19
+      },
+      {
+        "id": "caprese-avocado-toast",
+        "name": "Caprese Avocado Toast",
+        "type": "breakfast",
+        "calories": 400,
+        "prepTime": "10 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 440,
+        "carbs": 32
+      },
+      {
+        "id": "caprese-avocado-toast-gf",
+        "name": "Caprese Avocado Toast GF",
+        "type": "breakfast",
+        "calories": 400,
+        "prepTime": "10 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "contains-dairy"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 440,
+        "carbs": 32
+      },
+      {
+        "id": "pb&j-waffle-sandwich",
+        "name": "PB&J Waffle Sandwich",
+        "type": "breakfast",
+        "calories": 390,
+        "prepTime": "5 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 450,
+        "carbs": 60
+      },
+      {
+        "id": "carrot-cake-cookies",
+        "name": "Carrot Cake Cookies",
+        "type": "breakfast",
+        "calories": 590,
+        "prepTime": "20 min",
+        "servings": "4 servings",
+        "season": "Spring/Summer",
+        "dietaryTags": [
+          "contains-gluten",
+          "dairy-free",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 460,
+        "carbs": 84
+      },
+      {
+        "id": "egg-in-a-nest",
+        "name": "Egg in a Nest",
+        "type": "breakfast",
+        "calories": 340,
+        "prepTime": "10 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "dairy-optional",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 460,
+        "carbs": 28
+      },
+      {
+        "id": "egg-in-a-nest-gf",
+        "name": "Egg in a Nest GF",
+        "type": "breakfast",
+        "calories": 340,
+        "prepTime": "10 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-optional",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 460,
+        "carbs": 28
+      },
+      {
+        "id": "veggie-skillet-eggs",
+        "name": "Veggie Skillet Eggs",
+        "type": "breakfast",
+        "calories": 420,
+        "prepTime": "5 min",
+        "servings": "4 servings",
+        "season": "Essential",
+        "dietaryTags": [
+          "gluten-free",
+          "contains-dairy",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 460,
+        "carbs": 19
+      },
+      {
+        "id": "microwave-veggie-omelets",
+        "name": "Microwave Veggie Omelets",
+        "type": "breakfast",
+        "calories": 480,
+        "prepTime": "15 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "dairy-optional",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 470,
+        "carbs": 20
+      },
+      {
+        "id": "microwave-veggie-omelets-gf",
+        "name": "Microwave Veggie Omelets GF",
+        "type": "breakfast",
+        "calories": 480,
+        "prepTime": "15 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-optional",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 470,
+        "carbs": 20
+      },
+      {
+        "id": "buttermilk-raisin-scones",
+        "name": "Buttermilk Raisin Scones",
+        "type": "breakfast",
+        "calories": 660,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 480,
+        "carbs": 93
+      },
+      {
+        "id": "cottage-cheese-with-peaches-and-granola",
+        "name": "Cottage Cheese with Peaches and Granola",
+        "type": "breakfast",
+        "calories": 310,
+        "prepTime": "5 min",
+        "servings": "4 servings",
+        "season": "Essential",
+        "dietaryTags": [
+          "gluten-free",
+          "contains-dairy",
+          "contains-tree-nuts"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 490,
+        "carbs": 46
+      },
+      {
+        "id": "breakfast-casserole",
+        "name": "Breakfast Casserole",
+        "type": "breakfast",
+        "calories": 350,
+        "prepTime": "60 min",
+        "servings": "8 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "contains-dairy",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 500,
+        "carbs": 13
+      },
+      {
+        "id": "cream-cheese-bagels-and-fruit",
+        "name": "Cream Cheese Bagels and Fruit",
+        "type": "breakfast",
+        "calories": 340,
+        "prepTime": "5 min",
+        "servings": "4 servings",
+        "season": "Essential",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 520,
+        "carbs": 49
+      },
+      {
+        "id": "ham-and-jam-waffle-sandwich",
+        "name": "Ham and Jam Waffle Sandwich",
+        "type": "breakfast",
+        "calories": 400,
+        "prepTime": "10 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 520,
+        "carbs": 50
+      },
+      {
+        "id": "southwest-breakfast-sandwich",
+        "name": "Southwest Breakfast Sandwich",
+        "type": "breakfast",
+        "calories": 320,
+        "prepTime": "10 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "dairy-free",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 540,
+        "carbs": 46
+      },
+      {
+        "id": "microwave-bread-pudding",
+        "name": "Microwave Bread Pudding",
+        "type": "breakfast",
+        "calories": 500,
+        "prepTime": "15 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "dairy-optional",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 550,
+        "carbs": 84
+      },
+      {
+        "id": "microwave-bread-pudding-gf",
+        "name": "Microwave Bread Pudding GF",
+        "type": "breakfast",
+        "calories": 500,
+        "prepTime": "15 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-optional",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 550,
+        "carbs": 84
+      },
+      {
+        "id": "bacon-egg-and-cheese-sandwich",
+        "name": "Bacon Egg and Cheese Sandwich",
+        "type": "breakfast",
+        "calories": 540,
+        "prepTime": "20 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 570,
+        "carbs": 39
+      },
+      {
+        "id": "tex-mex-sweet-potato-hash",
+        "name": "Tex-Mex Sweet Potato Hash",
+        "type": "breakfast",
+        "calories": 400,
+        "prepTime": "45 min",
+        "servings": "4 servings",
+        "season": "Fall/Winter",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-optional"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 590,
+        "carbs": 22
+      },
+      {
+        "id": "applesauce-french-toast",
+        "name": "Applesauce French Toast",
+        "type": "breakfast",
+        "calories": 440,
+        "prepTime": "10 min",
+        "servings": "4 servings",
+        "season": "Fall/Winter",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 600,
+        "carbs": 59
+      },
+      {
+        "id": "hashbrown-breakfast-cups",
+        "name": "Hashbrown Breakfast Cups",
+        "type": "breakfast",
+        "calories": 510,
+        "prepTime": "45 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "contains-dairy",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 600,
+        "carbs": 28
+      },
+      {
+        "id": "lemon-ricotta-pancakes",
+        "name": "Lemon Ricotta Pancakes",
+        "type": "breakfast",
+        "calories": 410,
+        "prepTime": "20 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 600,
+        "carbs": 35
+      },
+      {
+        "id": "breakfast-fruit-\"pizzas\"",
+        "name": "Breakfast Fruit \"Pizzas\"",
+        "type": "breakfast",
+        "calories": 510,
+        "prepTime": "10 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 620,
+        "carbs": 95
+      },
+      {
+        "id": "microwave-ham-egg-and-cheese-sandwich",
+        "name": "Microwave Ham Egg and Cheese Sandwich",
+        "type": "breakfast",
+        "calories": 360,
+        "prepTime": "10 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 620,
+        "carbs": 31
+      },
+      {
+        "id": "sausage-gravy-and-home-fries",
+        "name": "Sausage Gravy and Home Fries",
+        "type": "breakfast",
+        "calories": 400,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-optional"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 660,
+        "carbs": 48
+      },
+      {
+        "id": "bacon-veggie-skillet",
+        "name": "Bacon Veggie Skillet",
+        "type": "breakfast",
+        "calories": 530,
+        "prepTime": "45 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-free"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 670,
+        "carbs": 61
+      },
+      {
+        "id": "bananas-foster-oatmeal",
+        "name": "Bananas Foster Oatmeal",
+        "type": "breakfast",
+        "calories": 370,
+        "prepTime": "45 min",
+        "servings": "6 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "contains-dairy",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 670,
+        "carbs": 97
+      },
+      {
+        "id": "blt-breakfast-wraps",
+        "name": "BLT Breakfast Wraps",
+        "type": "breakfast",
+        "calories": 410,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "dairy-free",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 690,
+        "carbs": 35
+      },
+      {
+        "id": "blt-breakfast-wraps-gf",
+        "name": "BLT Breakfast Wraps GF",
+        "type": "breakfast",
+        "calories": 410,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-free",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 690,
+        "carbs": 35
+      },
+      {
+        "id": "chocolate-muffins",
+        "name": "Chocolate Muffins",
+        "type": "breakfast",
+        "calories": 400,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 710,
+        "carbs": 49
+      },
+      {
+        "id": "bacon-and-egg-wraps",
+        "name": "Bacon and Egg Wraps",
+        "type": "breakfast",
+        "calories": 460,
+        "prepTime": "10 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "dairy-free"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 720,
+        "carbs": 38
+      },
+      {
+        "id": "gf-df-pancakes",
+        "name": "GF DF Pancakes",
+        "type": "breakfast",
+        "calories": 390,
+        "prepTime": "20 min",
+        "servings": "4 servings",
+        "season": "Essential",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-free",
+          "contains-almonds",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 720,
+        "carbs": 32
+      },
+      {
+        "id": "banana-oatmeal-bread",
+        "name": "Banana Oatmeal Bread",
+        "type": "breakfast",
+        "calories": 480,
+        "prepTime": "60 min",
+        "servings": "6 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "dairy-optional",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 730,
+        "carbs": 53
+      },
+      {
+        "id": "chilaquiles",
+        "name": "Chilaquiles",
+        "type": "breakfast",
+        "calories": 440,
+        "prepTime": "10 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-optional",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 760,
+        "carbs": 33
+      },
+      {
+        "id": "sausage,-toast,-&-eggs",
+        "name": "Sausage, Toast, & Eggs",
+        "type": "breakfast",
+        "calories": 370,
+        "prepTime": "20 min",
+        "servings": "4 servings",
+        "season": "Essential",
+        "dietaryTags": [
+          "contains-gluten",
+          "dairy-free",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 760,
+        "carbs": 21
+      },
+      {
+        "id": "sausage,-toast,-&-eggs-gf",
+        "name": "Sausage, Toast, & Eggs GF",
+        "type": "breakfast",
+        "calories": 370,
+        "prepTime": "20 min",
+        "servings": "4 servings",
+        "season": "Essential",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-free",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 760,
+        "carbs": 21
+      },
+      {
+        "id": "cheddar-broccoli-hash-brown-bake",
+        "name": "Cheddar Broccoli Hash Brown Bake",
+        "type": "breakfast",
+        "calories": 320,
+        "prepTime": "1 hour",
+        "servings": "8 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "contains-dairy"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 790,
+        "carbs": 20
+      },
+      {
+        "id": "potato-bacon-egg-scramble",
+        "name": "Potato Bacon Egg Scramble",
+        "type": "breakfast",
+        "calories": 480,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-optional",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 800,
+        "carbs": 44
+      },
+      {
+        "id": "banana-pancakes",
+        "name": "Banana Pancakes",
+        "type": "breakfast",
+        "calories": 560,
+        "prepTime": "20 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "dairy-optional",
+          "contains-tree-nuts",
+          "contains-almonds",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 810,
+        "carbs": 56
+      },
+      {
+        "id": "sheet-pan-english-breakfast",
+        "name": "Sheet Pan English Breakfast",
+        "type": "breakfast",
+        "calories": 380,
+        "prepTime": "45 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-free",
+          "chicken"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 840,
+        "carbs": 42
+      },
+      {
+        "id": "sausage-sweet-potato-skillet",
+        "name": "Sausage Sweet Potato Skillet",
+        "type": "breakfast",
+        "calories": 450,
+        "prepTime": "45 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-free",
+          "chicken"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 860,
+        "carbs": 30
+      },
+      {
+        "id": "spinach-feta-wrap",
+        "name": "Spinach Feta Wrap",
+        "type": "breakfast",
+        "calories": 300,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 890,
+        "carbs": 31
+      },
+      {
+        "id": "spinach-feta-wrap-gf",
+        "name": "Spinach Feta Wrap GF",
+        "type": "breakfast",
+        "calories": 300,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "contains-dairy",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 890,
+        "carbs": 31
+      },
+      {
+        "id": "breakfast-burritos",
+        "name": "Breakfast Burritos",
+        "type": "breakfast",
+        "calories": 360,
+        "prepTime": "15 min",
+        "servings": "4 servings",
+        "season": "Essential",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 900,
+        "carbs": 44
+      },
+      {
+        "id": "breakfast-burritos-gf",
+        "name": "Breakfast Burritos GF",
+        "type": "breakfast",
+        "calories": 360,
+        "prepTime": "15 min",
+        "servings": "4 servings",
+        "season": "Essential",
+        "dietaryTags": [
+          "gluten-free",
+          "contains-dairy",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 900,
+        "carbs": 44
+      },
+      {
+        "id": "ham-and-swiss-breakfast-sandwiches",
+        "name": "Ham and Swiss Breakfast Sandwiches",
+        "type": "breakfast",
+        "calories": 370,
+        "prepTime": "10 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 940,
+        "carbs": 46
+      },
+      {
+        "id": "spinach-artichoke-fritatta",
+        "name": "Spinach Artichoke Fritatta",
+        "type": "breakfast",
+        "calories": 440,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "contains-dairy",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 940,
+        "carbs": 13
+      },
+      {
+        "id": "ultimate-breakfast-sandwich",
+        "name": "Ultimate Breakfast Sandwich",
+        "type": "breakfast",
+        "calories": 520,
+        "prepTime": "20 min",
+        "servings": "4 servings",
+        "season": "Essential",
+        "dietaryTags": [
+          "contains-gluten",
+          "dairy-free",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 950,
+        "carbs": 47
+      },
+      {
+        "id": "breakfast-quesadillas",
+        "name": "Breakfast Quesadillas",
+        "type": "breakfast",
+        "calories": 540,
+        "prepTime": "15 min",
+        "servings": "4 servings",
+        "season": "Essential",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1010,
+        "carbs": 33
+      },
+      {
+        "id": "breakfast-quesadillas-gf",
+        "name": "Breakfast Quesadillas GF",
+        "type": "breakfast",
+        "calories": 540,
+        "prepTime": "15 min",
+        "servings": "4 servings",
+        "season": "Essential",
+        "dietaryTags": [
+          "gluten-free",
+          "contains-dairy",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1010,
+        "carbs": 33
+      },
+      {
+        "id": "monte-cristo",
+        "name": "Monte Cristo",
+        "type": "breakfast",
+        "calories": 450,
+        "prepTime": "10 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1010,
+        "carbs": 55
+      },
+      {
+        "id": "monte-cristo-gf",
+        "name": "Monte Cristo GF",
+        "type": "breakfast",
+        "calories": 450,
+        "prepTime": "10 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "contains-dairy",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1010,
+        "carbs": 55
+      },
+      {
+        "id": "biscuits-and-gravy-casserole",
+        "name": "Biscuits and Gravy Casserole",
+        "type": "breakfast",
+        "calories": 540,
+        "prepTime": "35 min",
+        "servings": "8 servings",
+        "season": "Essential",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1020,
+        "carbs": 28
+      },
+      {
+        "id": "irish-breakfast-nachos",
+        "name": "Irish Breakfast Nachos",
+        "type": "breakfast",
+        "calories": 370,
+        "prepTime": "45 min",
+        "servings": "8 servings",
+        "season": "Spring/Summer",
+        "dietaryTags": [
+          "gluten-free",
+          "contains-dairy",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1060,
+        "carbs": 22
+      },
+      {
+        "id": "sausage-and-egg-muffins",
+        "name": "Sausage and Egg Muffins",
+        "type": "breakfast",
+        "calories": 370,
+        "prepTime": "15 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-free",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1080,
+        "carbs": 13
+      },
+      {
+        "id": "egg-tacos",
+        "name": "Egg Tacos",
+        "type": "breakfast",
+        "calories": 320,
+        "prepTime": "10 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-optional",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1100,
+        "carbs": 30
+      },
+      {
+        "id": "shakshuka",
+        "name": "Shakshuka",
+        "type": "breakfast",
+        "calories": 470,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-optional",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1120,
+        "carbs": 52
+      },
+      {
+        "id": "blueberry-pancakes",
+        "name": "Blueberry Pancakes",
+        "type": "breakfast",
+        "calories": 560,
+        "prepTime": "20 min",
+        "servings": "4 servings",
+        "season": "Essential",
+        "dietaryTags": [
+          "contains-gluten",
+          "dairy-optional",
+          "contains-tree-nuts",
+          "contains-almonds",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 640,
+        "carbs": 66
+      },
+      {
+        "id": "bagel-breakfast-sandwich",
+        "name": "Bagel Breakfast Sandwich",
+        "type": "breakfast",
+        "calories": 590,
+        "prepTime": "10 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1190,
+        "carbs": 73
+      },
+      {
+        "id": "breakfast-bagel-sandwich",
+        "name": "Breakfast Bagel Sandwich",
+        "type": "breakfast",
+        "calories": 420,
+        "prepTime": "15 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1190,
+        "carbs": 73
+      },
+      {
+        "id": "skillet-eggs-with-chorizo",
+        "name": "Skillet Eggs with Chorizo",
+        "type": "breakfast",
+        "calories": 470,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "contains-dairy",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1270,
+        "carbs": 18
+      },
+      {
+        "id": "mexican-chorizo-potato-skillet",
+        "name": "Mexican Chorizo Potato Skillet",
+        "type": "breakfast",
+        "calories": 510,
+        "prepTime": "45 min",
+        "servings": "4 servings",
+        "season": "Fall/Winter",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-free"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1360,
+        "carbs": 47
+      },
+      {
+        "id": "waffle-fry-huevos-rancheros",
+        "name": "Waffle Fry Huevos Rancheros",
+        "type": "breakfast",
+        "calories": 660,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "contains-dairy"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1370,
+        "carbs": 48
+      },
+      {
+        "id": "pumpkin-pancakes",
+        "name": "Pumpkin Pancakes",
+        "type": "breakfast",
+        "calories": 550,
+        "prepTime": "15 min",
+        "servings": "4 servings",
+        "season": "Fall/Winter",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy",
+          "contains-tree-nuts",
+          "contains-almonds",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1410,
+        "carbs": 75
+      },
+      {
+        "id": "huevos-rancheros",
+        "name": "Huevos Rancheros",
+        "type": "breakfast",
+        "calories": 490,
+        "prepTime": "20 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-optional",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1530,
+        "carbs": 42
+      },
+      {
+        "id": "peanut-butter-protein-pancake-rollups",
+        "name": "Peanut Butter Protein Pancake Rollups",
+        "type": "breakfast",
+        "calories": 440,
+        "prepTime": "10 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "contains-dairy"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 300,
+        "carbs": 36
+      }
+    ],
+    "lunch": [
+      {
+        "id": "blt-kale-salad",
+        "name": "BLT Kale Salad",
+        "type": "lunch",
+        "calories": 570,
+        "prepTime": "10 min",
+        "servings": "4 servings",
+        "season": "Essential",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-free",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 170,
+        "carbs": 10
+      },
+      {
+        "id": "chicken-caesar-salad",
+        "name": "Chicken Caesar Salad",
+        "type": "lunch",
+        "calories": 520,
+        "prepTime": "10 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy",
+          "chicken",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1060,
+        "carbs": 11
+      },
+      {
+        "id": "cobb-salad",
+        "name": "Cobb Salad",
+        "type": "lunch",
+        "calories": 560,
+        "prepTime": "10 min",
+        "servings": "4 servings",
+        "season": "Essential",
+        "dietaryTags": [
+          "gluten-free",
+          "contains-dairy",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 740,
+        "carbs": 11
+      },
+      {
+        "id": "southwest-tuna-salad",
+        "name": "Southwest Tuna Salad",
+        "type": "lunch",
+        "calories": 600,
+        "prepTime": "10 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-free",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 630,
+        "carbs": 11
+      },
+      {
+        "id": "avocado-egg-salad",
+        "name": "Avocado Egg Salad",
+        "type": "lunch",
+        "calories": 510,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-dairy",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 390,
+        "carbs": 19
+      },
+      {
+        "id": "buffalo-tuna-salad",
+        "name": "Buffalo Tuna Salad",
+        "type": "lunch",
+        "calories": 400,
+        "prepTime": "10 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "dairy-free",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1270,
+        "carbs": 19
+      },
+      {
+        "id": "buffalo-tuna-salad-gf",
+        "name": "Buffalo Tuna Salad GF",
+        "type": "lunch",
+        "calories": 400,
+        "prepTime": "10 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-free",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1270,
+        "carbs": 19
+      },
+      {
+        "id": "asian-chicken-salad",
+        "name": "Asian Chicken Salad",
+        "type": "lunch",
+        "calories": 390,
+        "prepTime": "10 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "dairy-free",
+          "chicken"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 470,
+        "carbs": 24
+      },
+      {
+        "id": "strawberry-chicken-salad",
+        "name": "Strawberry Chicken Salad",
+        "type": "lunch",
+        "calories": 370,
+        "prepTime": "5 min",
+        "servings": "4 servings",
+        "season": "Spring/Summer",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-free",
+          "chicken"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 390,
+        "carbs": 25
+      },
+      {
+        "id": "tuna-quesadillas",
+        "name": "Tuna Quesadillas",
+        "type": "lunch",
+        "calories": 440,
+        "prepTime": "10 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 890,
+        "carbs": 26
+      },
+      {
+        "id": "tuna-quesadillas-gf",
+        "name": "Tuna Quesadillas GF",
+        "type": "lunch",
+        "calories": 440,
+        "prepTime": "10 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "contains-dairy"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 890,
+        "carbs": 26
+      },
+      {
+        "id": "cilantro-lime-tuna-wrap",
+        "name": "Cilantro Lime Tuna Wrap",
+        "type": "lunch",
+        "calories": 310,
+        "prepTime": "10 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "dairy-free",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 470,
+        "carbs": 29
+      },
+      {
+        "id": "cilantro-lime-tuna-wrap-gf",
+        "name": "Cilantro Lime Tuna Wrap GF",
+        "type": "lunch",
+        "calories": 310,
+        "prepTime": "10 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-free",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 470,
+        "carbs": 29
+      },
+      {
+        "id": "french-dip-sandwiches",
+        "name": "French Dip Sandwiches",
+        "type": "lunch",
+        "calories": 560,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1840,
+        "carbs": 30
+      },
+      {
+        "id": "buffalo-chicken-wraps",
+        "name": "Buffalo Chicken Wraps",
+        "type": "lunch",
+        "calories": 460,
+        "prepTime": "15 min",
+        "servings": "4 servings",
+        "season": "Essential",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy",
+          "chicken",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1760,
+        "carbs": 31
+      },
+      {
+        "id": "buffalo-chicken-wraps-gf",
+        "name": "Buffalo Chicken Wraps GF",
+        "type": "lunch",
+        "calories": 460,
+        "prepTime": "15 min",
+        "servings": "4 servings",
+        "season": "Essential",
+        "dietaryTags": [
+          "gluten-free",
+          "contains-dairy",
+          "chicken",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1760,
+        "carbs": 31
+      },
+      {
+        "id": "italian-grinder-sandwich",
+        "name": "Italian Grinder Sandwich",
+        "type": "lunch",
+        "calories": 710,
+        "prepTime": "20 min",
+        "servings": "8 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "dairy-optional"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1990,
+        "carbs": 31
+      },
+      {
+        "id": "loaded-baked-potato-soup",
+        "name": "Loaded Baked Potato Soup",
+        "type": "lunch",
+        "calories": 400,
+        "prepTime": "45 min",
+        "servings": "4 servings",
+        "season": "Fall/Winter",
+        "dietaryTags": [
+          "gluten-free",
+          "contains-dairy"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 700,
+        "carbs": 32
+      },
+      {
+        "id": "blt-sandwiches",
+        "name": "BLT Sandwiches",
+        "type": "lunch",
+        "calories": 580,
+        "prepTime": "10 min",
+        "servings": "4 servings",
+        "season": "Essential",
+        "dietaryTags": [
+          "contains-gluten",
+          "dairy-free",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 800,
+        "carbs": 33
+      },
+      {
+        "id": "blt-sandwiches-gf",
+        "name": "BLT Sandwiches GF",
+        "type": "lunch",
+        "calories": 580,
+        "prepTime": "10 min",
+        "servings": "4 servings",
+        "season": "Essential",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-free",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 800,
+        "carbs": 33
+      },
+      {
+        "id": "pizza-stuffed-crescent-rolls",
+        "name": "Pizza-Stuffed Crescent Rolls",
+        "type": "lunch",
+        "calories": 490,
+        "prepTime": "20 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1300,
+        "carbs": 33
+      },
+      {
+        "id": "tuna-veggie-melts",
+        "name": "Tuna Veggie Melts",
+        "type": "lunch",
+        "calories": 560,
+        "prepTime": "15 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 980,
+        "carbs": 33
+      },
+      {
+        "id": "homemade-fish-sticks",
+        "name": "Homemade Fish Sticks",
+        "type": "lunch",
+        "calories": 340,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Essential",
+        "dietaryTags": [],
+        "image": "/api/placeholder/200/200",
+        "sodium": 430,
+        "carbs": 35
+      },
+      {
+        "id": "everything-bagel-chicken-salad",
+        "name": "Everything Bagel Chicken Salad",
+        "type": "lunch",
+        "calories": 470,
+        "prepTime": "20 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-optional"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 700,
+        "carbs": 37
+      },
+      {
+        "id": "ham-and-veggie-chowder",
+        "name": "Ham and Veggie Chowder",
+        "type": "lunch",
+        "calories": 380,
+        "prepTime": "20 min",
+        "servings": "4 servings",
+        "season": "Fall/Winter",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-optional"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1170,
+        "carbs": 37
+      },
+      {
+        "id": "chicken-bacon-ranch-potatoes",
+        "name": "Chicken Bacon Ranch Potatoes",
+        "type": "lunch",
+        "calories": 550,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy",
+          "chicken",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1370,
+        "carbs": 39
+      },
+      {
+        "id": "potato-cauliflower-chowder",
+        "name": "Potato Cauliflower Chowder",
+        "type": "lunch",
+        "calories": 450,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Fall/Winter",
+        "dietaryTags": [
+          "contains-gluten",
+          "dairy-optional"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1980,
+        "carbs": 39
+      },
+      {
+        "id": "turkey-sandwich",
+        "name": "Turkey Sandwich",
+        "type": "lunch",
+        "calories": 340,
+        "prepTime": "5 min",
+        "servings": "4 servings",
+        "season": "Essential",
+        "dietaryTags": [
+          "contains-gluten",
+          "dairy-optional"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 750,
+        "carbs": 39
+      },
+      {
+        "id": "turkey-sandwich-gf",
+        "name": "Turkey Sandwich GF",
+        "type": "lunch",
+        "calories": 340,
+        "prepTime": "5 min",
+        "servings": "4 servings",
+        "season": "Essential",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-optional"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 750,
+        "carbs": 39
+      },
+      {
+        "id": "bean-and-cheese-burritos",
+        "name": "Bean and Cheese Burritos",
+        "type": "lunch",
+        "calories": 350,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Essential",
+        "dietaryTags": [],
+        "image": "/api/placeholder/200/200",
+        "sodium": 800,
+        "carbs": 40
+      },
+      {
+        "id": "gf-mac-and-cheese",
+        "name": "GF Mac and Cheese",
+        "type": "lunch",
+        "calories": 540,
+        "prepTime": "20 min",
+        "servings": "4 servings",
+        "season": "Essential",
+        "dietaryTags": [
+          "gluten-free",
+          "contains-dairy",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 910,
+        "carbs": 40
+      },
+      {
+        "id": "chicken-fajita-quesadilla",
+        "name": "Chicken Fajita Quesadilla",
+        "type": "lunch",
+        "calories": 420,
+        "prepTime": "20 min",
+        "servings": "4 servings",
+        "season": "Essential",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy",
+          "chicken"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1180,
+        "carbs": 41
+      },
+      {
+        "id": "chicken-fajita-quesadilla-gf",
+        "name": "Chicken Fajita Quesadilla GF",
+        "type": "lunch",
+        "calories": 420,
+        "prepTime": "20 min",
+        "servings": "4 servings",
+        "season": "Essential",
+        "dietaryTags": [
+          "gluten-free",
+          "contains-dairy",
+          "chicken"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1180,
+        "carbs": 41
+      },
+      {
+        "id": "chicken-salad-sandwich",
+        "name": "Chicken Salad Sandwich",
+        "type": "lunch",
+        "calories": 480,
+        "prepTime": "10 min",
+        "servings": "4 servings",
+        "season": "Essential",
+        "dietaryTags": [
+          "contains-gluten",
+          "dairy-free",
+          "chicken"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 470,
+        "carbs": 41
+      },
+      {
+        "id": "rainbow-hummus-veggie-wraps",
+        "name": "Rainbow Hummus Veggie Wraps",
+        "type": "lunch",
+        "calories": 320,
+        "prepTime": "10 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "dairy-free"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 660,
+        "carbs": 41
+      },
+      {
+        "id": "rainbow-hummus-veggie-wraps-gf",
+        "name": "Rainbow Hummus Veggie Wraps GF",
+        "type": "lunch",
+        "calories": 320,
+        "prepTime": "10 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-free"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 660,
+        "carbs": 41
+      },
+      {
+        "id": "cheese-quesadillas",
+        "name": "Cheese Quesadillas",
+        "type": "lunch",
+        "calories": 430,
+        "prepTime": "20 min",
+        "servings": "4 servings",
+        "season": "Essential",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-tree-nuts"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1220,
+        "carbs": 42
+      },
+      {
+        "id": "broccoli-cheddar-soup",
+        "name": "Broccoli Cheddar Soup",
+        "type": "lunch",
+        "calories": 460,
+        "prepTime": "15 min",
+        "servings": "4 servings",
+        "season": "Fall/Winter",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1460,
+        "carbs": 43
+      },
+      {
+        "id": "chicken-pozole",
+        "name": "Chicken Pozole",
+        "type": "lunch",
+        "calories": 410,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Fall/Winter",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-free",
+          "chicken"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1140,
+        "carbs": 45
+      },
+      {
+        "id": "veggie-pot-pie",
+        "name": "Veggie Pot Pie",
+        "type": "lunch",
+        "calories": 410,
+        "prepTime": "30 min",
+        "servings": "6 servings",
+        "season": "Fall/Winter",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1310,
+        "carbs": 45
+      },
+      {
+        "id": "burrito-bowls",
+        "name": "Burrito Bowls",
+        "type": "lunch",
+        "calories": 470,
+        "prepTime": "25 min",
+        "servings": "6 servings",
+        "season": "Essential",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-optional"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1920,
+        "carbs": 46
+      },
+      {
+        "id": "5-spice-tofu-stir-fry",
+        "name": "5-Spice Tofu Stir-Fry",
+        "type": "lunch",
+        "calories": 390,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 380,
+        "carbs": 47
+      },
+      {
+        "id": "tuscan-pasta-salad",
+        "name": "Tuscan Pasta Salad",
+        "type": "lunch",
+        "calories": 590,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Spring/Summer",
+        "dietaryTags": [
+          "dairy-optional"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 990,
+        "carbs": 50
+      },
+      {
+        "id": "cheesy-tomato-gnocchi",
+        "name": "Cheesy Tomato Gnocchi",
+        "type": "lunch",
+        "calories": 600,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 890,
+        "carbs": 51
+      },
+      {
+        "id": "philly-cheesesteak-sliders",
+        "name": "Philly Cheesesteak Sliders",
+        "type": "lunch",
+        "calories": 470,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1810,
+        "carbs": 51
+      },
+      {
+        "id": "turkey-croissant-sandwiches",
+        "name": "Turkey Croissant Sandwiches",
+        "type": "lunch",
+        "calories": 480,
+        "prepTime": "10 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1270,
+        "carbs": 51
+      },
+      {
+        "id": "chicken-taco-salad",
+        "name": "Chicken Taco Salad",
+        "type": "lunch",
+        "calories": 380,
+        "prepTime": "10 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "contains-dairy",
+          "chicken",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1140,
+        "carbs": 52
+      },
+      {
+        "id": "crispy-gnocchi-mac-and-cheese",
+        "name": "Crispy Gnocchi Mac and Cheese",
+        "type": "lunch",
+        "calories": 360,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 520,
+        "carbs": 52
+      },
+      {
+        "id": "salmon-burgers",
+        "name": "Salmon Burgers",
+        "type": "lunch",
+        "calories": 570,
+        "prepTime": "20 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "dairy-free",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1180,
+        "carbs": 52
+      },
+      {
+        "id": "skillet-corn-chowder",
+        "name": "Skillet Corn Chowder",
+        "type": "lunch",
+        "calories": 400,
+        "prepTime": "20 min",
+        "servings": "4 servings",
+        "season": "Fall/Winter",
+        "dietaryTags": [
+          "gluten-free",
+          "contains-dairy"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 760,
+        "carbs": 52
+      },
+      {
+        "id": "easy-mezze-plate",
+        "name": "Easy Mezze Plate",
+        "type": "lunch",
+        "calories": 580,
+        "prepTime": "10 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "dairy-optional"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1630,
+        "carbs": 53
+      },
+      {
+        "id": "easy-cheese-ravioli-and-broccoli",
+        "name": "Easy Cheese Ravioli and Broccoli",
+        "type": "lunch",
+        "calories": 370,
+        "prepTime": "20 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-tree-nuts"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 540,
+        "carbs": 55
+      },
+      {
+        "id": "tortilla-casserole",
+        "name": "Tortilla Casserole",
+        "type": "lunch",
+        "calories": 500,
+        "prepTime": "20 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1230,
+        "carbs": 55
+      },
+      {
+        "id": "tortilla-casserole-gf",
+        "name": "Tortilla Casserole GF",
+        "type": "lunch",
+        "calories": 500,
+        "prepTime": "20 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "contains-dairy"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1230,
+        "carbs": 55
+      },
+      {
+        "id": "broccoli-mac-and-cheese",
+        "name": "Broccoli Mac and Cheese",
+        "type": "lunch",
+        "calories": 420,
+        "prepTime": "15 min",
+        "servings": "4 servings",
+        "season": "Essential",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1220,
+        "carbs": 57
+      },
+      {
+        "id": "cowboy-salad-with-chips",
+        "name": "Cowboy Salad with Chips",
+        "type": "lunch",
+        "calories": 320,
+        "prepTime": "20 min",
+        "servings": "4 servings",
+        "season": "Essential",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-free"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 820,
+        "carbs": 59
+      },
+      {
+        "id": "chicken-tortilla-soup",
+        "name": "Chicken Tortilla Soup",
+        "type": "lunch",
+        "calories": 520,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-optional",
+          "chicken"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1290,
+        "carbs": 60
+      },
+      {
+        "id": "homemade-chicken-nuggets",
+        "name": "Homemade Chicken Nuggets",
+        "type": "lunch",
+        "calories": 610,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Essential",
+        "dietaryTags": [],
+        "image": "/api/placeholder/200/200",
+        "sodium": 960,
+        "carbs": 64
+      },
+      {
+        "id": "spinach-artichoke-mac-and-cheese",
+        "name": "Spinach Artichoke Mac and Cheese",
+        "type": "lunch",
+        "calories": 750,
+        "prepTime": "30 min",
+        "servings": "8 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "contains-dairy"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1740,
+        "carbs": 64
+      },
+      {
+        "id": "ham-and-pea-pasta",
+        "name": "Ham and Pea Pasta",
+        "type": "lunch",
+        "calories": 360,
+        "prepTime": "20 min",
+        "servings": "4 servings",
+        "season": "Essential",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 390,
+        "carbs": 65
+      },
+      {
+        "id": "chickpea-tomato-soup",
+        "name": "Chickpea Tomato Soup",
+        "type": "lunch",
+        "calories": 450,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Fall/Winter",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-optional"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1730,
+        "carbs": 68
+      },
+      {
+        "id": "pb&j-sandwiches",
+        "name": "PB&J Sandwiches",
+        "type": "lunch",
+        "calories": 470,
+        "prepTime": "5 min",
+        "servings": "4 servings",
+        "season": "Essential",
+        "dietaryTags": [],
+        "image": "/api/placeholder/200/200",
+        "sodium": 290,
+        "carbs": 69
+      },
+      {
+        "id": "veggie-quesadillas-with-yogurt-dip",
+        "name": "Veggie Quesadillas with Yogurt Dip",
+        "type": "lunch",
+        "calories": 450,
+        "prepTime": "35 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1340,
+        "carbs": 69
+      },
+      {
+        "id": "veggie-quesadillas-with-yogurt-dip-gf",
+        "name": "Veggie Quesadillas with Yogurt Dip GF",
+        "type": "lunch",
+        "calories": 450,
+        "prepTime": "35 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "contains-dairy"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1340,
+        "carbs": 69
+      },
+      {
+        "id": "holiday-quesadillas",
+        "name": "Holiday Quesadillas",
+        "type": "lunch",
+        "calories": 570,
+        "prepTime": "10 min",
+        "servings": "4 servings",
+        "season": "Fall/Winter",
+        "dietaryTags": [
+          "contains-dairy",
+          "chicken"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1630,
+        "carbs": 70
+      },
+      {
+        "id": "butternut-squash-carbonara",
+        "name": "Butternut Squash Carbonara",
+        "type": "lunch",
+        "calories": 560,
+        "prepTime": "",
+        "servings": "6 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-dairy",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 490,
+        "carbs": 74
+      },
+      {
+        "id": "veggie-pizza",
+        "name": "Veggie Pizza",
+        "type": "lunch",
+        "calories": 390,
+        "prepTime": "60 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1270,
+        "carbs": 74
+      },
+      {
+        "id": "crispy-black-bean-tacos",
+        "name": "Crispy Black Bean Tacos",
+        "type": "lunch",
+        "calories": 510,
+        "prepTime": "45 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-optional"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1780,
+        "carbs": 75
+      },
+      {
+        "id": "stovetop-tuna-casserole",
+        "name": "Stovetop Tuna Casserole",
+        "type": "lunch",
+        "calories": 520,
+        "prepTime": "15 min",
+        "servings": "4 servings",
+        "season": "Fall/Winter",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 860,
+        "carbs": 77
+      },
+      {
+        "id": "baked-cornbread-chili",
+        "name": "Baked Cornbread Chili",
+        "type": "lunch",
+        "calories": 580,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1230,
+        "carbs": 81
+      },
+      {
+        "id": "chili-cheese-sweet-potato-fries",
+        "name": "Chili Cheese Sweet Potato Fries",
+        "type": "lunch",
+        "calories": 530,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-dairy"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 860,
+        "carbs": 81
+      },
+      {
+        "id": "pumpkin-quesadillas",
+        "name": "Pumpkin Quesadillas",
+        "type": "lunch",
+        "calories": 660,
+        "prepTime": "10 min",
+        "servings": "4 servings",
+        "season": "Fall/Winter",
+        "dietaryTags": [
+          "contains-dairy"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1360,
+        "carbs": 81
+      },
+      {
+        "id": "thanksgiving-leftovers-sandwich",
+        "name": "Thanksgiving Leftovers Sandwich",
+        "type": "lunch",
+        "calories": 620,
+        "prepTime": "10 min",
+        "servings": "4 servings",
+        "season": "Holiday",
+        "dietaryTags": [
+          "dairy-optional"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1020,
+        "carbs": 82
+      },
+      {
+        "id": "cheesy-enchiladas",
+        "name": "Cheesy Enchiladas",
+        "type": "lunch",
+        "calories": 580,
+        "prepTime": "20 min",
+        "servings": "4 servings",
+        "season": "Essential",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1990,
+        "carbs": 85
+      },
+      {
+        "id": "enchilada-rice-skillet",
+        "name": "Enchilada Rice Skillet",
+        "type": "lunch",
+        "calories": 540,
+        "prepTime": "20 min",
+        "servings": "4 servings",
+        "season": "Essential",
+        "dietaryTags": [
+          "dairy-optional"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1490,
+        "carbs": 89
+      },
+      {
+        "id": "chicken-and-rice-soup",
+        "name": "Chicken and Rice Soup",
+        "type": "lunch",
+        "calories": 580,
+        "prepTime": "25 min",
+        "servings": "4 servings",
+        "season": "Fall/Winter",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-free",
+          "chicken"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1670,
+        "carbs": 90
+      },
+      {
+        "id": "baked-tofu",
+        "name": "Baked Tofu",
+        "type": "lunch",
+        "calories": 520,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Essential",
+        "dietaryTags": [
+          "contains-gluten",
+          "dairy-free"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 540,
+        "carbs": 92
+      },
+      {
+        "id": "hot-dogs-and-macaroni-salad",
+        "name": "Hot Dogs and Macaroni Salad",
+        "type": "lunch",
+        "calories": 650,
+        "prepTime": "90 minutes",
+        "servings": "4 servings",
+        "season": "Spring/Summer",
+        "dietaryTags": [
+          "contains-dairy",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1510,
+        "carbs": 92
+      },
+      {
+        "id": "minestrone",
+        "name": "Minestrone",
+        "type": "lunch",
+        "calories": 520,
+        "prepTime": "20 min",
+        "servings": "4 servings",
+        "season": "Essential",
+        "dietaryTags": [
+          "dairy-optional",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1520,
+        "carbs": 92
+      },
+      {
+        "id": "vegetable-lo-mein",
+        "name": "Vegetable Lo Mein",
+        "type": "lunch",
+        "calories": 620,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "dairy-free",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1390,
+        "carbs": 92
+      },
+      {
+        "id": "bacon-cauliflower-pasta",
+        "name": "Bacon Cauliflower Pasta",
+        "type": "lunch",
+        "calories": 600,
+        "prepTime": "20 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 670,
+        "carbs": 93
+      },
+      {
+        "id": "pork-fried-rice",
+        "name": "Pork Fried Rice",
+        "type": "lunch",
+        "calories": 510,
+        "prepTime": "15 min",
+        "servings": "4 servings",
+        "season": "Essential",
+        "dietaryTags": [
+          "contains-gluten",
+          "dairy-free"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1100,
+        "carbs": 95
+      },
+      {
+        "id": "eggplant-pasta-alla-norma",
+        "name": "Eggplant Pasta alla Norma",
+        "type": "lunch",
+        "calories": 550,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Spring/Summer",
+        "dietaryTags": [
+          "dairy-optional",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 270,
+        "carbs": 102
+      },
+      {
+        "id": "southwestern-stuffed-potatoes",
+        "name": "Southwestern Stuffed Potatoes",
+        "type": "lunch",
+        "calories": 590,
+        "prepTime": "10 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-optional"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 960,
+        "carbs": 105
+      },
+      {
+        "id": "blt-pasta-salad",
+        "name": "BLT Pasta Salad",
+        "type": "lunch",
+        "calories": 670,
+        "prepTime": "20 min",
+        "servings": "4 servings",
+        "season": "Essential",
+        "dietaryTags": [
+          "contains-dairy"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 880,
+        "carbs": 106
+      },
+      {
+        "id": "tomato-soup-with-grilled-cheese",
+        "name": "Tomato Soup with Grilled Cheese",
+        "type": "lunch",
+        "calories": 490,
+        "prepTime": "10 min",
+        "servings": "4 servings",
+        "season": "Essential",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy"
+        ],
+        "image": "/api/placeholder/200/200"
+      }
+    ],
+    "dinner": [
+      {
+        "id": "chicken-curry",
+        "name": "Chicken Curry",
+        "type": "dinner",
+        "calories": 580,
+        "prepTime": "30 min",
+        "servings": "6 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-free",
+          "chicken",
+          "contains-cashews"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 55,
+        "carbs": 67
+      },
+      {
+        "id": "butter-chicken",
+        "name": "Butter Chicken",
+        "type": "dinner",
+        "calories": 760,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-optional",
+          "chicken"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 95,
+        "carbs": 92
+      },
+      {
+        "id": "lemon-chicken-and-asparagus",
+        "name": "Lemon Chicken and Asparagus",
+        "type": "dinner",
+        "calories": 450,
+        "prepTime": "50 min",
+        "servings": "Servings",
+        "season": "Spring/Summer",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-free",
+          "chicken"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 100,
+        "carbs": 35
+      },
+      {
+        "id": "steak-with-corn-on-the-cob",
+        "name": "Steak with Corn on the Cob",
+        "type": "dinner",
+        "calories": 480,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Spring/Summer",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-optional"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 140,
+        "carbs": 73
+      },
+      {
+        "id": "chicken-potato-pepper-bake",
+        "name": "Chicken Potato Pepper Bake",
+        "type": "dinner",
+        "calories": 550,
+        "prepTime": "45 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-free",
+          "chicken"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 150,
+        "carbs": 95
+      },
+      {
+        "id": "sausage-and-broccoli-pasta",
+        "name": "Sausage and Broccoli Pasta",
+        "type": "dinner",
+        "calories": 470,
+        "prepTime": "25 min",
+        "servings": "6 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 150,
+        "carbs": 64
+      },
+      {
+        "id": "sausage-and-broccoli-pasta-gf",
+        "name": "Sausage and Broccoli Pasta GF",
+        "type": "dinner",
+        "calories": 470,
+        "prepTime": "25 min",
+        "servings": "6 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "contains-dairy"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 150,
+        "carbs": 64
+      },
+      {
+        "id": "chicken-mole",
+        "name": "Chicken Mole",
+        "type": "dinner",
+        "calories": 800,
+        "prepTime": "45 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "dairy-free",
+          "chicken"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 160,
+        "carbs": 83
+      },
+      {
+        "id": "coconut-shrimp-and-quinoa",
+        "name": "Coconut Shrimp and Quinoa",
+        "type": "dinner",
+        "calories": 520,
+        "prepTime": "20 min",
+        "servings": "4 servings",
+        "season": "Spring/Summer",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-free"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 160,
+        "carbs": 45
+      },
+      {
+        "id": "gf-sesame-beef-and-green-beans",
+        "name": "GF Sesame Beef and Green Beans",
+        "type": "dinner",
+        "calories": 700,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-free"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 170,
+        "carbs": 107
+      },
+      {
+        "id": "firecracker-chicken-and-rice",
+        "name": "Firecracker Chicken and Rice",
+        "type": "dinner",
+        "calories": 600,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "contains-dairy",
+          "chicken",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 200,
+        "carbs": 88
+      },
+      {
+        "id": "chipotle-honey-chicken-and-brown-rice",
+        "name": "Chipotle Honey Chicken and Brown Rice",
+        "type": "dinner",
+        "calories": 580,
+        "prepTime": "45 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-optional",
+          "chicken"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 210,
+        "carbs": 84
+      },
+      {
+        "id": "honey-garlic-pork-chops",
+        "name": "Honey Garlic Pork Chops",
+        "type": "dinner",
+        "calories": 650,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-optional"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 220,
+        "carbs": 74
+      },
+      {
+        "id": "meatballs-and-polenta",
+        "name": "Meatballs and Polenta",
+        "type": "dinner",
+        "calories": 510,
+        "prepTime": "45 min",
+        "servings": "6 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "dairy-optional"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 250,
+        "carbs": 33
+      },
+      {
+        "id": "meatballs-and-polenta-gf",
+        "name": "Meatballs and Polenta GF",
+        "type": "dinner",
+        "calories": 510,
+        "prepTime": "45 min",
+        "servings": "6 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-optional"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 250,
+        "carbs": 33
+      },
+      {
+        "id": "jerk-chicken-casserole",
+        "name": "Jerk Chicken Casserole",
+        "type": "dinner",
+        "calories": 750,
+        "prepTime": "1 hour",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-free",
+          "chicken"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 290,
+        "carbs": 127
+      },
+      {
+        "id": "sheet-pan-chipotle-lime-shrimp",
+        "name": "Sheet Pan Chipotle-Lime Shrimp",
+        "type": "dinner",
+        "calories": 510,
+        "prepTime": "45 min",
+        "servings": "4 servings",
+        "season": "Spring/Summer",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-optional"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 310,
+        "carbs": 65
+      },
+      {
+        "id": "steak-and-eggs",
+        "name": "Steak and Eggs",
+        "type": "dinner",
+        "calories": 500,
+        "prepTime": "60 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-free",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 310,
+        "carbs": 44
+      },
+      {
+        "id": "honey-mustard-chicken-and-green-beans",
+        "name": "Honey-Mustard Chicken and Green Beans",
+        "type": "dinner",
+        "calories": 560,
+        "prepTime": "45 min",
+        "servings": "4 servings",
+        "season": "Spring/Summer",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-free",
+          "chicken"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 320,
+        "carbs": 33
+      },
+      {
+        "id": "shepherd's-pie",
+        "name": "Shepherd's Pie",
+        "type": "dinner",
+        "calories": 480,
+        "prepTime": "60 min",
+        "servings": "4 servings",
+        "season": "Essential",
+        "dietaryTags": [
+          "contains-gluten",
+          "dairy-optional"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 350,
+        "carbs": 30
+      },
+      {
+        "id": "beef-and-rice-casserole",
+        "name": "Beef and Rice Casserole",
+        "type": "dinner",
+        "calories": 580,
+        "prepTime": "45 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "contains-dairy"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 360,
+        "carbs": 51
+      },
+      {
+        "id": "mexican-chicken-and-rice-bowls",
+        "name": "Mexican Chicken and Rice Bowls",
+        "type": "dinner",
+        "calories": 760,
+        "prepTime": "45 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "contains-dairy",
+          "chicken"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 360,
+        "carbs": 93
+      },
+      {
+        "id": "pork-chops-and-apples",
+        "name": "Pork Chops and Apples",
+        "type": "dinner",
+        "calories": 490,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Fall/Winter",
+        "dietaryTags": [
+          "gluten-free",
+          "contains-dairy"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 360,
+        "carbs": 30
+      },
+      {
+        "id": "baked-ziti",
+        "name": "Baked Ziti",
+        "type": "dinner",
+        "calories": 620,
+        "prepTime": "20 min",
+        "servings": "8 servings",
+        "season": "Essential",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 370,
+        "carbs": 68
+      },
+      {
+        "id": "meatballs-with-zucchini-and-potatoes",
+        "name": "Meatballs with Zucchini and Potatoes",
+        "type": "dinner",
+        "calories": 530,
+        "prepTime": "60 mi",
+        "servings": "6 servings",
+        "season": "Spring/Summer",
+        "dietaryTags": [
+          "contains-gluten",
+          "dairy-optional",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 370,
+        "carbs": 58
+      },
+      {
+        "id": "meatballs-with-zucchini-and-potatoes-gf",
+        "name": "Meatballs with Zucchini and Potatoes GF",
+        "type": "dinner",
+        "calories": 530,
+        "prepTime": "60 min",
+        "servings": "6 servings",
+        "season": "Spring/Summer",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-optional",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 370,
+        "carbs": 58
+      },
+      {
+        "id": "gf-beef-teriyaki",
+        "name": "GF Beef Teriyaki",
+        "type": "dinner",
+        "calories": 670,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-free"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 400,
+        "carbs": 110
+      },
+      {
+        "id": "honey-mustard-chicken-and-green-beans",
+        "name": "Honey Mustard Chicken and Green Beans",
+        "type": "dinner",
+        "calories": 770,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "dairy-free"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 410,
+        "carbs": 113
+      },
+      {
+        "id": "chicken-and-waffles",
+        "name": "Chicken and Waffles",
+        "type": "dinner",
+        "calories": 490,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Spring/Summer",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy",
+          "chicken",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 420,
+        "carbs": 38
+      },
+      {
+        "id": "korean-meatball-bowls",
+        "name": "Korean Meatball Bowls",
+        "type": "dinner",
+        "calories": 440,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "dairy-free"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 420,
+        "carbs": 45
+      },
+      {
+        "id": "beef-stroganoff",
+        "name": "Beef Stroganoff",
+        "type": "dinner",
+        "calories": 430,
+        "prepTime": "20 min",
+        "servings": "8 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 430,
+        "carbs": 42
+      },
+      {
+        "id": "spaghetti-and-meatballs",
+        "name": "Spaghetti and Meatballs",
+        "type": "dinner",
+        "calories": 440,
+        "prepTime": "30 min",
+        "servings": "8 servings",
+        "season": "Essential",
+        "dietaryTags": [
+          "contains-gluten",
+          "dairy-free"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 440,
+        "carbs": 59
+      },
+      {
+        "id": "spaghetti-and-meatballs-gf",
+        "name": "Spaghetti and Meatballs GF",
+        "type": "dinner",
+        "calories": 440,
+        "prepTime": "30 min",
+        "servings": "8 servings",
+        "season": "Essential",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-free"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 440,
+        "carbs": 59
+      },
+      {
+        "id": "sweet-and-sour-meatballs",
+        "name": "Sweet and Sour Meatballs",
+        "type": "dinner",
+        "calories": 680,
+        "prepTime": "15 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "dairy-free",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 440,
+        "carbs": 111
+      },
+      {
+        "id": "baked-fish-and-chips-with-peas",
+        "name": "Baked Fish and Chips with Peas",
+        "type": "dinner",
+        "calories": 530,
+        "prepTime": "45 min",
+        "servings": "4 servings",
+        "season": "Essential",
+        "dietaryTags": [
+          "contains-gluten",
+          "dairy-optional"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 450,
+        "carbs": 58
+      },
+      {
+        "id": "gf-sesame-shrimp",
+        "name": "GF Sesame Shrimp",
+        "type": "dinner",
+        "calories": 640,
+        "prepTime": "20 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-free"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 460,
+        "carbs": 85
+      },
+      {
+        "id": "stuffed-peppers",
+        "name": "Stuffed Peppers",
+        "type": "dinner",
+        "calories": 490,
+        "prepTime": "50 min",
+        "servings": "4 servings",
+        "season": "Spring/Summer",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-optional"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 460,
+        "carbs": 26
+      },
+      {
+        "id": "cheesy-beef-pasta",
+        "name": "Cheesy Beef Pasta",
+        "type": "dinner",
+        "calories": 540,
+        "prepTime": "30 min",
+        "servings": "8 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 470,
+        "carbs": 55
+      },
+      {
+        "id": "swedish-meatballs-and-mashed-potatoes",
+        "name": "Swedish Meatballs and Mashed Potatoes",
+        "type": "dinner",
+        "calories": 550,
+        "prepTime": "45 min",
+        "servings": "6 servings",
+        "season": "Fall/Winter",
+        "dietaryTags": [
+          "contains-gluten",
+          "dairy-optional"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 470,
+        "carbs": 42
+      },
+      {
+        "id": "swedish-meatballs-and-mashed-potatoes-gf",
+        "name": "Swedish Meatballs and Mashed Potatoes GF",
+        "type": "dinner",
+        "calories": 550,
+        "prepTime": "45 min",
+        "servings": "6 servings",
+        "season": "Fall/Winter",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-optional"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 470,
+        "carbs": 42
+      },
+      {
+        "id": "chili-mac",
+        "name": "Chili Mac",
+        "type": "dinner",
+        "calories": 520,
+        "prepTime": "30 min",
+        "servings": "8 servings",
+        "season": "Essential",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 480,
+        "carbs": 51
+      },
+      {
+        "id": "chili-mac-gf",
+        "name": "Chili Mac GF",
+        "type": "dinner",
+        "calories": 520,
+        "prepTime": "30 min",
+        "servings": "8 servings",
+        "season": "Essential",
+        "dietaryTags": [
+          "gluten-free",
+          "contains-dairy",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 480,
+        "carbs": 51
+      },
+      {
+        "id": "pesto-chicken-pasta",
+        "name": "Pesto Chicken Pasta",
+        "type": "dinner",
+        "calories": 490,
+        "prepTime": "20 min",
+        "servings": "8 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy",
+          "chicken",
+          "contains-tree-nuts"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 480,
+        "carbs": 62
+      },
+      {
+        "id": "burgers-and-corn-on-the-cob",
+        "name": "Burgers and Corn on the Cob",
+        "type": "dinner",
+        "calories": 520,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Spring/Summer",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-optional"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 490,
+        "carbs": 55
+      },
+      {
+        "id": "chicken-and-dumplings",
+        "name": "Chicken and Dumplings",
+        "type": "dinner",
+        "calories": 410,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Fall/Winter",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy",
+          "chicken",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 490,
+        "carbs": 41
+      },
+      {
+        "id": "greek-salad-with-fries",
+        "name": "Greek Salad with Fries",
+        "type": "dinner",
+        "calories": 650,
+        "prepTime": "45 min",
+        "servings": "4 servings",
+        "season": "Spring/Summer",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-free"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 500,
+        "carbs": 50
+      },
+      {
+        "id": "gf-chicken-stir-fry",
+        "name": "GF Chicken Stir-Fry",
+        "type": "dinner",
+        "calories": 630,
+        "prepTime": "20 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-free",
+          "chicken"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 510,
+        "carbs": 106
+      },
+      {
+        "id": "gf-sloppy-joe-pot-pie",
+        "name": "GF Sloppy Joe Pot Pie",
+        "type": "dinner",
+        "calories": 570,
+        "prepTime": "45 min",
+        "servings": "6 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "contains-dairy",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 510,
+        "carbs": 44
+      },
+      {
+        "id": "sesame-chicken-and-broccoli",
+        "name": "Sesame Chicken and Broccoli",
+        "type": "dinner",
+        "calories": 620,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Essential",
+        "dietaryTags": [
+          "contains-gluten",
+          "dairy-free",
+          "chicken"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 510,
+        "carbs": 91
+      },
+      {
+        "id": "sriracha-lime-steak-and-rice-noodle-bowls",
+        "name": "Sriracha Lime Steak and Rice Noodle Bowls",
+        "type": "dinner",
+        "calories": 410,
+        "prepTime": "15 min",
+        "servings": "4 servings",
+        "season": "Spring/Summer",
+        "dietaryTags": [
+          "contains-gluten",
+          "dairy-free"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 510,
+        "carbs": 53
+      },
+      {
+        "id": "sriracha-lime-steak-and-rice-noodle-bowls-gf",
+        "name": "Sriracha Lime Steak and Rice Noodle Bowls GF",
+        "type": "dinner",
+        "calories": 410,
+        "prepTime": "15 min",
+        "servings": "4 servings",
+        "season": "Spring/Summer",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-free"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 510,
+        "carbs": 53
+      },
+      {
+        "id": "lemon-broccoli-pasta-with-sausage",
+        "name": "Lemon Broccoli Pasta with Sausage",
+        "type": "dinner",
+        "calories": 430,
+        "prepTime": "20 min",
+        "servings": "8 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy",
+          "chicken",
+          "contains-tree-nuts"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 520,
+        "carbs": 51
+      },
+      {
+        "id": "lemon-broccoli-pasta-with-sausage-gf",
+        "name": "Lemon Broccoli Pasta with Sausage GF",
+        "type": "dinner",
+        "calories": 430,
+        "prepTime": "20 min",
+        "servings": "8 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "contains-dairy",
+          "chicken",
+          "contains-tree-nuts"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 520,
+        "carbs": 51
+      },
+      {
+        "id": "meatball-pitas",
+        "name": "Meatball Pitas",
+        "type": "dinner",
+        "calories": 620,
+        "prepTime": "45 min",
+        "servings": "6 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "dairy-free",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 520,
+        "carbs": 51
+      },
+      {
+        "id": "quick-lasagna",
+        "name": "Quick Lasagna",
+        "type": "dinner",
+        "calories": 520,
+        "prepTime": "55 min",
+        "servings": "6 servings",
+        "season": "Essential",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 520,
+        "carbs": 32
+      },
+      {
+        "id": "hamburger-skillet",
+        "name": "Hamburger Skillet",
+        "type": "dinner",
+        "calories": 580,
+        "prepTime": "40 min",
+        "servings": "6 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-optional"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 540,
+        "carbs": 57
+      },
+      {
+        "id": "lemon-chicken-orzo-soup",
+        "name": "Lemon Chicken Orzo Soup",
+        "type": "dinner",
+        "calories": 390,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Fall/Winter",
+        "dietaryTags": [
+          "contains-gluten",
+          "dairy-optional",
+          "chicken",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 540,
+        "carbs": 30
+      },
+      {
+        "id": "souvlaki-and-salad",
+        "name": "Souvlaki and Salad",
+        "type": "dinner",
+        "calories": 520,
+        "prepTime": "30 min",
+        "servings": "6 servings",
+        "season": "Spring/Summer",
+        "dietaryTags": [
+          "contains-gluten",
+          "dairy-optional"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 540,
+        "carbs": 46
+      },
+      {
+        "id": "thai-cashew-chicken",
+        "name": "Thai Cashew Chicken",
+        "type": "dinner",
+        "calories": 610,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-free",
+          "chicken",
+          "contains-tree-nuts"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 540,
+        "carbs": 69
+      },
+      {
+        "id": "one-pan-spaghetti",
+        "name": "One-Pan Spaghetti",
+        "type": "dinner",
+        "calories": 490,
+        "prepTime": "30 min",
+        "servings": "8 servings",
+        "season": "Essential",
+        "dietaryTags": [
+          "contains-gluten",
+          "dairy-optional",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 560,
+        "carbs": 46
+      },
+      {
+        "id": "one-pan-spaghetti-gf",
+        "name": "One-Pan Spaghetti GF",
+        "type": "dinner",
+        "calories": 490,
+        "prepTime": "30 min",
+        "servings": "8 servings",
+        "season": "Essential",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-optional",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 560,
+        "carbs": 46
+      },
+      {
+        "id": "baked-chicken-and-rice-casserole",
+        "name": "Baked Chicken and Rice Casserole",
+        "type": "dinner",
+        "calories": 510,
+        "prepTime": "20 min",
+        "servings": "8 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy",
+          "chicken"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 570,
+        "carbs": 32
+      },
+      {
+        "id": "baked-sesame-chicken-and-rice",
+        "name": "Baked Sesame Chicken and Rice",
+        "type": "dinner",
+        "calories": 400,
+        "prepTime": "60 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "dairy-free",
+          "chicken",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 570,
+        "carbs": 44
+      },
+      {
+        "id": "baked-sesame-chicken-and-rice-gf",
+        "name": "Baked Sesame Chicken and Rice GF",
+        "type": "dinner",
+        "calories": 400,
+        "prepTime": "60 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-free",
+          "chicken",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 570,
+        "carbs": 44
+      },
+      {
+        "id": "ham-with-mashed-potatoes-and-winter-vegetables",
+        "name": "Ham with Mashed Potatoes and Winter Vegetables",
+        "type": "dinner",
+        "calories": 680,
+        "prepTime": "60 min",
+        "servings": "8 servings",
+        "season": "Holiday",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-free"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 570,
+        "carbs": 110
+      },
+      {
+        "id": "easy-chicken-paella",
+        "name": "Easy Chicken Paella",
+        "type": "dinner",
+        "calories": 600,
+        "prepTime": "45 min",
+        "servings": "6 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-free",
+          "chicken"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 590,
+        "carbs": 75
+      },
+      {
+        "id": "mahi-mahi-sandwiches",
+        "name": "Mahi Mahi Sandwiches",
+        "type": "dinner",
+        "calories": 730,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Spring/Summer",
+        "dietaryTags": [
+          "contains-gluten",
+          "dairy-free"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 600,
+        "carbs": 75
+      },
+      {
+        "id": "chicken-and-tomato-pasta",
+        "name": "Chicken and Tomato Pasta",
+        "type": "dinner",
+        "calories": 630,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "dairy-optional",
+          "chicken",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 610,
+        "carbs": 98
+      },
+      {
+        "id": "chicken-and-tomato-pasta-gf",
+        "name": "Chicken and Tomato Pasta GF",
+        "type": "dinner",
+        "calories": 630,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-optional",
+          "chicken",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 610,
+        "carbs": 98
+      },
+      {
+        "id": "tater-tot-casserole",
+        "name": "Tater Tot Casserole",
+        "type": "dinner",
+        "calories": 360,
+        "prepTime": "20 min",
+        "servings": "8 servings",
+        "season": "Essential",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 610,
+        "carbs": 22
+      },
+      {
+        "id": "beef-and-bok-choy-stir-fry",
+        "name": "Beef and Bok Choy Stir-Fry",
+        "type": "dinner",
+        "calories": 620,
+        "prepTime": "45 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "dairy-free"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 620,
+        "carbs": 45
+      },
+      {
+        "id": "beef-and-bok-choy-stir-fry-gf",
+        "name": "Beef and Bok Choy Stir-Fry GF",
+        "type": "dinner",
+        "calories": 620,
+        "prepTime": "45 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-free"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 620,
+        "carbs": 45
+      },
+      {
+        "id": "chicken-parmesan-pasta",
+        "name": "Chicken Parmesan Pasta",
+        "type": "dinner",
+        "calories": 520,
+        "prepTime": "30 min",
+        "servings": "6 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy",
+          "chicken",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 620,
+        "carbs": 68
+      },
+      {
+        "id": "tomato-braised-fish-and-couscous",
+        "name": "Tomato-Braised Fish and Couscous",
+        "type": "dinner",
+        "calories": 620,
+        "prepTime": "45 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "dairy-optional"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 620,
+        "carbs": 87
+      },
+      {
+        "id": "chicken-with-roasted-brussels-sprouts",
+        "name": "Chicken with Roasted Brussels Sprouts",
+        "type": "dinner",
+        "calories": 520,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Fall/Winter",
+        "dietaryTags": [
+          "contains-gluten",
+          "dairy-optional",
+          "chicken"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 630,
+        "carbs": 56
+      },
+      {
+        "id": "garden-sloppy-joes",
+        "name": "Garden Sloppy Joes",
+        "type": "dinner",
+        "calories": 610,
+        "prepTime": "20 min",
+        "servings": "4 servings",
+        "season": "Spring/Summer",
+        "dietaryTags": [
+          "contains-gluten",
+          "dairy-free"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 630,
+        "carbs": 47
+      },
+      {
+        "id": "garden-sloppy-joes-gf",
+        "name": "Garden Sloppy Joes GF",
+        "type": "dinner",
+        "calories": 610,
+        "prepTime": "20 min",
+        "servings": "4 servings",
+        "season": "Spring/Summer",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-free"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 630,
+        "carbs": 47
+      },
+      {
+        "id": "slow-cooker-beef-stew",
+        "name": "Slow Cooker Beef Stew",
+        "type": "dinner",
+        "calories": 450,
+        "prepTime": "20 min + all day",
+        "servings": "4 servings",
+        "season": "Fall/Winter",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-free"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 630,
+        "carbs": 54
+      },
+      {
+        "id": "sweet-and-sour-chicken",
+        "name": "Sweet and Sour Chicken",
+        "type": "dinner",
+        "calories": 420,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Essential",
+        "dietaryTags": [
+          "contains-gluten",
+          "dairy-free",
+          "chicken"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 630,
+        "carbs": 60
+      },
+      {
+        "id": "sweet-and-sour-chicken",
+        "name": "Sweet and Sour Chicken",
+        "type": "dinner",
+        "calories": 420,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Essential",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-free",
+          "chicken"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 630,
+        "carbs": 60
+      },
+      {
+        "id": "meatloaf-and-roasted-brussels-sprouts",
+        "name": "Meatloaf and Roasted Brussels Sprouts",
+        "type": "dinner",
+        "calories": 580,
+        "prepTime": "45 min",
+        "servings": "6 servings",
+        "season": "Fall/Winter",
+        "dietaryTags": [
+          "contains-gluten",
+          "dairy-optional"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 640,
+        "carbs": 47
+      },
+      {
+        "id": "supreme-ground-beef-nachos",
+        "name": "Supreme Ground Beef Nachos",
+        "type": "dinner",
+        "calories": 500,
+        "prepTime": "20 min",
+        "servings": "8 servings",
+        "season": "Essential",
+        "dietaryTags": [
+          "gluten-free",
+          "contains-dairy"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 640,
+        "carbs": 30
+      },
+      {
+        "id": "cheddar-quiche-with-broccoli",
+        "name": "Cheddar Quiche with Broccoli",
+        "type": "dinner",
+        "calories": 490,
+        "prepTime": "45 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 650,
+        "carbs": 33
+      },
+      {
+        "id": "egg-roll-bowls",
+        "name": "Egg Roll Bowls",
+        "type": "dinner",
+        "calories": 450,
+        "prepTime": "20 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "dairy-free"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 650,
+        "carbs": 51
+      },
+      {
+        "id": "egg-roll-bowls-gf",
+        "name": "Egg Roll Bowls GF",
+        "type": "dinner",
+        "calories": 450,
+        "prepTime": "20 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-free"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 650,
+        "carbs": 51
+      },
+      {
+        "id": "fish-and-chips",
+        "name": "Fish and Chips",
+        "type": "dinner",
+        "calories": 480,
+        "prepTime": "45 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "dairy-free",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 650,
+        "carbs": 45
+      },
+      {
+        "id": "pineapple-shrimp-fried-rice",
+        "name": "Pineapple Shrimp Fried Rice",
+        "type": "dinner",
+        "calories": 690,
+        "prepTime": "20 min",
+        "servings": "4 servings",
+        "season": "Spring/Summer",
+        "dietaryTags": [
+          "contains-gluten",
+          "dairy-free"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 660,
+        "carbs": 100
+      },
+      {
+        "id": "pineapple-shrimp-fried-rice-gf",
+        "name": "Pineapple Shrimp Fried Rice GF",
+        "type": "dinner",
+        "calories": 690,
+        "prepTime": "20 min",
+        "servings": "4 servings",
+        "season": "Spring/Summer",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-free"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 660,
+        "carbs": 100
+      },
+      {
+        "id": "greek-turkey-burgers",
+        "name": "Greek Turkey Burgers",
+        "type": "dinner",
+        "calories": 550,
+        "prepTime": "45 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 670,
+        "carbs": 63
+      },
+      {
+        "id": "greek-turkey-burgers-gf",
+        "name": "Greek Turkey Burgers GF",
+        "type": "dinner",
+        "calories": 550,
+        "prepTime": "45 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "contains-dairy",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 670,
+        "carbs": 63
+      },
+      {
+        "id": "cheese-lasagna",
+        "name": "Cheese Lasagna",
+        "type": "dinner",
+        "calories": 410,
+        "prepTime": "60 min",
+        "servings": "8 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 680,
+        "carbs": 52
+      },
+      {
+        "id": "pork-chops-and-peach-sauce",
+        "name": "Pork Chops and Peach Sauce",
+        "type": "dinner",
+        "calories": 550,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Spring/Summer",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-optional"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 680,
+        "carbs": 54
+      },
+      {
+        "id": "greek-meatballs-with-couscous",
+        "name": "Greek Meatballs with Couscous",
+        "type": "dinner",
+        "calories": 480,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [],
+        "image": "/api/placeholder/200/200",
+        "sodium": 700,
+        "carbs": 45
+      },
+      {
+        "id": "pork-chops-and-potato-salad",
+        "name": "Pork Chops and Potato Salad",
+        "type": "dinner",
+        "calories": 490,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Spring/Summer",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-free",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 700,
+        "carbs": 43
+      },
+      {
+        "id": "bbq-chicken-and-rice",
+        "name": "BBQ Chicken and Rice",
+        "type": "dinner",
+        "calories": 610,
+        "prepTime": "45 min",
+        "servings": "4 servings",
+        "season": "Spring/Summer",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-optional",
+          "chicken"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 710,
+        "carbs": 63
+      },
+      {
+        "id": "garlic-tomato-chicken-pasta",
+        "name": "Garlic Tomato Chicken Pasta",
+        "type": "dinner",
+        "calories": 590,
+        "prepTime": "45 min",
+        "servings": "6 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "contains-dairy",
+          "chicken"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 710,
+        "carbs": 67
+      },
+      {
+        "id": "gf-cheeseburger-egg-pie",
+        "name": "GF Cheeseburger Egg Pie",
+        "type": "dinner",
+        "calories": 720,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "contains-dairy",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 710,
+        "carbs": 42
+      },
+      {
+        "id": "turkey-lettuce-wraps",
+        "name": "Turkey Lettuce Wraps",
+        "type": "dinner",
+        "calories": 640,
+        "prepTime": "20 min",
+        "servings": "4 servings",
+        "season": "Spring/Summer",
+        "dietaryTags": [
+          "contains-gluten",
+          "dairy-free"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 710,
+        "carbs": 106
+      },
+      {
+        "id": "turkey-lettuce-wraps",
+        "name": "Turkey Lettuce Wraps",
+        "type": "dinner",
+        "calories": 640,
+        "prepTime": "20 min",
+        "servings": "4 servings",
+        "season": "Spring/Summer",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-free"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 710,
+        "carbs": 106
+      },
+      {
+        "id": "beef-and-biscuit-casserole",
+        "name": "Beef and Biscuit Casserole",
+        "type": "dinner",
+        "calories": 660,
+        "prepTime": "45 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 720,
+        "carbs": 35
+      },
+      {
+        "id": "chorizo-enchiladas",
+        "name": "Chorizo Enchiladas",
+        "type": "dinner",
+        "calories": 430,
+        "prepTime": "30 min",
+        "servings": "8 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 720,
+        "carbs": 48
+      },
+      {
+        "id": "chorizo-enchiladas-gf",
+        "name": "Chorizo Enchiladas GF",
+        "type": "dinner",
+        "calories": 430,
+        "prepTime": "30 min",
+        "servings": "8 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "contains-dairy"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 720,
+        "carbs": 48
+      },
+      {
+        "id": "peanut-chicken-and-noodles",
+        "name": "Peanut Chicken and Noodles",
+        "type": "dinner",
+        "calories": 760,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Spring/Summer",
+        "dietaryTags": [
+          "contains-gluten",
+          "dairy-free",
+          "chicken"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 730,
+        "carbs": 95
+      },
+      {
+        "id": "chicken-pita-wraps",
+        "name": "Chicken Pita Wraps",
+        "type": "dinner",
+        "calories": 450,
+        "prepTime": "25 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy",
+          "chicken",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 750,
+        "carbs": 52
+      },
+      {
+        "id": "chicken-cacciatore",
+        "name": "Chicken Cacciatore",
+        "type": "dinner",
+        "calories": 650,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Essential",
+        "dietaryTags": [
+          "contains-gluten",
+          "dairy-free",
+          "chicken"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 760,
+        "carbs": 48
+      },
+      {
+        "id": "arrroz-con-pollo",
+        "name": "Arrroz Con Pollo",
+        "type": "dinner",
+        "calories": 570,
+        "prepTime": "45 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "dairy-free",
+          "chicken"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 780,
+        "carbs": 56
+      },
+      {
+        "id": "bbq-ribs-and-coleslaw",
+        "name": "BBQ Ribs and Coleslaw",
+        "type": "dinner",
+        "calories": 850,
+        "prepTime": "",
+        "servings": "",
+        "season": "Spring/Summer",
+        "dietaryTags": [],
+        "image": "/api/placeholder/200/200",
+        "sodium": 810,
+        "carbs": 31
+      },
+      {
+        "id": "cheesy-pesto-gnocchi",
+        "name": "Cheesy Pesto Gnocchi",
+        "type": "dinner",
+        "calories": 420,
+        "prepTime": "40 min",
+        "servings": "8 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy",
+          "contains-tree-nuts"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 810,
+        "carbs": 26
+      },
+      {
+        "id": "vietnamese-shaking-beef",
+        "name": "Vietnamese Shaking Beef",
+        "type": "dinner",
+        "calories": 630,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-free"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 810,
+        "carbs": 88
+      },
+      {
+        "id": "fisherman's-pie",
+        "name": "Fisherman's Pie",
+        "type": "dinner",
+        "calories": 620,
+        "prepTime": "45 min",
+        "servings": "4 servings",
+        "season": "Fall/Winter",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 830,
+        "carbs": 60
+      },
+      {
+        "id": "sheet-pan-breaded-chicken",
+        "name": "Sheet Pan Breaded Chicken",
+        "type": "dinner",
+        "calories": 570,
+        "prepTime": "40 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy",
+          "chicken",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 830,
+        "carbs": 58
+      },
+      {
+        "id": "beef-and-bean-orzo",
+        "name": "Beef and Bean Orzo",
+        "type": "dinner",
+        "calories": 790,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy",
+          "contains-tree-nuts"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 850,
+        "carbs": 61
+      },
+      {
+        "id": "chicken,-kale-and-wild-rice-salad",
+        "name": "Chicken, Kale and Wild Rice Salad",
+        "type": "dinner",
+        "calories": 610,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Spring/Summer",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-optional",
+          "chicken"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 850,
+        "carbs": 70
+      },
+      {
+        "id": "gf-chicken-parmesan-tuscany",
+        "name": "GF Chicken Parmesan Tuscany",
+        "type": "dinner",
+        "calories": 610,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-optional",
+          "chicken",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 850,
+        "carbs": 88
+      },
+      {
+        "id": "bbq-chicken-and-potato-salad",
+        "name": "BBQ Chicken and Potato Salad",
+        "type": "dinner",
+        "calories": 800,
+        "prepTime": "60 min",
+        "servings": "4 servings",
+        "season": "Spring/Summer",
+        "dietaryTags": [
+          "gluten-free",
+          "contains-dairy",
+          "chicken",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 860,
+        "carbs": 39
+      },
+      {
+        "id": "shrimp-and-grits",
+        "name": "Shrimp and Grits",
+        "type": "dinner",
+        "calories": 410,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "dairy-optional"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 860,
+        "carbs": 37
+      },
+      {
+        "id": "mexican-beans-and-rice",
+        "name": "Mexican Beans and Rice",
+        "type": "dinner",
+        "calories": 590,
+        "prepTime": "60 min",
+        "servings": "8 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 870,
+        "carbs": 72
+      },
+      {
+        "id": "fish-fry-with-brussels-caesar-salad",
+        "name": "Fish Fry with Brussels Caesar Salad",
+        "type": "dinner",
+        "calories": 470,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Spring/Summer",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 880,
+        "carbs": 24
+      },
+      {
+        "id": "ravioli-with-garlic-butter-mushrooms",
+        "name": "Ravioli with Garlic Butter Mushrooms",
+        "type": "dinner",
+        "calories": 400,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Fall/Winter",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 880,
+        "carbs": 29
+      },
+      {
+        "id": "beef-and-broccoli",
+        "name": "Beef and Broccoli",
+        "type": "dinner",
+        "calories": 650,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Essential",
+        "dietaryTags": [
+          "contains-gluten",
+          "dairy-free",
+          "contains-tree-nuts"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 900,
+        "carbs": 91
+      },
+      {
+        "id": "burger-bowls",
+        "name": "Burger Bowls",
+        "type": "dinner",
+        "calories": 560,
+        "prepTime": "45 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [],
+        "image": "/api/placeholder/200/200",
+        "sodium": 910,
+        "carbs": 58
+      },
+      {
+        "id": "honey-mustard-sheet-pan-salmon",
+        "name": "Honey-Mustard Sheet-Pan Salmon",
+        "type": "dinner",
+        "calories": 710,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-free"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 910,
+        "carbs": 46
+      },
+      {
+        "id": "pork-and-noodle-stir-fry",
+        "name": "Pork and Noodle Stir-Fry",
+        "type": "dinner",
+        "calories": 760,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "dairy-free"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 920,
+        "carbs": 104
+      },
+      {
+        "id": "sheet-pan-pork-fajitas",
+        "name": "Sheet Pan Pork Fajitas",
+        "type": "dinner",
+        "calories": 400,
+        "prepTime": "20 min",
+        "servings": "4 servings",
+        "season": "Essential",
+        "dietaryTags": [
+          "contains-gluten",
+          "dairy-free"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 920,
+        "carbs": 38
+      },
+      {
+        "id": "sheet-pan-pork-fajitas-gf",
+        "name": "Sheet Pan Pork Fajitas GF",
+        "type": "dinner",
+        "calories": 400,
+        "prepTime": "20 min",
+        "servings": "4 servings",
+        "season": "Essential",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-free"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 920,
+        "carbs": 38
+      },
+      {
+        "id": "mexican-turkey-skillet",
+        "name": "Mexican Turkey Skillet",
+        "type": "dinner",
+        "calories": 490,
+        "prepTime": "30 min",
+        "servings": "6 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "contains-dairy"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 940,
+        "carbs": 49
+      },
+      {
+        "id": "baked-smothered-beef-burritos",
+        "name": "Baked Smothered Beef Burritos",
+        "type": "dinner",
+        "calories": 530,
+        "prepTime": "45 min",
+        "servings": "8 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "dairy-optional"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 960,
+        "carbs": 38
+      },
+      {
+        "id": "baked-smothered-beef-burritos-gf",
+        "name": "Baked Smothered Beef Burritos GF",
+        "type": "dinner",
+        "calories": 530,
+        "prepTime": "45 min",
+        "servings": "8 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-optional"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 960,
+        "carbs": 38
+      },
+      {
+        "id": "bbq-chicken-and-creamed-corn",
+        "name": "BBQ Chicken and Creamed Corn",
+        "type": "dinner",
+        "calories": 700,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Spring/Summer",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy",
+          "chicken"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 960,
+        "carbs": 46
+      },
+      {
+        "id": "orange-beef-lo-mein",
+        "name": "Orange Beef Lo Mein",
+        "type": "dinner",
+        "calories": 470,
+        "prepTime": "20 min",
+        "servings": "4 servings",
+        "season": "Essential",
+        "dietaryTags": [
+          "contains-gluten",
+          "dairy-free",
+          "contains-tree-nuts"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 970,
+        "carbs": 65
+      },
+      {
+        "id": "salisbury-steak-and-mashed-potatoes",
+        "name": "Salisbury Steak and Mashed Potatoes",
+        "type": "dinner",
+        "calories": 760,
+        "prepTime": "45 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "dairy-optional"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 980,
+        "carbs": 57
+      },
+      {
+        "id": "garlic-ginger-ramen",
+        "name": "Garlic Ginger Ramen",
+        "type": "dinner",
+        "calories": 610,
+        "prepTime": "15 min",
+        "servings": "4 servings",
+        "season": "Fall/Winter",
+        "dietaryTags": [
+          "contains-gluten",
+          "dairy-free"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1000,
+        "carbs": 35
+      },
+      {
+        "id": "broccoli-alfredo-tortellini",
+        "name": "Broccoli Alfredo Tortellini",
+        "type": "dinner",
+        "calories": 630,
+        "prepTime": "20 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1010,
+        "carbs": 47
+      },
+      {
+        "id": "chorizo-taco-salad",
+        "name": "Chorizo Taco Salad",
+        "type": "dinner",
+        "calories": 420,
+        "prepTime": "20 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1020,
+        "carbs": 48
+      },
+      {
+        "id": "taco-salad",
+        "name": "Taco Salad",
+        "type": "dinner",
+        "calories": 420,
+        "prepTime": "15 min",
+        "servings": "4 servings",
+        "season": "Essential",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-optional"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1030,
+        "carbs": 23
+      },
+      {
+        "id": "sweet-and-sour-pork",
+        "name": "Sweet and Sour Pork",
+        "type": "dinner",
+        "calories": 660,
+        "prepTime": "",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1040,
+        "carbs": 107
+      },
+      {
+        "id": "chicken-broccoli-stir-fry",
+        "name": "Chicken Broccoli Stir-Fry",
+        "type": "dinner",
+        "calories": 560,
+        "prepTime": "20 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1090,
+        "carbs": 91
+      },
+      {
+        "id": "garlic-butter-chicken-and-potatoes",
+        "name": "Garlic Butter Chicken and Potatoes",
+        "type": "dinner",
+        "calories": 460,
+        "prepTime": "25 min",
+        "servings": "4 servings",
+        "season": "Fall/Winter",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-optional",
+          "chicken"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1090,
+        "carbs": 28
+      },
+      {
+        "id": "ground-beef-tacos",
+        "name": "Ground Beef Tacos",
+        "type": "dinner",
+        "calories": 660,
+        "prepTime": "20 min",
+        "servings": "4 servings",
+        "season": "Essential",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-optional"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1130,
+        "carbs": 33
+      },
+      {
+        "id": "fish-tacos",
+        "name": "Fish Tacos",
+        "type": "dinner",
+        "calories": 520,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Essential",
+        "dietaryTags": [
+          "gluten-free",
+          "contains-dairy",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1140,
+        "carbs": 35
+      },
+      {
+        "id": "turkey-and-rice-enchiladas",
+        "name": "Turkey and Rice Enchiladas",
+        "type": "dinner",
+        "calories": 400,
+        "prepTime": "30 min",
+        "servings": "8 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1150,
+        "carbs": 49
+      },
+      {
+        "id": "turkey-and-rice-enchiladas-gf",
+        "name": "Turkey and Rice Enchiladas GF",
+        "type": "dinner",
+        "calories": 400,
+        "prepTime": "30 min",
+        "servings": "8 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "contains-dairy"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1150,
+        "carbs": 49
+      },
+      {
+        "id": "chicken-creole",
+        "name": "Chicken Creole",
+        "type": "dinner",
+        "calories": 530,
+        "prepTime": "20 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "dairy-free",
+          "chicken",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1160,
+        "carbs": 78
+      },
+      {
+        "id": "gf-chicken-with-broccoli-cheddar-rice",
+        "name": "GF Chicken with Broccoli Cheddar Rice",
+        "type": "dinner",
+        "calories": 760,
+        "prepTime": "45 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "contains-dairy",
+          "chicken"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1170,
+        "carbs": 99
+      },
+      {
+        "id": "chorizo-black-bean-tacos",
+        "name": "Chorizo Black Bean Tacos",
+        "type": "dinner",
+        "calories": 570,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1180,
+        "carbs": 43
+      },
+      {
+        "id": "chorizo-black-bean-tacos-gf",
+        "name": "Chorizo Black Bean Tacos GF",
+        "type": "dinner",
+        "calories": 570,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "contains-dairy"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1180,
+        "carbs": 43
+      },
+      {
+        "id": "easy-skillet-chili",
+        "name": "Easy Skillet Chili",
+        "type": "dinner",
+        "calories": 650,
+        "prepTime": "45 min",
+        "servings": "4 servings",
+        "season": "Fall/Winter",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-free"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1180,
+        "carbs": 52
+      },
+      {
+        "id": "french-bread-pizza",
+        "name": "French Bread Pizza",
+        "type": "dinner",
+        "calories": 520,
+        "prepTime": "5 min",
+        "servings": "4 servings",
+        "season": "Essential",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1210,
+        "carbs": 50
+      },
+      {
+        "id": "chicken-burritos",
+        "name": "Chicken Burritos",
+        "type": "dinner",
+        "calories": 500,
+        "prepTime": "20 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "dairy-optional",
+          "chicken"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1230,
+        "carbs": 47
+      },
+      {
+        "id": "pork-tacos",
+        "name": "Pork Tacos",
+        "type": "dinner",
+        "calories": 640,
+        "prepTime": "15 min",
+        "servings": "4 servings",
+        "season": "Essential",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-optional"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1230,
+        "carbs": 50
+      },
+      {
+        "id": "street-corn-enchilada-bake",
+        "name": "Street Corn Enchilada Bake",
+        "type": "dinner",
+        "calories": 580,
+        "prepTime": "90 min",
+        "servings": "8 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy",
+          "chicken"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1230,
+        "carbs": 64
+      },
+      {
+        "id": "street-corn-enchilada-bake-gf",
+        "name": "Street Corn Enchilada Bake GF",
+        "type": "dinner",
+        "calories": 580,
+        "prepTime": "90 min",
+        "servings": "8 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "contains-dairy",
+          "chicken"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1230,
+        "carbs": 64
+      },
+      {
+        "id": "tortilla-casserole",
+        "name": "Tortilla Casserole",
+        "type": "dinner",
+        "calories": 500,
+        "prepTime": "20 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1230,
+        "carbs": 55
+      },
+      {
+        "id": "pulled-pork-tacos-with-peach-salsa",
+        "name": "Pulled Pork Tacos with Peach Salsa",
+        "type": "dinner",
+        "calories": 450,
+        "prepTime": "20 min",
+        "servings": "4 servings",
+        "season": "Spring/Summer",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-optional"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1240,
+        "carbs": 67
+      },
+      {
+        "id": "sheet-pan-salmon",
+        "name": "Sheet Pan Salmon",
+        "type": "dinner",
+        "calories": 460,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-optional",
+          "contains-tree-nuts",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1250,
+        "carbs": 52
+      },
+      {
+        "id": "chicken-marsala",
+        "name": "Chicken Marsala",
+        "type": "dinner",
+        "calories": 750,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Essential",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy",
+          "chicken"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1270,
+        "carbs": 69
+      },
+      {
+        "id": "ground-beef-burritos",
+        "name": "Ground Beef Burritos",
+        "type": "dinner",
+        "calories": 780,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Essential",
+        "dietaryTags": [
+          "contains-gluten",
+          "dairy-optional"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1270,
+        "carbs": 52
+      },
+      {
+        "id": "ground-beef-burritos-gf",
+        "name": "Ground Beef Burritos GF",
+        "type": "dinner",
+        "calories": 780,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Essential",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-optional"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1270,
+        "carbs": 52
+      },
+      {
+        "id": "cheesy-polenta-pie",
+        "name": "Cheesy Polenta Pie",
+        "type": "dinner",
+        "calories": 660,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Fall/Winter",
+        "dietaryTags": [
+          "gluten-free",
+          "contains-dairy"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1300,
+        "carbs": 70
+      },
+      {
+        "id": "taco-casserole",
+        "name": "Taco Casserole",
+        "type": "dinner",
+        "calories": 460,
+        "prepTime": "90 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-optional"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1300,
+        "carbs": 38
+      },
+      {
+        "id": "italian-chicken-and-garlic-bread",
+        "name": "Italian Chicken and Garlic Bread",
+        "type": "dinner",
+        "calories": 720,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy",
+          "chicken"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1320,
+        "carbs": 69
+      },
+      {
+        "id": "gf-pizza-bake",
+        "name": "GF Pizza Bake",
+        "type": "dinner",
+        "calories": 600,
+        "prepTime": "45 min",
+        "servings": "6 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "contains-dairy",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1340,
+        "carbs": 51
+      },
+      {
+        "id": "baked-bean-medley",
+        "name": "Baked Bean Medley",
+        "type": "dinner",
+        "calories": 470,
+        "prepTime": "90 min",
+        "servings": "6 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "dairy-free"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1350,
+        "carbs": 79
+      },
+      {
+        "id": "sheet-pan-greek-chicken",
+        "name": "Sheet Pan Greek Chicken",
+        "type": "dinner",
+        "calories": 720,
+        "prepTime": "45 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-free",
+          "chicken"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1390,
+        "carbs": 72
+      },
+      {
+        "id": "oven-fried-chicken",
+        "name": "Oven-Fried Chicken",
+        "type": "dinner",
+        "calories": 650,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Spring/Summer",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy",
+          "chicken"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1400,
+        "carbs": 11
+      },
+      {
+        "id": "pork-banh-mi-salad",
+        "name": "Pork Banh Mi Salad",
+        "type": "dinner",
+        "calories": 500,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Spring/Summer",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-free"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1410,
+        "carbs": 64
+      },
+      {
+        "id": "pork-banh-mi-sandwiches",
+        "name": "Pork Banh Mi Sandwiches",
+        "type": "dinner",
+        "calories": 500,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Spring/Summer",
+        "dietaryTags": [
+          "contains-gluten",
+          "dairy-free"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1410,
+        "carbs": 64
+      },
+      {
+        "id": "quesadillas-with-street-corn",
+        "name": "Quesadillas with Street Corn",
+        "type": "dinner",
+        "calories": 710,
+        "prepTime": "20 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy",
+          "chicken",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1410,
+        "carbs": 54
+      },
+      {
+        "id": "quesadillas-with-street-corn-gf",
+        "name": "Quesadillas with Street Corn GF",
+        "type": "dinner",
+        "calories": 710,
+        "prepTime": "20 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "contains-dairy",
+          "chicken",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1410,
+        "carbs": 54
+      },
+      {
+        "id": "chicken-sausage-kale-gnocchi",
+        "name": "Chicken Sausage Kale Gnocchi",
+        "type": "dinner",
+        "calories": 550,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy",
+          "chicken",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1420,
+        "carbs": 61
+      },
+      {
+        "id": "chicken-and-corn-taquitos",
+        "name": "Chicken and Corn Taquitos",
+        "type": "dinner",
+        "calories": 710,
+        "prepTime": "20 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1430,
+        "carbs": 72
+      },
+      {
+        "id": "southern-pork-with-rice-and-beans",
+        "name": "Southern Pork with Rice and Beans",
+        "type": "dinner",
+        "calories": 500,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Spring/Summer",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-free"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1430,
+        "carbs": 43
+      },
+      {
+        "id": "pork-chops-and-mushroom-gravy",
+        "name": "Pork Chops and Mushroom Gravy",
+        "type": "dinner",
+        "calories": 540,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Fall/Winter",
+        "dietaryTags": [
+          "gluten-free",
+          "contains-dairy"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1440,
+        "carbs": 45
+      },
+      {
+        "id": "pepperoni-pizza",
+        "name": "Pepperoni Pizza",
+        "type": "dinner",
+        "calories": 610,
+        "prepTime": "20 min",
+        "servings": "4 servings",
+        "season": "Essential",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1460,
+        "carbs": 56
+      },
+      {
+        "id": "chicken-mushroom-risotto",
+        "name": "Chicken Mushroom Risotto",
+        "type": "dinner",
+        "calories": 510,
+        "prepTime": "60 min",
+        "servings": "6 servings",
+        "season": "Fall/Winter",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-free",
+          "chicken"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1490,
+        "carbs": 58
+      },
+      {
+        "id": "red-chili-pork-with-refried-beans",
+        "name": "Red Chili Pork with Refried Beans",
+        "type": "dinner",
+        "calories": 670,
+        "prepTime": "15 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-free"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1490,
+        "carbs": 147
+      },
+      {
+        "id": "turkey-meatloaf-and-mashed-potatoes",
+        "name": "Turkey Meatloaf and Mashed Potatoes",
+        "type": "dinner",
+        "calories": 740,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "dairy-optional"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1510,
+        "carbs": 93
+      },
+      {
+        "id": "one-pan-chicken-alfredo",
+        "name": "One-Pan Chicken Alfredo",
+        "type": "dinner",
+        "calories": 710,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Essential",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy",
+          "chicken"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1530,
+        "carbs": 56
+      },
+      {
+        "id": "vegetable-beef-soup",
+        "name": "Vegetable Beef Soup",
+        "type": "dinner",
+        "calories": 560,
+        "prepTime": "45 min",
+        "servings": "4 servings",
+        "season": "Fall/Winter",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-free"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1540,
+        "carbs": 62
+      },
+      {
+        "id": "turmeric-chicken-and-chickpea-soup",
+        "name": "Turmeric Chicken and Chickpea Soup",
+        "type": "dinner",
+        "calories": 610,
+        "prepTime": "45 min",
+        "servings": "4 servings",
+        "season": "Fall/Winter",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-free",
+          "chicken"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1580,
+        "carbs": 38
+      },
+      {
+        "id": "broccoli-cheddar-chicken-and-dumplings",
+        "name": "Broccoli Cheddar Chicken and Dumplings",
+        "type": "dinner",
+        "calories": 400,
+        "prepTime": "45 min",
+        "servings": "8 servings",
+        "season": "Fall/Winter",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy",
+          "chicken"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1600,
+        "carbs": 37
+      },
+      {
+        "id": "pizza-soup",
+        "name": "Pizza Soup",
+        "type": "dinner",
+        "calories": 580,
+        "prepTime": "50 min",
+        "servings": "6 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-free"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1600,
+        "carbs": 9
+      },
+      {
+        "id": "orange-chicken",
+        "name": "Orange Chicken",
+        "type": "dinner",
+        "calories": 660,
+        "prepTime": "",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1620,
+        "carbs": 114
+      },
+      {
+        "id": "white-chicken-chili",
+        "name": "White Chicken Chili",
+        "type": "dinner",
+        "calories": 470,
+        "prepTime": "45 min",
+        "servings": "4 servings",
+        "season": "Fall/Winter",
+        "dietaryTags": [
+          "gluten-free",
+          "contains-dairy",
+          "chicken"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1650,
+        "carbs": 61
+      },
+      {
+        "id": "greek-chicken-and-rice-skillet",
+        "name": "Greek Chicken and Rice Skillet",
+        "type": "dinner",
+        "calories": 740,
+        "prepTime": "45 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-free",
+          "chicken"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1690,
+        "carbs": 49
+      },
+      {
+        "id": "moo-shu-chicken",
+        "name": "Moo Shu Chicken",
+        "type": "dinner",
+        "calories": 540,
+        "prepTime": "20 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "dairy-free",
+          "chicken"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1700,
+        "carbs": 47
+      },
+      {
+        "id": "cheeseburger-loaded-fries",
+        "name": "Cheeseburger-Loaded Fries",
+        "type": "dinner",
+        "calories": 600,
+        "prepTime": "30 min",
+        "servings": "8 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1720,
+        "carbs": 43
+      },
+      {
+        "id": "pulled-pork-sandwiches",
+        "name": "Pulled Pork Sandwiches",
+        "type": "dinner",
+        "calories": 500,
+        "prepTime": "10 min",
+        "servings": "4 servings",
+        "season": "Spring/Summer",
+        "dietaryTags": [],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1720,
+        "carbs": 111
+      },
+      {
+        "id": "turkey-pumpkin-chili",
+        "name": "Turkey Pumpkin Chili",
+        "type": "dinner",
+        "calories": 510,
+        "prepTime": "60 min",
+        "servings": "4 servings",
+        "season": "Fall/Winter",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-free"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1740,
+        "carbs": 65
+      },
+      {
+        "id": "chicken-pot-pie",
+        "name": "Chicken Pot Pie",
+        "type": "dinner",
+        "calories": 580,
+        "prepTime": "45 min",
+        "servings": "4 servings",
+        "season": "Fall/Winter",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy",
+          "chicken",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1780,
+        "carbs": 34
+      },
+      {
+        "id": "chorizo-butternut-squash-chili",
+        "name": "Chorizo Butternut Squash Chili",
+        "type": "dinner",
+        "calories": 430,
+        "prepTime": "45 min",
+        "servings": "4 servings",
+        "season": "Fall/Winter",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-free"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1800,
+        "carbs": 46
+      },
+      {
+        "id": "tex-mex-beef-tostadas",
+        "name": "Tex-Mex Beef Tostadas",
+        "type": "dinner",
+        "calories": 820,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1830,
+        "carbs": 64
+      },
+      {
+        "id": "beef-and-barley-soup",
+        "name": "Beef and Barley Soup",
+        "type": "dinner",
+        "calories": 640,
+        "prepTime": "45 min",
+        "servings": "4 servings",
+        "season": "Fall/Winter",
+        "dietaryTags": [
+          "contains-gluten",
+          "dairy-free"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1860,
+        "carbs": 46
+      },
+      {
+        "id": "supreme-pizza",
+        "name": "Supreme Pizza",
+        "type": "dinner",
+        "calories": 580,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Essential",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1920,
+        "carbs": 36
+      },
+      {
+        "id": "italian-wedding-soup",
+        "name": "Italian Wedding Soup",
+        "type": "dinner",
+        "calories": 600,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Fall/Winter",
+        "dietaryTags": [
+          "contains-gluten",
+          "dairy-optional"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1930,
+        "carbs": 42
+      },
+      {
+        "id": "fried-chicken-sandwich",
+        "name": "Fried Chicken Sandwich",
+        "type": "dinner",
+        "calories": 540,
+        "prepTime": "45 min",
+        "servings": "4 servings",
+        "season": "Spring/Summer",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy",
+          "chicken"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1940,
+        "carbs": 68
+      },
+      {
+        "id": "gf-chicken-tetrazzini",
+        "name": "GF Chicken Tetrazzini",
+        "type": "dinner",
+        "calories": 570,
+        "prepTime": "30 min",
+        "servings": "8 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "contains-dairy",
+          "chicken",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1990,
+        "carbs": 80
+      },
+      {
+        "id": "hawaiian-pizza",
+        "name": "Hawaiian Pizza",
+        "type": "dinner",
+        "calories": 680,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Essential",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1990,
+        "carbs": 70
+      },
+      {
+        "id": "butternut-white-chicken-chili",
+        "name": "Butternut White Chicken Chili",
+        "type": "dinner",
+        "calories": 650,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Fall/Winter",
+        "dietaryTags": [
+          "gluten-free",
+          "contains-dairy",
+          "chicken"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 2040,
+        "carbs": 77
+      },
+      {
+        "id": "white-alfredo-chicken-pizza",
+        "name": "White Alfredo Chicken Pizza",
+        "type": "dinner",
+        "calories": 620,
+        "prepTime": "20 min",
+        "servings": "4 servings",
+        "season": "Essential",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy",
+          "chicken"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 2040,
+        "carbs": 64
+      },
+      {
+        "id": "white-alfredo-chicken-pizza-gf",
+        "name": "White Alfredo Chicken Pizza GF",
+        "type": "dinner",
+        "calories": 620,
+        "prepTime": "20 min",
+        "servings": "4 servings",
+        "season": "Essential",
+        "dietaryTags": [
+          "gluten-free",
+          "contains-dairy",
+          "chicken"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 2040,
+        "carbs": 64
+      },
+      {
+        "id": "crispy-ranch-chicken-with-green-beans",
+        "name": "Crispy Ranch Chicken with Green Beans",
+        "type": "dinner",
+        "calories": 660,
+        "prepTime": "45 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy",
+          "chicken",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 2090,
+        "carbs": 78
+      },
+      {
+        "id": "chorizo-pumpkin-enchiladas",
+        "name": "Chorizo Pumpkin Enchiladas",
+        "type": "dinner",
+        "calories": 740,
+        "prepTime": "45 min",
+        "servings": "4 servings",
+        "season": "Fall/Winter",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 2120,
+        "carbs": 78
+      },
+      {
+        "id": "teriyaki-chicken-and-green-beans",
+        "name": "Teriyaki Chicken and Green Beans",
+        "type": "dinner",
+        "calories": 730,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Essential",
+        "dietaryTags": [
+          "contains-gluten",
+          "dairy-free",
+          "chicken"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 2260,
+        "carbs": 109
+      },
+      {
+        "id": "baked-meatballs-with-orzo",
+        "name": "Baked Meatballs with Orzo",
+        "type": "dinner",
+        "calories": 670,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 2280,
+        "carbs": 57
+      },
+      {
+        "id": "easy-one-pot-shrimp-alfredo",
+        "name": "Easy One-Pot Shrimp Alfredo",
+        "type": "dinner",
+        "calories": 620,
+        "prepTime": "20 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 2300,
+        "carbs": 43
+      },
+      {
+        "id": "easy-one-pot-shrimp-alfredo-gf",
+        "name": "Easy One-Pot Shrimp Alfredo GF",
+        "type": "dinner",
+        "calories": 620,
+        "prepTime": "20 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "contains-dairy",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 2300,
+        "carbs": 43
+      },
+      {
+        "id": "carne-asada-torta",
+        "name": "Carne Asada Torta",
+        "type": "dinner",
+        "calories": 730,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "dairy-optional"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 2580,
+        "carbs": 86
+      },
+      {
+        "id": "chicken-enchiladas",
+        "name": "Chicken Enchiladas",
+        "type": "dinner",
+        "calories": 670,
+        "prepTime": "45 min",
+        "servings": "4 servings",
+        "season": "Essential",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy",
+          "chicken"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 2650,
+        "carbs": 82
+      },
+      {
+        "id": "chicken-enchiladas-gf",
+        "name": "Chicken Enchiladas GF",
+        "type": "dinner",
+        "calories": 670,
+        "prepTime": "45 min",
+        "servings": "4 servings",
+        "season": "Essential",
+        "dietaryTags": [
+          "gluten-free",
+          "contains-dairy",
+          "chicken"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 2650,
+        "carbs": 82
+      },
+      {
+        "id": "bbq-chicken-pizza",
+        "name": "BBQ Chicken Pizza",
+        "type": "dinner",
+        "calories": 410,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Essential",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy",
+          "chicken",
+          "contains-eggs"
+        ],
+        "image": "/api/placeholder/200/200"
+      },
+      {
+        "id": "bbq-chicken-pizza",
+        "name": "BBQ Chicken Pizza",
+        "type": "dinner",
+        "calories": 410,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Essential",
+        "dietaryTags": [
+          "gluten-free",
+          "contains-dairy",
+          "chicken"
+        ],
+        "image": "/api/placeholder/200/200"
+      },
+      {
+        "id": "bbq-ribs,-collards-&-cornbread",
+        "name": "BBQ Ribs, Collards & Cornbread",
+        "type": "dinner",
+        "calories": 490,
+        "prepTime": "30 min",
+        "servings": "6 servings",
+        "season": "Spring/Summer",
+        "dietaryTags": [
+          "dairy-optional"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 1680,
+        "carbs": 73
+      },
+      {
+        "id": "hamburgers-and-fries",
+        "name": "Hamburgers and Fries",
+        "type": "dinner",
+        "calories": 460,
+        "prepTime": "20 min",
+        "servings": "4 servings",
+        "season": "Essential",
+        "dietaryTags": [
+          "contains-gluten",
+          "dairy-optional"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 860
+      },
+      {
+        "id": "hamburgers-and-fries-gf",
+        "name": "Hamburgers and Fries GF",
+        "type": "dinner",
+        "calories": 460,
+        "prepTime": "20 min",
+        "servings": "4 servings",
+        "season": "Essential",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-optional"
+        ],
+        "image": "/api/placeholder/200/200"
+      },
+      {
+        "id": "meatball-subs",
+        "name": "Meatball Subs",
+        "type": "dinner",
+        "calories": 770,
+        "prepTime": "20 min",
+        "servings": "",
+        "season": "Classic",
+        "dietaryTags": [
+          "contains-gluten",
+          "contains-dairy"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 750,
+        "carbs": 57
+      },
+      {
+        "id": "salmon-with-asparagus-and-potatoes",
+        "name": "Salmon with Asparagus and Potatoes",
+        "type": "dinner",
+        "calories": 400,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Spring/Summer",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-free"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 150,
+        "carbs": 54
+      },
+      {
+        "id": "steak-with-mashed-potatoes-and-corn",
+        "name": "Steak with Mashed Potatoes and Corn",
+        "type": "dinner",
+        "calories": 570,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Spring/Summer",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-optional"
+        ],
+        "image": "/api/placeholder/200/200"
+      },
+      {
+        "id": "steak-with-mushrooms-and-baked-potatoes",
+        "name": "Steak with Mushrooms and Baked Potatoes",
+        "type": "dinner",
+        "calories": 600,
+        "prepTime": "30 min",
+        "servings": "4 servings",
+        "season": "Classic",
+        "dietaryTags": [
+          "gluten-free",
+          "dairy-optional"
+        ],
+        "image": "/api/placeholder/200/200",
+        "sodium": 90,
+        "carbs": 66
+      }
+    ]
+}
