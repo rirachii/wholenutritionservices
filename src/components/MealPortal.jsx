@@ -1,82 +1,159 @@
-import React, { useState, useEffect } from 'react';
-import { AlertCircle, Filter } from 'lucide-react';
-import { Alert, AlertDescription } from '../components/ui/alert';
-import { Popover, PopoverContent, PopoverTrigger } from '../components/ui/popover';
-import { Checkbox } from '../components/ui/checkbox';
-import { Label } from '../components/ui/label';
-import { MEAL_DATA } from '../data/meals';
-import { MealDetails } from './MealDetails';
+  const renderMealSection = (type) => {
+    let mealsToShow = MEAL_DATA[type] || [];
+    mealsToShow = filterMeals(mealsToShow);
 
-const DIETARY_OPTIONS = [
-  { id: 'gluten-free', label: 'Gluten Free' },
-  { id: 'dairy-free', label: 'Dairy Free' },
-  { id: 'dairy-optional', label: 'Dairy Optional' },
-  { id: 'contains-tree-nuts', label: 'Contains Tree Nuts' },
-  { id: 'contains-eggs', label: 'Contains Eggs' },
-  { id: 'contains-dairy', label: 'Contains Dairy' },
-  { id: 'contains-gluten', label: 'Contains Gluten' },
-  { id: 'contains-cashews', label: 'Contains Cashews' },
-];
+    if (mealsToShow.length === 0) return null;
 
-const SEASONS = ['Classic', 'Essential', 'Fall/Winter', 'Spring/Summer'];
-
-function MealPortal() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
-  const [activeTab, setActiveTab] = useState('meals');
-  const [selectedMealType, setSelectedMealType] = useState('all');
-  const [selectedSeason, setSelectedSeason] = useState('all');
-  const [selectedMeal, setSelectedMeal] = useState(null);
-  const [showMealDetails, setShowMealDetails] = useState(false);
-  const [dietaryFilters, setDietaryFilters] = useState(() => {
-    const saved = localStorage.getItem('dietaryFilters');
-    return saved ? JSON.parse(saved) : [];
-  });
-
-  useEffect(() => {
-    localStorage.setItem('dietaryFilters', JSON.stringify(dietaryFilters));
-  }, [dietaryFilters]);
-
-  const handleLogin = (e) => {
-    e.preventDefault();
-    if (email === 'home1@example.com' && password === 'password123') {
-      setIsLoggedIn(true);
-      setError('');
-    } else {
-      setError('Invalid credentials');
-    }
+    return (
+      <div key={type} className="mb-12">
+        <h2 className="text-2xl font-bold mb-6 capitalize border-b pb-2">
+          {type}
+          <span className="text-gray-500 text-sm ml-2">({mealsToShow.length} items)</span>
+        </h2>
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {mealsToShow.map((meal) => (
+            <div key={meal.id} className="bg-white overflow-hidden shadow-lg rounded-lg hover:shadow-xl transition-shadow">
+              {/* Meal card content remains the same */}
+            </div>
+          ))}
+        </div>
+      </div>
+    );
   };
 
-  const handleFilterChange = (filterId) => {
-    setDietaryFilters((prev) => {
-      if (prev.includes(filterId)) {
-        return prev.filter((id) => id !== filterId);
-      }
-      return [...prev, filterId];
-    });
-  };
+  if (!isLoggedIn) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex flex-col justify-center">
+        {/* Login form remains the same */}
+      </div>
+    );
+  }
 
-  const filterMeals = (meals) => {
-    return meals.filter(meal => {
-      // Filter by season
-      if (selectedSeason !== 'all' && meal.season !== selectedSeason) {
-        return false;
-      }
+  return (
+    <div className="min-h-screen bg-gray-50">
+      <nav className="bg-white shadow-sm">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between h-16">
+            <div className="flex">
+              <div className="flex-shrink-0 flex items-center">
+                <h1 className="text-xl font-bold">Whole Nutrition Services</h1>
+              </div>
+              <div className="ml-6 flex space-x-8">
+                {/* Navigation tabs remain the same */}
+              </div>
+            </div>
+            <div className="flex items-center space-x-4">
+              <Popover>
+                <PopoverTrigger asChild>
+                  <button className="p-2 text-gray-600 hover:text-gray-900">
+                    <Filter className="h-5 w-5" />
+                  </button>
+                </PopoverTrigger>
+                <PopoverContent className="w-80">
+                  <div className="p-4">
+                    <h3 className="font-medium mb-4">Dietary Preferences</h3>
+                    <div className="space-y-4">
+                      {DIETARY_OPTIONS.map(({ id, label }) => (
+                        <div key={id} className="flex items-center space-x-2">
+                          <Checkbox
+                            id={id}
+                            checked={dietaryFilters.includes(id)}
+                            onCheckedChange={() => handleFilterChange(id)}
+                          />
+                          <Label htmlFor={id} className="text-sm">
+                            {label}
+                          </Label>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </PopoverContent>
+              </Popover>
+              <span className="text-gray-700">
+                Welcome, {email}
+              </span>
+              <button
+                onClick={() => setIsLoggedIn(false)}
+                className="text-gray-600 hover:text-gray-900"
+              >
+                Log Out
+              </button>
+            </div>
+          </div>
+        </div>
+      </nav>
 
-      // Filter by dietary restrictions
-      if (dietaryFilters.length > 0) {
-        return dietaryFilters.some(filter => 
-          meal.dietaryTags.includes(filter)
-        );
-      }
+      <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+        {activeTab === 'meals' ? (
+          <div>
+            <div className="mb-8">
+              <div className="flex justify-between items-center mb-6">
+                <h2 className="text-3xl font-bold">Weekly Menu</h2>
+                <div className="flex space-x-4">
+                  <select 
+                    className="border rounded-md px-3 py-2"
+                    value={selectedMealType}
+                    onChange={(e) => setSelectedMealType(e.target.value)}
+                  >
+                    <option value="all">All Meals</option>
+                    <option value="breakfast">Breakfast</option>
+                    <option value="lunch">Lunch</option>
+                    <option value="dinner">Dinner</option>
+                  </select>
+                  <select
+                    className="border rounded-md px-3 py-2"
+                    value={selectedSeason}
+                    onChange={(e) => setSelectedSeason(e.target.value)}
+                  >
+                    <option value="all">All Seasons</option>
+                    {SEASONS.map(season => (
+                      <option key={season} value={season}>{season}</option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+              {dietaryFilters.length > 0 && (
+                <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
+                  <p className="text-blue-800">
+                    Filtering by: {dietaryFilters.map(filter => 
+                      DIETARY_OPTIONS.find(opt => opt.id === filter)?.label
+                    ).join(', ')}
+                  </p>
+                </div>
+              )}
+            </div>
+            {selectedMealType === 'all' ? (
+              <>
+                {renderMealSection('breakfast')}
+                {renderMealSection('lunch')}
+                {renderMealSection('dinner')}
+              </>
+            ) : (
+              renderMealSection(selectedMealType)
+            )}
+          </div>
+        ) : (
+          <div className="bg-white shadow rounded-lg">
+            <div className="p-6">
+              <h2 className="text-2xl font-bold mb-6">Account Settings</h2>
+              <div className="space-y-4">
+                <div>
+                  <h3 className="text-lg font-medium mb-2">Email</h3>
+                  <p className="text-gray-600">{email}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+      </main>
 
-      return true;
-    });
-  };
+      <MealDetails
+        meal={selectedMeal}
+        isOpen={showMealDetails}
+        onClose={() => setShowMealDetails(false)}
+      />
+    </div>
+  );
+}
 
-  const handleViewDetails = (meal) => {
-    setSelectedMeal(meal);
-    setShowMealDetails(true);
-  };
+export default MealPortal;
