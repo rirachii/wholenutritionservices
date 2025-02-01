@@ -1,24 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { AlertCircle, Filter } from 'lucide-react';
-import { Alert, AlertDescription } from '../components/ui/alert';
-import { Popover, PopoverTrigger, PopoverContent } from '../components/ui/popover';
 import { Checkbox, Label } from '../components/ui/checkbox';
-import { MEAL_DATA } from '../data/meals';
 import mealData from '../data/meals.json';
 import { SettingsModal } from './SettingsModal';
 import { LoginPage } from './LoginPage';
 
-const DIETARY_OPTIONS = [
-  { id: 'Gluten', label: 'Gluten Free' },
-  { id: 'Dairy', label: 'Dairy Free' },
-  { id: 'Tree Nuts', label: 'Tree Nut Free' },
-  { id: 'Peanuts', label: 'Peanut Free' },
-  { id: 'Soy', label: 'Soy Free' },
-  { id: 'Shellfish', label: 'Shellfish Free' },
-  { id: 'Eggs', label: 'Egg Free' },
-  { id: 'Sesame', label: 'Sesame Free' },
-  { id: 'Pork', label: 'Pork Free' }
-];
 
 const PROTEIN_OPTIONS = [
   { id: 'chicken', label: 'Chicken' },
@@ -45,6 +30,7 @@ const MealPortal = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
   const [activeTab, setActiveTab] = useState('meals');
   const [showSettingsModal, setShowSettingsModal] = useState(false);
   const [expandedSections, setExpandedSections] = useState(['breakfast', 'lunch', 'dinner']);
@@ -315,6 +301,109 @@ const MealPortal = () => {
     );
   };
 
+  const handleExportCSV = () => {
+    if (likedMeals.length === 0) {
+      setError('No liked meals to export');
+      return;
+    }
+
+    // Create CSV header
+    const headers = ['ID', 'Name', 'Calories', 'Prep Time', 'Servings', 'Season', 'Sodium', 'Carbs', 'Protein', 'Type'];
+    const dietaryHeaders = ['Gluten Free', 'Dairy Free', 'Tree Nut Free', 'Egg Free', 'Peanut Free', 'Soy Free', 'Shellfish Free'];
+    
+    // Combine all headers
+    const allHeaders = [...headers, ...dietaryHeaders];
+    
+    // Create CSV content
+    const csvContent = [
+      allHeaders.join(','),
+      ...likedMeals.map(meal => {
+        const values = [
+          `"${meal.id}"`,
+          `"${meal.name}"`,
+          meal.calories,
+          `"${meal.prepTime}"`,
+          `"${meal.servings}"`,
+          `"${meal.season}"`,
+          meal.sodium,
+          meal.carbs,
+          `"${meal.Protein}"`,
+          `"${meal.type}"`
+        ];
+        
+        // Add dietary information
+        const dietary = [
+          meal.Gluten === 'no',
+          meal.Dairy === 'no',
+          meal['Tree Nuts'] === 'no',
+          meal.Eggs === 'no',
+          meal.Peanuts === 'no',
+          meal.Soy === 'no',
+          meal.Shellfish === 'no'
+        ].map(val => val.toString());
+        
+        return [...values, ...dietary].join(',');
+      })
+    ].join('\n');
+
+    // Create and download the file
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    const url = URL.createObjectURL(blob);
+    link.setAttribute('href', url);
+    link.setAttribute('download', 'liked_meals.csv');
+    link.style.visibility = 'hidden';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    setSuccess('Liked meals exported successfully');
+  };
+
+  const handleImportCSV = (event) => {
+    const file = event.target.files[0];
+    if (!file) return;
+  
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      try {
+        const text = e.target.result;
+        const rows = text.split('\n');
+        const headers = rows[0].split(',');
+        const idIndex = headers.indexOf('"ID"');
+        
+        if (idIndex === -1) {
+          setError('Invalid file format');
+          return;
+        }
+  
+        const importedMeals = rows.slice(1)
+          .filter(row => row.trim())
+          .map(row => {
+            const columns = row.split(',');
+            const mealId = columns[idIndex].replace(/"/g, '');
+            return Object.values(mealData)
+              .flat()
+              .find(meal => meal.id === mealId);
+          })
+          .filter(meal => meal); // Remove any undefined meals
+  
+        setLikedMeals(prev => {
+          const newMeals = [...prev];
+          importedMeals.forEach(meal => {
+            if (!newMeals.some(m => m.id === meal.id)) {
+              newMeals.push(meal);
+            }
+          });
+          return newMeals;
+        });
+        setSuccess('Meals imported successfully');
+      } catch (error) {
+        setError('Error importing meals');
+      }
+    };
+    reader.readAsText(file);
+  };
+
   const handleSignOut = () => {
     setIsLoggedIn(false);
     setEmail('');
@@ -373,14 +462,26 @@ const MealPortal = () => {
                       onClick={() => setShowSettingsModal(true)}
                       className="inline-flex items-center px-1 pt-1 hover:border-b-2 hover:border-blue-500 transition-colors"
                     >
-                      Settings
+                      Update Info
                     </button>
                   </div>
                 </div>
                 <div className="flex items-center space-x-4">
-                  <span className="text-gray-700">
-                    Welcome, {DUMMY_USER.email}
-                  </span>
+                  <button
+                    onClick={handleExportCSV}
+                    className="text-blue-600 hover:text-blue-700 transition-colors"
+                  >
+                    Export Liked Meals
+                  </button>
+                  <label className="cursor-pointer text-blue-600 hover:text-blue-700 transition-colors">
+                    Import Liked Meals
+                    <input
+                      type="file"
+                      accept=".csv"
+                      className="hidden"
+                      onChange={handleImportCSV}
+                    />
+                  </label>
                   <button
                     onClick={handleSignOut}
                     className="text-red-600 hover:text-red-700 transition-colors"
@@ -477,9 +578,72 @@ const MealPortal = () => {
                         {['breakfast', 'lunch', 'dinner'].map(type => renderLikedMealSection(type))}
                         <button
                           className="w-full bg-blue-600 text-white rounded-md py-2 px-4 hover:bg-blue-700 transition-colors mt-4"
-                          onClick={() => alert('Meals sent to Sarah!')}
+                          onClick={async () => {
+                            if (!process.env.REACT_APP_MAILJET_API_KEY || !process.env.REACT_APP_MAILJET_SECRET_KEY) {
+                              alert('Email service is not configured. Please contact support.');
+                              return;
+                            }
+                            setError('');
+                            setSuccess('');
+                            try {
+                              const response = await fetch('https://api.mailjet.com/v3.1/send', {
+                                method: 'POST',
+                                mode: 'cors',
+                                headers: {
+                                  'Content-Type': 'application/json',
+                                  'Authorization': `Basic ${btoa(process.env.REACT_APP_MAILJET_API_KEY + ':' + process.env.REACT_APP_MAILJET_SECRET_KEY)}`
+                                },
+                                body: JSON.stringify({
+                                  Messages: [{
+                                    From: {
+                                      Email: "webportal@wholenutritionservices.com",
+                                      Name: "Whole Nutrition Services Web Portal"
+                                    },
+                                    To: [
+                                      {
+                                        Email: "dopehods@gmail.com",
+                                        Name: "Sarah"
+                                      },
+                                      {
+                                        Email: userInfo.email,
+                                        Name: userInfo.email.split('@')[0] || "Client"
+                                      }
+                                    ],
+                                    Subject: "New Meal Selections",
+                                    TextPart: `New meal selections from ${userInfo.email.split('@')[0] || 'Client'}:\n\n${likedMeals.map(meal => 
+                                      `${meal.name}\n- Calories: ${meal.calories}\n- Prep Time: ${meal.prepTime}\n- Servings: ${meal.servings}\n\n`
+                                    ).join('')}`,
+                                    HTMLPart: `<h3>New meal selections from ${userInfo.email.split('@')[0] || 'Client'}</h3>
+                                    <ul>${likedMeals.map(meal => 
+                                      `<li>
+                                        <strong>${meal.name}</strong><br>
+                                        Calories: ${meal.calories}<br>
+                                        Prep Time: ${meal.prepTime}<br>
+                                        Servings: ${meal.servings}
+                                      </li>`
+                                    ).join('')}</ul>`
+                                  }]
+                                })
+                              });
+
+                              if (!response.ok) {
+                                throw new Error('Failed to send email');
+                              }
+
+                              alert('Meals sent successfully to Sarah!');
+                            } catch (error) {
+                              console.error('Error sending email:', error);
+                              alert('Failed to send meals. Please try again later.');
+                            }
+                          }}
                         >
                           Send to Sarah!
+                        </button>
+                        <button
+                          className="w-full bg-green-600 text-white rounded-md py-2 px-4 hover:bg-green-700 transition-colors mt-2"
+                          onClick={handleExportCSV}
+                        >
+                          Export to CSV
                         </button>
                       </div>
                     )}

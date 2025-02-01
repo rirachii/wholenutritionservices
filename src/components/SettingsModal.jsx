@@ -6,6 +6,11 @@ export function SettingsModal({ isOpen, onClose, userInfo, onUpdate, onSignOut }
     const savedData = JSON.parse(localStorage.getItem('userData') || '{}');
     return savedData.phoneNumber || userInfo?.phoneNumber || '';
   });
+  const [contactEmail, setContactEmail] = useState(() => {
+    const savedData = JSON.parse(localStorage.getItem('userData') || '{}');
+    return savedData.contactEmail || '';
+  });
+  const [emailError, setEmailError] = useState('');
   const [householdSize, setHouseholdSize] = useState(() => {
     const savedData = JSON.parse(localStorage.getItem('userData') || '{}');
     return savedData.householdSize || userInfo?.householdSize || 1;
@@ -27,9 +32,33 @@ export function SettingsModal({ isOpen, onClose, userInfo, onUpdate, onSignOut }
   });
   const [phoneError, setPhoneError] = useState('');
 
+  const handlePhoneChange = (e) => {
+    const value = e.target.value;
+    setPhoneNumber(value);
+    if (phoneError) setPhoneError('');
+  };
+
+  const handleEmailChange = (e) => {
+    const value = e.target.value;
+    setContactEmail(value);
+    if (emailError) setEmailError('');
+  };
+
+  const handleDietaryChange = (restriction) => {
+    setDietaryRestrictions(prev => ({
+      ...prev,
+      [restriction]: !prev[restriction]
+    }));
+  };
+
   const validatePhoneNumber = (phone) => {
     const phoneRegex = /^\d{10}$/;
     return phoneRegex.test(phone.replace(/[^0-9]/g, ''));
+  };
+
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
   };
 
   const handleSubmit = (e) => {
@@ -41,51 +70,44 @@ export function SettingsModal({ isOpen, onClose, userInfo, onUpdate, onSignOut }
       return;
     }
 
+    if (!contactEmail) {
+      setEmailError('Email is required');
+      return;
+    }
+
+    if (!validateEmail(contactEmail)) {
+      setEmailError('Please enter a valid email address');
+      return;
+    }
+
     const userData = {
       phoneNumber: cleanPhone,
       householdSize,
-      dietaryRestrictions
+      dietaryRestrictions,
+      contactEmail
     };
 
-    // Save to localStorage
     localStorage.setItem('userData', JSON.stringify(userData));
-
     onUpdate(userData);
     onClose();
   };
 
-  const handlePhoneChange = (e) => {
-    const value = e.target.value;
-    setPhoneNumber(value);
-    if (phoneError) setPhoneError('');
-
-    // Update localStorage immediately
-    const savedData = JSON.parse(localStorage.getItem('userData') || '{}');
-    localStorage.setItem('userData', JSON.stringify({
-      ...savedData,
-      phoneNumber: value
-    }));
-  };
-
-  const handleDietaryChange = (restriction) => {
-    const newRestrictions = {
-      ...dietaryRestrictions,
-      [restriction]: !dietaryRestrictions[restriction]
-    };
-    setDietaryRestrictions(newRestrictions);
-    
-    // Update localStorage immediately
-    const savedData = JSON.parse(localStorage.getItem('userData') || '{}');
-    localStorage.setItem('userData', JSON.stringify({
-      ...savedData,
-      dietaryRestrictions: newRestrictions
-    }));
+  const handleClose = () => {
+    if (!contactEmail) {
+      setEmailError('Please provide an email address before closing');
+      return;
+    }
+    if (!validateEmail(contactEmail)) {
+      setEmailError('Please enter a valid email address before closing');
+      return;
+    }
+    onClose();
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <Modal isOpen={isOpen} onClose={handleClose}>
       <div className="p-6">
-        <h2 className="text-2xl font-bold mb-4">Settings</h2>
+        <h2 className="text-2xl font-bold mb-4">Update Your Info</h2>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
@@ -106,6 +128,23 @@ export function SettingsModal({ isOpen, onClose, userInfo, onUpdate, onSignOut }
           </div>
 
           <div>
+            <label htmlFor="contactEmail" className="block text-sm font-medium text-gray-700 mb-1">
+              Contact Email
+            </label>
+            <input
+              type="email"
+              id="contactEmail"
+              value={contactEmail}
+              onChange={handleEmailChange}
+              placeholder="Enter your contact email"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            {emailError && (
+              <p className="text-red-500 text-sm mt-1">{emailError}</p>
+            )}
+          </div>
+
+          <div>
             <label htmlFor="household" className="block text-sm font-medium text-gray-700 mb-1">
               Household Size
             </label>
@@ -120,17 +159,7 @@ export function SettingsModal({ isOpen, onClose, userInfo, onUpdate, onSignOut }
             />
           </div>
 
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Email
-            </label>
-            <input
-              type="email"
-              value={userInfo?.email || ''}
-              disabled
-              className="w-full px-3 py-2 border border-gray-300 rounded-md bg-gray-50 text-gray-500"
-            />
-          </div>
+          
 
           <div>
             <h3 className="text-xl font-semibold mb-3">Dietary Restrictions</h3>

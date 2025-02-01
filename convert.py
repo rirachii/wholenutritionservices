@@ -7,10 +7,10 @@ def clean_string(s):
     """Convert string to snake case for IDs"""
     if not isinstance(s, str):
         return ""
-    s = s.lower()
-    s = re.sub(r'[^a-z0-9\s-]', '', s)
-    s = re.sub(r'\s+', '-', s.strip())
-    return s
+    clean_string = s.lower()
+    clean_string = re.sub(r'[^a-z0-9\s-]', '', clean_string)
+    clean_string = re.sub(r'\s+', '-', clean_string.strip())
+    return clean_string
 
 def safe_get_numeric(value, default=0):
     """Safely convert a value to integer, handling various invalid cases"""
@@ -34,8 +34,8 @@ def format_recipe(row):
     """Format a single recipe row into the desired structure"""
     # Base recipe information
     recipe = {
-        "id": clean_string(safe_get(row, 'Recipe Prep')),
-        "name": safe_get(row, 'Recipe Prep'),
+        "name": safe_get(row, 'Recipe Prep'),  # Keep original case
+        "id": clean_string(safe_get(row, 'Recipe Prep')),  # ID still needs to be lowercase
         "calories": safe_get_numeric(safe_get(row, 'Calories')),
         "prepTime": safe_get(row, 'Prep Time'),
         "servings": safe_get(row, 'Servings'),
@@ -58,9 +58,9 @@ def format_recipe(row):
         "Pork": safe_get(row, 'Pork', 'no')
     }
     
-    # Clean up the string values
+    # Clean up the string values except for 'name' field
     for key, value in recipe.items():
-        if isinstance(value, str):
+        if isinstance(value, str) and key != 'name':
             recipe[key] = value.lower().strip()
             if value == '':
                 recipe[key] = 'no'

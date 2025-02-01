@@ -1,15 +1,32 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import MealPortal from './components/MealPortal';
 import AdminDashboard from './components/AdminDashboard';
+import { AdminLoginPage } from './components/AdminLoginPage';
 
 function App() {
-  // Simplified admin check - in production, use proper auth
-  const isAdmin = window.location.pathname === '/admin';
+  const [isAdminAuthenticated, setIsAdminAuthenticated] = useState(false);
+
+  const handleAdminLogin = () => {
+    setIsAdminAuthenticated(true);
+  };
 
   return (
-    <div>
-      {isAdmin ? <AdminDashboard /> : <MealPortal />}
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<MealPortal />} />
+        <Route
+          path="/admin"
+          element={
+            isAdminAuthenticated ? (
+              <AdminDashboard />
+            ) : (
+              <AdminLoginPage onLogin={handleAdminLogin} />
+            )
+          }
+        />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
