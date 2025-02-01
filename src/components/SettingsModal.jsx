@@ -133,30 +133,34 @@ export function SettingsModal({ isOpen, onClose, userInfo, onUpdate, onSignOut }
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Dietary Restrictions
-            </label>
-            <div className="grid grid-cols-2 gap-2">
-              {Object.entries({
-                gluten: 'Gluten Free',
-                dairy: 'Dairy Free',
-                treeNuts: 'Tree Nuts Free',
-                peanuts: 'Peanuts Free',
-                soy: 'Soy Free',
-                shellfish: 'Shellfish Free',
-                eggs: 'Eggs Free',
-                sesame: 'Sesame Free',
-                vegetarian: 'Vegetarian',
-                vegan: 'Vegan'
-              }).map(([key, label]) => (
-                <label key={key} className="flex items-center space-x-2 text-sm">
-                  <input
-                    type="checkbox"
-                    checked={dietaryRestrictions[key]}
-                    onChange={() => handleDietaryChange(key)}
-                    className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
-                  />
-                  <span>{label}</span>
+            <h3 className="text-xl font-semibold mb-3">Dietary Restrictions</h3>
+            <div className="grid grid-cols-2 gap-4">
+              {Object.entries(dietaryRestrictions).map(([restriction, value]) => (
+                <label
+                  key={restriction}
+                  className="flex items-center space-x-3 text-base cursor-pointer group"
+                >
+                  <div className="relative">
+                    <input
+                      type="checkbox"
+                      checked={value}
+                      onChange={() => handleDietaryChange(restriction)}
+                      className="hidden"
+                    />
+                    <div className={`w-6 h-6 border-2 rounded-md transition-colors ${value ? 'bg-blue-600 border-blue-600' : 'border-gray-300 group-hover:border-blue-500'}`}>
+                      {value && (
+                        <svg className="w-5 h-5 text-white" viewBox="0 0 20 20" fill="currentColor">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                      )}
+                    </div>
+                  </div>
+                  <span className="capitalize">
+                    {restriction === 'vegetarian' || restriction === 'vegan'
+                      ? restriction.replace(/([A-Z])/g, ' $1').toLowerCase()
+                      : `${restriction.replace(/([A-Z])/g, ' $1').toLowerCase()} Free`
+                    }
+                  </span>
                 </label>
               ))}
             </div>

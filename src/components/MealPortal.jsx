@@ -186,7 +186,7 @@ const MealPortal = () => {
                 >
               <div className="flex-grow">
                 <div className="flex justify-between items-start mb-3">
-                <h3 className="text-lg font-medium flex-1">{meal.name}</h3>
+                <h3 className="text-lg font-medium flex-1">{meal.name.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}</h3>
                 <div className="flex flex-col items-end gap-1">
                 <span className="bg-blue-500 text-white px-2 py-1 rounded-full text-sm">
                   {meal.calories} cal
@@ -475,6 +475,12 @@ const MealPortal = () => {
                     ) : (
                       <div className="space-y-4">
                         {['breakfast', 'lunch', 'dinner'].map(type => renderLikedMealSection(type))}
+                        <button
+                          className="w-full bg-blue-600 text-white rounded-md py-2 px-4 hover:bg-blue-700 transition-colors mt-4"
+                          onClick={() => alert('Meals sent to Sarah!')}
+                        >
+                          Send to Sarah!
+                        </button>
                       </div>
                     )}
                   </div>
