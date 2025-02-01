@@ -1,0 +1,6 @@
+home_id,residents,dietary_restrictions,breakfast_preferences,lunch_preferences,dinner_preferences
+home1,4,"gluten-free,dairy-free","apple-spice-oatmeal,banana-nut-oatmeal","blt-kale-salad,cobb-salad","chicken-curry,lemon-chicken-and-asparagus"
+home2,2,"dairy-free","apple-spice-oatmeal,banana-nut-oatmeal","blt-kale-salad","chicken-curry,butter-chicken"
+home3,6,"contains-tree-nuts","cherry-oat-crumble,banana-nut-oatmeal","chicken-caesar-salad,cobb-salad","butter-chicken,lemon-chicken-and-asparagus"
+home4,3,"gluten-free","apple-spice-oatmeal,banana-nut-oatmeal","blt-kale-salad,cobb-salad","chicken-curry,butter-chicken"
+home5,2,"none","cherry-oat-crumble,apple-spice-oatmeal","chicken-caesar-salad,blt-kale-salad","butter-chicken,chicken-curry"
