@@ -33,6 +33,7 @@ function MealPortal() {
   const [selectedMeal, setSelectedMeal] = useState(null);
   const [showMealDetails, setShowMealDetails] = useState(false);
   const [dietaryFilters, setDietaryFilters] = useState([]);
+  const [likedMeals, setLikedMeals] = useState([]);
 
   const handleFilterChange = (filterId) => {
     setDietaryFilters((prev) => {
@@ -83,6 +84,17 @@ function MealPortal() {
     });
   };
 
+  const scrollToMeal = (mealId) => {
+    const mealElement = document.getElementById(mealId);
+    if (mealElement) {
+      mealElement.scrollIntoView({ behavior: 'smooth' });
+      mealElement.classList.add('highlight-meal');
+      setTimeout(() => {
+        mealElement.classList.remove('highlight-meal');
+      }, 2000);
+    }
+  };
+
   const renderMealSection = (type) => {
     let mealsToShow = MEAL_DATA[type] || [];
     mealsToShow = filterMeals(mealsToShow);
@@ -113,8 +125,12 @@ function MealPortal() {
         {isExpanded && (
           <div className="rounded-lg shadow-sm p-6 mb-6">
             <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {mealsToShow.map((meal) => (
-            <div key={meal.id} className="bg-white overflow-hidden shadow-lg rounded-lg hover:shadow-xl transition-shadow p-4">
+              {mealsToShow.map((meal) => (
+                <div 
+                  key={meal.id} 
+                  id={meal.id}
+                  className="bg-white overflow-hidden shadow-lg rounded-lg hover:shadow-xl transition-shadow p-4"
+                >
               <div className="flex justify-between items-start mb-3">
                 <h3 className="text-lg font-medium flex-1">{meal.name}</h3>
                 <span className="bg-blue-500 text-white px-2 py-1 rounded-full text-sm ml-2">
@@ -149,14 +165,77 @@ function MealPortal() {
                 ))}
               </div>
               <div className="mt-4 flex space-x-2">
-                <button className="w-full bg-pink-600 text-white rounded-md py-2 hover:bg-blue-700 transition-colors">
-                  I would like this
+                <button
+                  onClick={() => handleLikeMeal(meal)}
+                  className={`w-full ${likedMeals.some(m => m.id === meal.id) ? 'bg-pink-200 text-pink-800' : 'bg-pink-600 text-white'} rounded-md py-2 hover:bg-pink-700 hover:text-white transition-colors`}
+                >
+                  {likedMeals.some(m => m.id === meal.id) ? 'Remove from Liked' : 'I would like this'}
                 </button>
               </div>
             </div>
           ))}
           </div>
         </div>
+        )}
+      </div>
+    );
+  };
+
+  const handleLikeMeal = (meal) => {
+    setLikedMeals(prev => {
+      if (prev.some(m => m.id === meal.id)) {
+        return prev.filter(m => m.id !== meal.id);
+      }
+      return [...prev, meal];
+    });
+  };
+
+  const renderLikedMealSection = (type) => {
+    const mealsToShow = likedMeals.filter(meal => meal.type === type);
+    if (mealsToShow.length === 0) return null;
+
+    const isExpanded = expandedSections.includes(`liked-${type}`);
+
+    return (
+      <div key={type} className="mb-6">
+        <button 
+          onClick={() => toggleSection(`liked-${type}`)}
+          className="w-full text-left text-xl font-bold mb-2 capitalize flex items-center justify-between hover:text-blue-600 transition-colors bg-white p-3 rounded-lg shadow-sm"
+        >
+          <div>
+            {type}
+            <span className="text-gray-500 text-sm ml-2">({mealsToShow.length})</span>
+          </div>
+          <svg
+            className={`w-5 h-5 transform transition-transform ${isExpanded ? 'rotate-180' : ''}`}
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+        {isExpanded && (
+          <div className="space-y-2">
+            {mealsToShow.map((meal) => (
+              <div key={meal.id} className="bg-white p-3 rounded-lg shadow-sm hover:shadow-md transition-shadow cursor-pointer"
+                onClick={() => scrollToMeal(meal)}
+              >
+                <div className="flex justify-between items-start">
+                  <h4 className="text-sm font-medium">{meal.name}</h4>
+                  <button
+                    onClick={() => handleLikeMeal(meal)}
+                    className="text-red-500 hover:text-red-600"
+                  >
+                    Remove
+                  </button>
+                </div>
+                <div className="text-xs text-gray-500 mt-1">
+                  {meal.calories} cal · {meal.servings}
+                </div>
+              </div>
+            ))}
+          </div>
         )}
       </div>
     );
@@ -239,12 +318,6 @@ function MealPortal() {
               <span className="text-gray-700">
                 Welcome, {DUMMY_USER.email}
               </span>
-              <button
-                onClick={() => setIsLoggedIn(false)}
-                className="text-gray-600 hover:text-gray-900"
-              >
-                Log Out
-              </button>
             </div>
           </div>
         </div>
@@ -252,82 +325,98 @@ function MealPortal() {
 
       <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
         {activeTab === 'meals' ? (
-          <div>
-            <div className="mb-8">
-              <h2 className="text-3xl font-bold mb-6">Select Meals You Would Like</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                <div className="bg-white p-4 rounded-lg border border-gray-200">
-                  <h3 className="text-base font-semibold mb-3">Dietary Restrictions</h3>
-                  <div className="grid grid-cols-2 gap-2">
-                    {DIETARY_OPTIONS.map(({ id, label }) => (
-                      <div key={id} className="flex items-center space-x-2 p-2 rounded-md transition-colors border border-gray-100 hover:border-blue-200 hover:bg-blue-50">
-                        <Checkbox
-                          id={id}
-                          checked={dietaryFilters.includes(id)}
-                          onCheckedChange={() => handleFilterChange(id)}
-                          className="h-4 w-4"
-                        />
-                        <Label htmlFor={id} className="text-sm cursor-pointer select-none">
-                          {label}
-                        </Label>
-                      </div>
-                    ))}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div className="lg:col-span-2">
+              <div className="mb-8">
+                <h2 className="text-3xl font-bold mb-6">Select Meals You Would Like</h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                  <div className="bg-white p-4 rounded-lg border border-gray-200">
+                    <h3 className="text-base font-semibold mb-3">Dietary Restrictions</h3>
+                    <div className="grid grid-cols-2 gap-2">
+                      {DIETARY_OPTIONS.map(({ id, label }) => (
+                        <div key={id} className="flex items-center space-x-2 p-2 rounded-md transition-colors border border-gray-100 hover:border-blue-200 hover:bg-blue-50">
+                          <Checkbox
+                            id={id}
+                            checked={dietaryFilters.includes(id)}
+                            onCheckedChange={() => handleFilterChange(id)}
+                            className="h-4 w-4"
+                          />
+                          <Label htmlFor={id} className="text-sm cursor-pointer select-none">
+                            {label}
+                          </Label>
+                        </div>
+                      ))}
+                    </div>
+                    {dietaryFilters.length > 0 && (
+                      <button
+                        onClick={() => setDietaryFilters([])}
+                        className="mt-4 w-full py-1.5 text-xs font-medium text-red-600 hover:text-red-700 transition-colors border border-red-200 rounded-md hover:bg-red-50"
+                      >
+                        Clear Dietary Filters
+                      </button>
+                    )}
                   </div>
-                  {dietaryFilters.length > 0 && (
-                    <button
-                      onClick={() => setDietaryFilters([])}
-                      className="mt-4 w-full py-1.5 text-xs font-medium text-red-600 hover:text-red-700 transition-colors border border-red-200 rounded-md hover:bg-red-50"
-                    >
-                      Clear Dietary Filters
-                    </button>
-                  )}
-                </div>
 
-                <div className="bg-white p-4 rounded-lg border border-gray-200">
-                  <h3 className="text-base font-semibold mb-3">Seasons</h3>
-                  <div className="grid grid-cols-2 gap-2">
-                    {SEASONS.map((season) => (
-                      <div key={season} className="flex items-center space-x-2 p-2 rounded-md transition-colors border border-gray-100 hover:border-blue-200 hover:bg-blue-50">
-                        <Checkbox
-                          id={`season-${season}`}
-                          checked={selectedSeasons.includes(season)}
-                          onCheckedChange={() => {
-                            setSelectedSeasons(prev => {
-                              if (prev.includes(season)) {
-                                return prev.filter(s => s !== season);
-                              }
-                              return [...prev, season];
-                            });
-                          }}
-                          className="h-4 w-4"
-                        />
-                        <Label htmlFor={`season-${season}`} className="text-sm cursor-pointer">
-                          {season}
-                        </Label>
-                      </div>
-                    ))}
+                  <div className="bg-white p-4 rounded-lg border border-gray-200">
+                    <h3 className="text-base font-semibold mb-3">Seasons</h3>
+                    <div className="grid grid-cols-2 gap-2">
+                      {SEASONS.map((season) => (
+                        <div key={season} className="flex items-center space-x-2 p-2 rounded-md transition-colors border border-gray-100 hover:border-blue-200 hover:bg-blue-50">
+                          <Checkbox
+                            id={`season-${season}`}
+                            checked={selectedSeasons.includes(season)}
+                            onCheckedChange={() => {
+                              setSelectedSeasons(prev => {
+                                if (prev.includes(season)) {
+                                  return prev.filter(s => s !== season);
+                                }
+                                return [...prev, season];
+                              });
+                            }}
+                            className="h-4 w-4"
+                          />
+                          <Label htmlFor={`season-${season}`} className="text-sm cursor-pointer">
+                            {season}
+                          </Label>
+                        </div>
+                      ))}
+                    </div>
+                    {selectedSeasons.length > 0 && (
+                      <button
+                        onClick={() => setSelectedSeasons([])}
+                        className="mt-4 w-full py-1.5 text-xs font-medium text-red-600 hover:text-red-700 transition-colors border border-red-200 rounded-md hover:bg-red-50"
+                      >
+                        Clear Seasons
+                      </button>
+                    )}
                   </div>
-                  {selectedSeasons.length > 0 && (
-                    <button
-                      onClick={() => setSelectedSeasons([])}
-                      className="mt-4 w-full py-1.5 text-xs font-medium text-red-600 hover:text-red-700 transition-colors border border-red-200 rounded-md hover:bg-red-50"
-                    >
-                      Clear Seasons
-                    </button>
-                  )}
                 </div>
+                {dietaryFilters.length > 0 && (
+                  <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
+                    <p className="text-blue-800">
+                      Filtering by: {dietaryFilters.map(filter => 
+                        DIETARY_OPTIONS.find(opt => opt.id === filter)?.label
+                      ).join(', ')}
+                    </p>
+                  </div>
+                )}
               </div>
-              {dietaryFilters.length > 0 && (
-                <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
-                  <p className="text-blue-800">
-                    Filtering by: {dietaryFilters.map(filter => 
-                      DIETARY_OPTIONS.find(opt => opt.id === filter)?.label
-                    ).join(', ')}
-                  </p>
-                </div>
-              )}
-            </div>
               {['breakfast', 'lunch', 'dinner'].map(type => renderMealSection(type))}
+            </div>
+            <div className="bg-white p-6 rounded-lg shadow-sm h-fit sticky top-6">
+              <h2 className="text-2xl font-bold mb-6">Liked Meals</h2>
+              <div className="max-h-[calc(100vh-200px)] overflow-y-auto">
+                {likedMeals.length === 0 ? (
+                  <p className="text-gray-500 text-center py-4">
+                    No meals liked yet. Click "I would like this" on any meal to add it here.
+                  </p>
+                ) : (
+                  <div className="space-y-4">
+                    {['breakfast', 'lunch', 'dinner'].map(type => renderLikedMealSection(type))}
+                  </div>
+                )}
+              </div>
+            </div>
           </div>
         ) : (
           <div className="bg-white shadow rounded-lg">
@@ -350,6 +439,14 @@ function MealPortal() {
                       </span>
                     ))}
                   </div>
+                </div>
+                <div className="pt-4 border-t">
+                  <button
+                    onClick={() => setIsLoggedIn(false)}
+                    className="w-full bg-red-600 text-white rounded-md py-2 px-4 hover:bg-red-700 transition-colors"
+                  >
+                    Log Out
+                  </button>
                 </div>
               </div>
             </div>

@@ -3596,7 +3596,7 @@
         "carbs": 110
       },
       {
-        "id": "honey-mustard-chicken-and-green-beans",
+        "id": "honey-mustard-chicken-and-green-beans-2",
         "name": "Honey Mustard Chicken and Green Beans",
         "type": "dinner",
         "calories": 770,
@@ -4398,15 +4398,15 @@
         "carbs": 54
       },
       {
-        "id": "sweet-and-sour-chicken",
-        "name": "Sweet and Sour Chicken",
+        "id": "sweet-and-sour-chicken-gf",
+        "name": "Sweet and Sour Chicken (GF)",
         "type": "dinner",
         "calories": 420,
         "prepTime": "30 min",
         "servings": "4 servings",
         "season": "Essential",
         "dietaryTags": [
-          "contains-gluten",
+          "gluten-free",
           "dairy-free",
           "chicken"
         ],
@@ -4414,7 +4414,7 @@
         "carbs": 60
       },
       {
-        "id": "sweet-and-sour-chicken",
+        "id": "sweet-and-sour-chicken-2",
         "name": "Sweet and Sour Chicken",
         "type": "dinner",
         "calories": 420,
@@ -4691,7 +4691,7 @@
         "carbs": 42
       },
       {
-        "id": "turkey-lettuce-wraps",
+        "id": "turkey-lettuce-wraps-2",
         "name": "Turkey Lettuce Wraps",
         "type": "dinner",
         "calories": 640,
@@ -4706,8 +4706,8 @@
         "carbs": 106
       },
       {
-        "id": "turkey-lettuce-wraps",
-        "name": "Turkey Lettuce Wraps",
+        "id": "turkey-lettuce-wraps-2-gf",
+        "name": "Turkey Lettuce Wraps GF",
         "type": "dinner",
         "calories": 640,
         "prepTime": "20 min",
@@ -6431,7 +6431,7 @@
         "carbs": 82
       },
       {
-        "id": "bbq-chicken-pizza",
+        "id": "bbq-chicken-pizza-regular",
         "name": "BBQ Chicken Pizza",
         "type": "dinner",
         "calories": 410,
@@ -6447,7 +6447,7 @@
         "image": "/api/placeholder/200/200"
       },
       {
-        "id": "bbq-chicken-pizza",
+        "id": "bbq-chicken-pizza-gf",
         "name": "BBQ Chicken Pizza",
         "type": "dinner",
         "calories": 410,

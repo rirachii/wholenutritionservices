@@ -1,3 +1,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@keyframes highlight {
+  0% {
+    background-color: #fff;
+  }
+  50% {
+    background-color: #dbeafe;
+  }
+  100% {
+    background-color: #fff;
+  }
+}
+
+.highlight-meal {
+  animation: highlight 2s ease;
+}
