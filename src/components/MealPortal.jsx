@@ -219,7 +219,7 @@ function MealPortal() {
           <div className="space-y-2">
             {mealsToShow.map((meal) => (
               <div key={meal.id} className="bg-white p-3 rounded-lg shadow-sm hover:shadow-md transition-shadow cursor-pointer"
-                onClick={() => scrollToMeal(meal)}
+                onClick={() => scrollToMeal(meal.id)}
               >
                 <div className="flex justify-between items-start">
                   <h4 className="text-sm font-medium">{meal.name}</h4>
