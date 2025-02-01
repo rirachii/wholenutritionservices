@@ -1,8 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { AlertCircle, Filter } from 'lucide-react';
 import { Alert, AlertDescription } from '../components/ui/alert';
+import { Popover, PopoverTrigger, PopoverContent } from '../components/ui/popover';
+import { Checkbox, Label } from '../components/ui/checkbox';
 import { MEAL_DATA } from '../data/meals';
-import { MealDetails } from './MealDetails';
+
+const DIETARY_OPTIONS = [
+  { id: 'gluten-free', label: 'Gluten Free' },
+  { id: 'dairy-free', label: 'Dairy Free' },
+  { id: 'vegetarian', label: 'Vegetarian' },
+  { id: 'vegan', label: 'Vegan' },
+  { id: 'nut-free', label: 'Nut Free' },
+  { id: 'low-carb', label: 'Low Carb' }
+];
 
 const DUMMY_USER = {
   email: 'home1@example.com',
@@ -18,11 +28,20 @@ function MealPortal() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [activeTab, setActiveTab] = useState('meals');
-  const [selectedMealType, setSelectedMealType] = useState('all');
-  const [selectedSeason, setSelectedSeason] = useState('all');
-  const [showFilters, setShowFilters] = useState(false);
+  const [expandedSections, setExpandedSections] = useState(['breakfast', 'lunch', 'dinner']);
+  const [selectedSeasons, setSelectedSeasons] = useState(SEASONS);
   const [selectedMeal, setSelectedMeal] = useState(null);
   const [showMealDetails, setShowMealDetails] = useState(false);
+  const [dietaryFilters, setDietaryFilters] = useState([]);
+
+  const handleFilterChange = (filterId) => {
+    setDietaryFilters((prev) => {
+      if (prev.includes(filterId)) {
+        return prev.filter((id) => id !== filterId);
+      }
+      return [...prev, filterId];
+    });
+  };
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -37,15 +56,13 @@ function MealPortal() {
   const filterMeals = (meals) => {
     return meals.filter(meal => {
       // Filter by season
-      if (selectedSeason !== 'all' && meal.season !== selectedSeason) {
+      if (selectedSeasons.length > 0 && !selectedSeasons.includes(meal.season)) {
         return false;
       }
 
       // Filter by dietary restrictions
-      if (DUMMY_USER.dietaryRestrictions.length > 0) {
-        return DUMMY_USER.dietaryRestrictions.every(restriction =>
-          meal.dietaryTags.some(tag => tag.includes(restriction))
-        );
+      if (dietaryFilters.length > 0 && !dietaryFilters.some(filter => meal.dietaryTags.includes(filter))) {
+        return false;
       }
 
       return true;
@@ -57,78 +74,90 @@ function MealPortal() {
     setShowMealDetails(true);
   };
 
+  const toggleSection = (type) => {
+    setExpandedSections(prev => {
+      if (prev.includes(type)) {
+        return prev.filter(t => t !== type);
+      }
+      return [...prev, type];
+    });
+  };
+
   const renderMealSection = (type) => {
     let mealsToShow = MEAL_DATA[type] || [];
     mealsToShow = filterMeals(mealsToShow);
 
     if (mealsToShow.length === 0) return null;
 
+    const isExpanded = expandedSections.includes(type);
+
     return (
       <div key={type} className="mb-12">
-        <h2 className="text-2xl font-bold mb-6 capitalize border-b pb-2">
-          {type}
-          <span className="text-gray-500 text-sm ml-2">({mealsToShow.length} items)</span>
-        </h2>
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <button 
+          onClick={() => toggleSection(type)}
+          className="w-full text-left text-2xl font-bold mb-2 capitalize flex items-center justify-between hover:text-blue-600 transition-colors bg-white p-4 rounded-lg shadow-sm"
+        >
+          <div>
+            {type}
+            <span className="text-gray-500 text-sm ml-2">({mealsToShow.length} items)</span>
+          </div>
+          <svg
+            className={`w-6 h-6 transform transition-transform ${isExpanded ? 'rotate-180' : ''}`}
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+        {isExpanded && (
+          <div className="rounded-lg shadow-sm p-6 mb-6">
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           {mealsToShow.map((meal) => (
-            <div key={meal.id} className="bg-white overflow-hidden shadow-lg rounded-lg hover:shadow-xl transition-shadow">
-              <div className="h-48 overflow-hidden relative">
-                <img 
-                  src={meal.image} 
-                  alt={meal.name}
-                  className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-200"
-                />
-                <span className="absolute top-2 right-2 bg-blue-500 text-white px-2 py-1 rounded-full text-sm">
+            <div key={meal.id} className="bg-white overflow-hidden shadow-lg rounded-lg hover:shadow-xl transition-shadow p-4">
+              <div className="flex justify-between items-start mb-3">
+                <h3 className="text-lg font-medium flex-1">{meal.name}</h3>
+                <span className="bg-blue-500 text-white px-2 py-1 rounded-full text-sm ml-2">
                   {meal.calories} cal
                 </span>
               </div>
-              <div className="p-4">
-                <div className="flex justify-between items-start mb-2">
-                  <h3 className="text-lg font-medium flex-1">{meal.name}</h3>
+              <div className="mb-2 text-sm text-gray-600">
+                <div className="flex items-center mb-1">
+                  <span className="mr-3">{meal.prepTime}</span>
+                  <span>{meal.servings}</span>
                 </div>
-                <div className="mb-2 text-sm text-gray-600">
-                  <div className="flex items-center mb-1">
-                    <span className="mr-3">{meal.prepTime}</span>
-                    <span>{meal.servings}</span>
-                  </div>
-                  <div className="text-sm text-blue-600">{meal.season}</div>
+                <div className="text-sm text-blue-600">{meal.season}</div>
+                <div className="flex items-center gap-4 mt-2">
+                  <span className="text-gray-700">Sodium: {meal.sodium}mg</span>
+                  <span className="text-gray-700">Carbs: {meal.carbs}g</span>
                 </div>
-                <div className="mt-2 flex flex-wrap gap-2">
-                  {meal.dietaryTags.slice(0, 3).map((tag) => (
-                    <span
-                      key={tag}
-                      className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                        tag.includes('free') || tag === 'vegetarian' || tag === 'vegan'
-                          ? 'bg-green-100 text-green-800'
-                          : tag.includes('contains')
-                          ? 'bg-yellow-100 text-yellow-800'
-                          : 'bg-blue-100 text-blue-800'
-                      }`}
-                    >
-                      {tag.replace(/-/g, ' ')}
-                    </span>
-                  ))}
-                  {meal.dietaryTags.length > 3 && (
-                    <span className="text-xs text-gray-500">
-                      +{meal.dietaryTags.length - 3} more
-                    </span>
-                  )}
-                </div>
-                <div className="mt-4 flex space-x-2">
-                  <button className="flex-1 bg-blue-600 text-white rounded-md py-2 hover:bg-blue-700 transition-colors">
-                    Add to Order
-                  </button>
-                  <button 
-                    onClick={() => handleViewDetails(meal)}
-                    className="px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-50 transition-colors"
+              </div>
+              <div className="mt-2 flex flex-wrap gap-2">
+                {meal.dietaryTags.map((tag) => (
+                  <span
+                    key={tag}
+                    className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
+                      tag.includes('free') || tag === 'vegetarian' || tag === 'vegan'
+                        ? 'bg-green-100 text-green-800'
+                        : tag.includes('contains')
+                        ? 'bg-yellow-100 text-yellow-800'
+                        : 'bg-blue-100 text-blue-800'
+                    }`}
                   >
-                    Details
-                  </button>
-                </div>
+                    {tag.replace(/-/g, ' ')}
+                  </span>
+                ))}
+              </div>
+              <div className="mt-4 flex space-x-2">
+                <button className="w-full bg-pink-600 text-white rounded-md py-2 hover:bg-blue-700 transition-colors">
+                  I would like this
+                </button>
               </div>
             </div>
           ))}
+          </div>
         </div>
+        )}
       </div>
     );
   };
@@ -173,7 +202,7 @@ function MealPortal() {
               </button>
             </form>
           </div>
-        </div>
+          </div>
       </div>
     );
   }
@@ -207,12 +236,6 @@ function MealPortal() {
               </div>
             </div>
             <div className="flex items-center space-x-4">
-              <button
-                onClick={() => setShowFilters(!showFilters)}
-                className="p-2 text-gray-600 hover:text-gray-900"
-              >
-                <Filter className="h-5 w-5" />
-              </button>
               <span className="text-gray-700">
                 Welcome, {DUMMY_USER.email}
               </span>
@@ -231,46 +254,80 @@ function MealPortal() {
         {activeTab === 'meals' ? (
           <div>
             <div className="mb-8">
-              <div className="flex justify-between items-center mb-6">
-                <h2 className="text-3xl font-bold">Weekly Menu</h2>
-                <div className="flex space-x-4">
-                  <select 
-                    className="border rounded-md px-3 py-2"
-                    value={selectedMealType}
-                    onChange={(e) => setSelectedMealType(e.target.value)}
-                  >
-                    <option value="all">All Meals</option>
-                    <option value="breakfast">Breakfast</option>
-                    <option value="lunch">Lunch</option>
-                    <option value="dinner">Dinner</option>
-                  </select>
-                  <select
-                    className="border rounded-md px-3 py-2"
-                    value={selectedSeason}
-                    onChange={(e) => setSelectedSeason(e.target.value)}
-                  >
-                    <option value="all">All Seasons</option>
-                    {SEASONS.map(season => (
-                      <option key={season} value={season}>{season}</option>
+              <h2 className="text-3xl font-bold mb-6">Select Meals You Would Like</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                <div className="bg-white p-4 rounded-lg border border-gray-200">
+                  <h3 className="text-base font-semibold mb-3">Dietary Restrictions</h3>
+                  <div className="grid grid-cols-2 gap-2">
+                    {DIETARY_OPTIONS.map(({ id, label }) => (
+                      <div key={id} className="flex items-center space-x-2 p-2 rounded-md transition-colors border border-gray-100 hover:border-blue-200 hover:bg-blue-50">
+                        <Checkbox
+                          id={id}
+                          checked={dietaryFilters.includes(id)}
+                          onCheckedChange={() => handleFilterChange(id)}
+                          className="h-4 w-4"
+                        />
+                        <Label htmlFor={id} className="text-sm cursor-pointer select-none">
+                          {label}
+                        </Label>
+                      </div>
                     ))}
-                  </select>
+                  </div>
+                  {dietaryFilters.length > 0 && (
+                    <button
+                      onClick={() => setDietaryFilters([])}
+                      className="mt-4 w-full py-1.5 text-xs font-medium text-red-600 hover:text-red-700 transition-colors border border-red-200 rounded-md hover:bg-red-50"
+                    >
+                      Clear Dietary Filters
+                    </button>
+                  )}
+                </div>
+
+                <div className="bg-white p-4 rounded-lg border border-gray-200">
+                  <h3 className="text-base font-semibold mb-3">Seasons</h3>
+                  <div className="grid grid-cols-2 gap-2">
+                    {SEASONS.map((season) => (
+                      <div key={season} className="flex items-center space-x-2 p-2 rounded-md transition-colors border border-gray-100 hover:border-blue-200 hover:bg-blue-50">
+                        <Checkbox
+                          id={`season-${season}`}
+                          checked={selectedSeasons.includes(season)}
+                          onCheckedChange={() => {
+                            setSelectedSeasons(prev => {
+                              if (prev.includes(season)) {
+                                return prev.filter(s => s !== season);
+                              }
+                              return [...prev, season];
+                            });
+                          }}
+                          className="h-4 w-4"
+                        />
+                        <Label htmlFor={`season-${season}`} className="text-sm cursor-pointer">
+                          {season}
+                        </Label>
+                      </div>
+                    ))}
+                  </div>
+                  {selectedSeasons.length > 0 && (
+                    <button
+                      onClick={() => setSelectedSeasons([])}
+                      className="mt-4 w-full py-1.5 text-xs font-medium text-red-600 hover:text-red-700 transition-colors border border-red-200 rounded-md hover:bg-red-50"
+                    >
+                      Clear Seasons
+                    </button>
+                  )}
                 </div>
               </div>
-              <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
-                <p className="text-blue-800">
-                  Showing meals matching your dietary preferences: {DUMMY_USER.dietaryRestrictions.join(', ')}
-                </p>
-              </div>
+              {dietaryFilters.length > 0 && (
+                <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
+                  <p className="text-blue-800">
+                    Filtering by: {dietaryFilters.map(filter => 
+                      DIETARY_OPTIONS.find(opt => opt.id === filter)?.label
+                    ).join(', ')}
+                  </p>
+                </div>
+              )}
             </div>
-            {selectedMealType === 'all' ? (
-              <>
-                {renderMealSection('breakfast')}
-                {renderMealSection('lunch')}
-                {renderMealSection('dinner')}
-              </>
-            ) : (
-              renderMealSection(selectedMealType)
-            )}
+              {['breakfast', 'lunch', 'dinner'].map(type => renderMealSection(type))}
           </div>
         ) : (
           <div className="bg-white shadow rounded-lg">
@@ -299,12 +356,6 @@ function MealPortal() {
           </div>
         )}
       </main>
-
-      <MealDetails
-        meal={selectedMeal}
-        isOpen={showMealDetails}
-        onClose={() => setShowMealDetails(false)}
-      />
     </div>
   );
 }

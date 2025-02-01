@@ -7,46 +7,37 @@ export function MealDetails({ meal, isOpen, onClose }) {
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <div className="p-6">
-        <div className="flex">
-          <div className="w-1/3">
-            <img
-              src={meal.image}
-              alt={meal.name}
-              className="w-full h-48 object-cover rounded-lg"
-            />
-          </div>
-          <div className="w-2/3 pl-6">
-            <h2 className="text-2xl font-bold mb-2">{meal.name}</h2>
-            <div className="grid grid-cols-2 gap-4 text-sm mb-4">
-              <div>
-                <span className="text-gray-600">Preparation Time:</span>
-                <p className="font-medium">{meal.prepTime}</p>
-              </div>
-              <div>
-                <span className="text-gray-600">Servings:</span>
-                <p className="font-medium">{meal.servings}</p>
-              </div>
-              <div>
-                <span className="text-gray-600">Calories:</span>
-                <p className="font-medium">{meal.calories} cal</p>
-              </div>
-              <div>
-                <span className="text-gray-600">Season:</span>
-                <p className="font-medium">{meal.season}</p>
-              </div>
-              {meal.sodium && (
-                <div>
-                  <span className="text-gray-600">Sodium:</span>
-                  <p className="font-medium">{meal.sodium} mg</p>
-                </div>
-              )}
-              {meal.carbs && (
-                <div>
-                  <span className="text-gray-600">Carbs:</span>
-                  <p className="font-medium">{meal.carbs} g</p>
-                </div>
-              )}
+        <div>
+          <h2 className="text-2xl font-bold mb-4">{meal.name}</h2>
+          <div className="grid grid-cols-2 gap-4 text-sm mb-4">
+            <div>
+              <span className="text-gray-600">Preparation Time:</span>
+              <p className="font-medium">{meal.prepTime}</p>
             </div>
+            <div>
+              <span className="text-gray-600">Servings:</span>
+              <p className="font-medium">{meal.servings}</p>
+            </div>
+            <div>
+              <span className="text-gray-600">Calories:</span>
+              <p className="font-medium">{meal.calories} cal</p>
+            </div>
+            <div>
+              <span className="text-gray-600">Season:</span>
+              <p className="font-medium">{meal.season}</p>
+            </div>
+            {meal.sodium && (
+              <div>
+                <span className="text-gray-600">Sodium:</span>
+                <p className="font-medium">{meal.sodium} mg</p>
+              </div>
+            )}
+            {meal.carbs && (
+              <div>
+                <span className="text-gray-600">Carbs:</span>
+                <p className="font-medium">{meal.carbs} g</p>
+              </div>
+            )}
           </div>
         </div>
 
