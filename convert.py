@@ -46,7 +46,7 @@ def format_recipe(row):
         "Gluten": safe_get(row, 'Gluten', 'no'),
         "Dairy": safe_get(row, 'Dairy', 'no'),
         "Tree Nuts": safe_get(row, 'Tree Nuts', 'no'),
-        "Protein": safe_get(row, 'Protein', 'Meatless'),
+        "Protein": safe_get(row, 'Protein', 'Chicken'),
         "Eggs": safe_get(row, 'Eggs', 'no'),
         "Peanuts": safe_get(row, 'Peanuts', 'no'),
         "Soy": safe_get(row, 'Soy', 'no'),
@@ -64,6 +64,15 @@ def format_recipe(row):
             recipe[key] = value.lower().strip()
             if value == '':
                 recipe[key] = 'no'
+    
+    # Update protein categorization for vegetarian/vegan recipes
+    if recipe['Protein'].lower() == 'meatless':
+        if recipe['Eggs'].lower() == 'no' and recipe['Dairy'].lower() == 'no':
+            recipe['Protein'] = 'Vegan'
+        elif recipe['Eggs'].lower() == 'optional' and recipe['Dairy'].lower() == 'optional':
+            recipe['Protein'] = 'Vegan optional'
+        else:
+            recipe['Protein'] = 'Meatless'
         
     return recipe
 
@@ -117,13 +126,6 @@ def main():
             total_recipes = sum(len(recipes) for recipes in recipe_data.values())
             print(f"\nTotal recipes processed: {total_recipes}")
             
-            for meal_type, recipes in recipe_data.items():
-                print(f"{meal_type.capitalize()}: {len(recipes)} recipes")
-                
-                # Print a sample recipe from each category
-                if recipes:
-                    print(f"\nSample {meal_type} recipe:")
-                    print(json.dumps(recipes[0], indent=2))
                     
     except Exception as e:
         print(f"Error in main: {e}")
