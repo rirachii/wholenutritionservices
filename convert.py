@@ -1,109 +1,133 @@
 import pandas as pd
 import json
+import re
+import numpy as np
 
-def convert_dietary_tags(row):
-    """Convert dietary restrictions from columns to tags list"""
-    tags = []
-    
-    # Handle gluten
-    if str(row.get('Gluten', '')).lower() == 'yes':
-        tags.append('contains-gluten')
-    elif str(row.get('Gluten', '')).lower() == 'no':
-        tags.append('gluten-free')
-        
-    # Handle dairy
-    if str(row.get('Dairy', '')).lower() == 'yes':
-        tags.append('contains-dairy')
-    elif str(row.get('Dairy', '')).lower() == 'no':
-        tags.append('dairy-free')
-    elif str(row.get('Dairy', '')).lower() == 'optional':
-        tags.append('dairy-optional')
-        
-    # Handle protein types
-    protein = str(row.get('Protein', '')).lower()
-    if protein == 'chicken':
-        tags.append('chicken')
-        
-    # Handle nuts
-    for nut in ['Tree Nuts', 'Cashews', 'Almonds']:
-        if str(row.get(nut, '')).lower() == 'yes':
-            tags.append(f'contains-{nut.lower().replace(" ", "-")}')
-    
-    # Handle eggs
-    if str(row.get('Eggs', '')).lower() == 'yes':
-        tags.append('contains-eggs')
-        
-    return tags
+def clean_string(s):
+    """Convert string to snake case for IDs"""
+    if not isinstance(s, str):
+        return ""
+    s = s.lower()
+    s = re.sub(r'[^a-z0-9\s-]', '', s)
+    s = re.sub(r'\s+', '-', s.strip())
+    return s
 
-def safe_int_conversion(value):
-    """Safely convert a value to integer, returning None if not possible"""
-    if pd.isna(value) or value == '' or value == 'X' or value == 'undefined':
-        return None
+def safe_get_numeric(value, default=0):
+    """Safely convert a value to integer, handling various invalid cases"""
+    if pd.isna(value):
+        return default
     try:
-        return int(float(value))
+        # Try to convert to float first, then to int
+        cleaned_value = str(value).strip().replace('X', '0')
+        return int(float(cleaned_value))
     except (ValueError, TypeError):
-        return None
+        return default
 
-def excel_to_meal_json(excel_file):
-    # Initialize the meal data structure
-    meal_data = {
-        "breakfast": [],
-        "lunch": [],
-        "dinner": []
+def safe_get(row, key, default=''):
+    """Safely get a value from the row, handling NaN values"""
+    value = row.get(key)
+    if pd.isna(value):
+        return default
+    return value
+
+def format_recipe(row):
+    """Format a single recipe row into the desired structure"""
+    # Base recipe information
+    recipe = {
+        "id": clean_string(safe_get(row, 'Recipe Prep')),
+        "name": safe_get(row, 'Recipe Prep'),
+        "calories": safe_get_numeric(safe_get(row, 'Calories')),
+        "prepTime": safe_get(row, 'Prep Time'),
+        "servings": safe_get(row, 'Servings'),
+        "season": safe_get(row, 'Season'),
+        "sodium": safe_get_numeric(safe_get(row, 'Sodium')),
+        "carbs": safe_get_numeric(safe_get(row, 'Carbs')),
+        # Dietary fields
+        "Gluten": safe_get(row, 'Gluten', 'no'),
+        "Dairy": safe_get(row, 'Dairy', 'no'),
+        "Tree Nuts": safe_get(row, 'Tree Nuts', 'no'),
+        "Protein": safe_get(row, 'Protein', 'Meatless'),
+        "Eggs": safe_get(row, 'Eggs', 'no'),
+        "Peanuts": safe_get(row, 'Peanuts', 'no'),
+        "Soy": safe_get(row, 'Soy', 'no'),
+        "Shellfish": safe_get(row, 'Shellfish', 'no'),
+        "Almonds": safe_get(row, 'Almonds', 'no'),
+        "Coconut": safe_get(row, 'Coconut', 'no'),
+        "Cashews": safe_get(row, 'Cashews', 'no'),
+        "Sesame": safe_get(row, 'Sesame', 'no'),
+        "Pork": safe_get(row, 'Pork', 'no')
     }
     
-    # Read each sheet
-    for meal_type in ['Breakfast', 'Lunch', 'Dinner']:
-        df = pd.read_excel(excel_file, sheet_name=meal_type)
+    # Clean up the string values
+    for key, value in recipe.items():
+        if isinstance(value, str):
+            recipe[key] = value.lower().strip()
+            if value == '':
+                recipe[key] = 'no'
         
-        for _, row in df.iterrows():
-            # Skip any non-meal rows (like headers or empty rows)
-            if pd.isna(row.get('Recipe Prep')) or not isinstance(row.get('Recipe Prep'), str):
-                continue
+    return recipe
+
+def process_excel_file(file_path):
+    """Process Excel file and extract recipes in the desired format"""
+    try:
+        # Dictionary to store all recipes by type
+        recipe_data = {
+            "breakfast": [],
+            "lunch": [],
+            "dinner": []
+        }
+        
+        # Read each sheet
+        xls = pd.ExcelFile(file_path)
+        
+        for meal_type in ['Breakfast', 'Lunch', 'Dinner']:
+            if meal_type in xls.sheet_names:
+                # Read the sheet
+                df = pd.read_excel(xls, sheet_name=meal_type)
                 
-            calories = safe_int_conversion(row.get('Calories'))
-            if calories is None:
-                continue  # Skip meals without valid calorie information
+                # Convert DataFrame to dictionary for easier handling
+                records = df.replace({np.nan: None}).to_dict('records')
                 
-            meal = {
-                "id": str(row['Recipe Prep']).lower().strip().replace(' ', '-'),
-                "name": row['Recipe Prep'].strip(),
-                "type": meal_type.lower(),
-                "calories": calories,
-                "prepTime": str(row.get('Prep Time', '')).strip() if not pd.isna(row.get('Prep Time')) else "",
-                "servings": str(row.get('Servings', '')).strip() if not pd.isna(row.get('Servings')) else "",
-                "season": str(row.get('Season', '')).strip() if not pd.isna(row.get('Season')) else "Classic",
-                "dietaryTags": convert_dietary_tags(row),
-                "image": "/api/placeholder/200/200"
-            }
-            
-            # Add optional fields if they exist and are valid numbers
-            sodium = safe_int_conversion(row.get('Sodium'))
-            if sodium is not None:
-                meal['sodium'] = sodium
-                
-            carbs = safe_int_conversion(row.get('Carbs'))
-            if carbs is not None:
-                meal['carbs'] = carbs
-                
-            # Add to appropriate category
-            meal_data[meal_type.lower()].append(meal)
+                # Process each recipe in the sheet
+                for row in records:
+                    if row.get('Recipe Prep'):
+                        recipe = format_recipe(row)
+                        recipe['type'] = meal_type.lower()
+                        recipe_data[meal_type.lower()].append(recipe)
+                        
+        return recipe_data
     
-    return {"MEAL_DATA": meal_data}
+    except Exception as e:
+        print(f"Error processing Excel file: {e}")
+        raise  # Re-raise for debugging
 
 def main():
     try:
-        excel_file = "RecipeIndex.xlsx"
-        json_data = excel_to_meal_json(excel_file)
+        # Process the Excel file
+        recipe_data = process_excel_file('RecipeIndex.xlsx')
         
-        # Write to JSON file
-        with open('meal_data.json', 'w', encoding='utf-8') as f:
-            json.dump(json_data, f, indent=2)
+        if recipe_data:
+            # Save to JSON file
+            with open('formatted_recipes.json', 'w', encoding='utf-8') as f:
+                json.dump(recipe_data, f, indent=2, ensure_ascii=False)
             
-        print("Successfully converted Excel to JSON!")
-        
+            print("Successfully converted recipes to JSON!")
+            
+            # Print statistics
+            total_recipes = sum(len(recipes) for recipes in recipe_data.values())
+            print(f"\nTotal recipes processed: {total_recipes}")
+            
+            for meal_type, recipes in recipe_data.items():
+                print(f"{meal_type.capitalize()}: {len(recipes)} recipes")
+                
+                # Print a sample recipe from each category
+                if recipes:
+                    print(f"\nSample {meal_type} recipe:")
+                    print(json.dumps(recipes[0], indent=2))
+                    
     except Exception as e:
-        print(f"Error: {str(e)}")
+        print(f"Error in main: {e}")
+        raise  # Re-raise for debugging
 
 if __name__ == "__main__":
     main()

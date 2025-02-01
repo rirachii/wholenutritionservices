@@ -4,14 +4,29 @@ import { Alert, AlertDescription } from '../components/ui/alert';
 import { Popover, PopoverTrigger, PopoverContent } from '../components/ui/popover';
 import { Checkbox, Label } from '../components/ui/checkbox';
 import { MEAL_DATA } from '../data/meals';
+import mealData from '../data/meals.json';
 
 const DIETARY_OPTIONS = [
-  { id: 'gluten-free', label: 'Gluten Free' },
-  { id: 'dairy-free', label: 'Dairy Free' },
-  { id: 'vegetarian', label: 'Vegetarian' },
-  { id: 'vegan', label: 'Vegan' },
-  { id: 'nut-free', label: 'Nut Free' },
-  { id: 'low-carb', label: 'Low Carb' }
+  { id: 'Gluten', label: 'Gluten Free' },
+  { id: 'Dairy', label: 'Dairy Free' },
+  { id: 'Tree Nuts', label: 'Tree Nut Free' },
+  { id: 'Peanuts', label: 'Peanut Free' },
+  { id: 'Soy', label: 'Soy Free' },
+  { id: 'Shellfish', label: 'Shellfish Free' },
+  { id: 'Eggs', label: 'Egg Free' },
+  { id: 'Sesame', label: 'Sesame Free' },
+  { id: 'Pork', label: 'Pork Free' }
+];
+
+const PROTEIN_OPTIONS = [
+  { id: 'chicken', label: 'Chicken' },
+  { id: 'beef', label: 'Beef' },
+  { id: 'turkey', label: 'Turkey' },
+  { id: 'shrimp', label: 'Shrimp' },
+  { id: 'white_fish', label: 'White Fish' },
+  { id: 'meatless', label: 'Meatless' },
+  { id: 'salmon', label: 'Salmon' },
+  { id: 'tuna', label: 'Tuna' }
 ];
 
 const DUMMY_USER = {
@@ -20,8 +35,6 @@ const DUMMY_USER = {
   dietaryRestrictions: ['gluten-free']
 };
 
-const SEASONS = ['Classic', 'Essential', 'Fall/Winter', 'Spring/Summer'];
-
 function MealPortal() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [email, setEmail] = useState('');
@@ -29,10 +42,10 @@ function MealPortal() {
   const [error, setError] = useState('');
   const [activeTab, setActiveTab] = useState('meals');
   const [expandedSections, setExpandedSections] = useState(['breakfast', 'lunch', 'dinner']);
-  const [selectedSeasons, setSelectedSeasons] = useState(SEASONS);
   const [selectedMeal, setSelectedMeal] = useState(null);
   const [showMealDetails, setShowMealDetails] = useState(false);
   const [dietaryFilters, setDietaryFilters] = useState([]);
+  const [proteinFilters, setProteinFilters] = useState([]);
   const [likedMeals, setLikedMeals] = useState([]);
 
   const handleFilterChange = (filterId) => {
@@ -41,6 +54,15 @@ function MealPortal() {
         return prev.filter((id) => id !== filterId);
       }
       return [...prev, filterId];
+    });
+  };
+
+  const handleProteinFilterChange = (proteinId) => {
+    setProteinFilters((prev) => {
+      if (prev.includes(proteinId)) {
+        return prev.filter((id) => id !== proteinId);
+      }
+      return [...prev, proteinId];
     });
   };
 
@@ -56,14 +78,25 @@ function MealPortal() {
 
   const filterMeals = (meals) => {
     return meals.filter(meal => {
-      // Filter by season
-      if (selectedSeasons.length > 0 && !selectedSeasons.includes(meal.season)) {
-        return false;
+      // Filter by dietary restrictions
+      if (dietaryFilters.length > 0) {
+        return dietaryFilters.every(filter => {
+          if (filter === 'Gluten') return meal.Gluten === 'no';
+          if (filter === 'Dairy') return meal.Dairy === 'no' || meal.Dairy === 'optional';
+          if (filter === 'Tree Nuts') return meal['Tree Nuts'] === 'no';
+          if (filter === 'Peanuts') return meal.Peanuts === 'no';
+          if (filter === 'Soy') return meal.Soy === 'no' || meal.Soy === 'optional';
+          if (filter === 'Shellfish') return meal.Shellfish === 'no';
+          if (filter === 'Eggs') return meal.Eggs === 'no';
+          if (filter === 'Sesame') return meal.Sesame === 'no';
+          if (filter === 'Pork') return meal.Pork === 'no';
+          return true;
+        });
       }
 
-      // Filter by dietary restrictions
-      if (dietaryFilters.length > 0 && !dietaryFilters.some(filter => meal.dietaryTags.includes(filter))) {
-        return false;
+      // Filter by protein type
+      if (proteinFilters.length > 0) {
+        return proteinFilters.some(protein => meal.Protein === protein);
       }
 
       return true;
@@ -96,7 +129,7 @@ function MealPortal() {
   };
 
   const renderMealSection = (type) => {
-    let mealsToShow = MEAL_DATA[type] || [];
+    let mealsToShow = mealData[type] || [];
     mealsToShow = filterMeals(mealsToShow);
 
     if (mealsToShow.length === 0) return null;
@@ -129,9 +162,10 @@ function MealPortal() {
                 <div 
                   key={meal.id} 
                   id={meal.id}
-                  className="bg-white overflow-hidden shadow-lg rounded-lg hover:shadow-xl transition-shadow p-4"
+                  className="bg-white overflow-hidden shadow-lg rounded-lg hover:shadow-xl transition-shadow p-4 flex flex-col h-full"
                 >
-              <div className="flex justify-between items-start mb-3">
+              <div className="flex-grow">
+                <div className="flex justify-between items-start mb-3">
                 <h3 className="text-lg font-medium flex-1">{meal.name}</h3>
                 <span className="bg-blue-500 text-white px-2 py-1 rounded-full text-sm ml-2">
                   {meal.calories} cal
@@ -142,27 +176,34 @@ function MealPortal() {
                   <span className="mr-3">{meal.prepTime}</span>
                   <span>{meal.servings}</span>
                 </div>
-                <div className="text-sm text-blue-600">{meal.season}</div>
                 <div className="flex items-center gap-4 mt-2">
                   <span className="text-gray-700">Sodium: {meal.sodium}mg</span>
                   <span className="text-gray-700">Carbs: {meal.carbs}g</span>
                 </div>
               </div>
               <div className="mt-2 flex flex-wrap gap-2">
-                {meal.dietaryTags.map((tag) => (
-                  <span
-                    key={tag}
-                    className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                      tag.includes('free') || tag === 'vegetarian' || tag === 'vegan'
-                        ? 'bg-green-100 text-green-800'
-                        : tag.includes('contains')
-                        ? 'bg-yellow-100 text-yellow-800'
-                        : 'bg-blue-100 text-blue-800'
-                    }`}
-                  >
-                    {tag.replace(/-/g, ' ')}
-                  </span>
-                ))}
+                {Object.entries(meal)
+                  .filter(([key, value]) => [
+                    'Gluten', 'Dairy', 'Tree Nuts', 'Peanuts', 'Soy',
+                    'Shellfish', 'Eggs', 'Sesame', 'Pork'
+                  ].includes(key))
+                  .map(([key, value]) => (
+                    <span
+                      key={key}
+                      className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
+                        value === 'no'
+                          ? 'bg-green-100 text-green-800'
+                          : value === 'optional'
+                          ? 'bg-blue-100 text-blue-800'
+                          : 'bg-yellow-100 text-yellow-800'
+                      }`}
+                    >
+                      {value === 'no' ? `${key} Free` : 
+                       value === 'optional' ? `${key} Optional` : 
+                       `Contains ${key}`}
+                    </span>
+                  ))}
+              </div>
               </div>
               <div className="mt-4 flex space-x-2">
                 <button
@@ -358,45 +399,50 @@ function MealPortal() {
                   </div>
 
                   <div className="bg-white p-4 rounded-lg border border-gray-200">
-                    <h3 className="text-base font-semibold mb-3">Seasons</h3>
+                    <h3 className="text-base font-semibold mb-3">Protein Options</h3>
                     <div className="grid grid-cols-2 gap-2">
-                      {SEASONS.map((season) => (
-                        <div key={season} className="flex items-center space-x-2 p-2 rounded-md transition-colors border border-gray-100 hover:border-blue-200 hover:bg-blue-50">
+                      {PROTEIN_OPTIONS.map(({ id, label }) => (
+                        <div key={id} className="flex items-center space-x-2 p-2 rounded-md transition-colors border border-gray-100 hover:border-blue-200 hover:bg-blue-50">
                           <Checkbox
-                            id={`season-${season}`}
-                            checked={selectedSeasons.includes(season)}
-                            onCheckedChange={() => {
-                              setSelectedSeasons(prev => {
-                                if (prev.includes(season)) {
-                                  return prev.filter(s => s !== season);
-                                }
-                                return [...prev, season];
-                              });
-                            }}
+                            id={`protein-${id}`}
+                            checked={proteinFilters.includes(id)}
+                            onCheckedChange={() => handleProteinFilterChange(id)}
                             className="h-4 w-4"
                           />
-                          <Label htmlFor={`season-${season}`} className="text-sm cursor-pointer">
-                            {season}
+                          <Label htmlFor={`protein-${id}`} className="text-sm cursor-pointer select-none">
+                            {label}
                           </Label>
                         </div>
                       ))}
                     </div>
-                    {selectedSeasons.length > 0 && (
+                    {proteinFilters.length > 0 && (
                       <button
-                        onClick={() => setSelectedSeasons([])}
+                        onClick={() => setProteinFilters([])}
                         className="mt-4 w-full py-1.5 text-xs font-medium text-red-600 hover:text-red-700 transition-colors border border-red-200 rounded-md hover:bg-red-50"
                       >
-                        Clear Seasons
+                        Clear Protein Filters
                       </button>
                     )}
                   </div>
                 </div>
-                {dietaryFilters.length > 0 && (
+                {(dietaryFilters.length > 0 || proteinFilters.length > 0) && (
                   <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
                     <p className="text-blue-800">
-                      Filtering by: {dietaryFilters.map(filter => 
-                        DIETARY_OPTIONS.find(opt => opt.id === filter)?.label
-                      ).join(', ')}
+                      {dietaryFilters.length > 0 && (
+                        <span>
+                          Dietary Filters: {dietaryFilters.map(filter => 
+                            DIETARY_OPTIONS.find(opt => opt.id === filter)?.label
+                          ).join(', ')}
+                        </span>
+                      )}
+                      {dietaryFilters.length > 0 && proteinFilters.length > 0 && <span className="mx-2">|</span>}
+                      {proteinFilters.length > 0 && (
+                        <span>
+                          Protein Filters: {proteinFilters.map(filter => 
+                            PROTEIN_OPTIONS.find(opt => opt.id === filter)?.label
+                          ).join(', ')}
+                        </span>
+                      )}
                     </p>
                   </div>
                 )}

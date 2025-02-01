@@ -1,4 +1,4 @@
-import mealData from './meal_data.json';
+import mealData from './meals.json';
 
 export const MEAL_DATA = mealData;
 
