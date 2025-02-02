@@ -1,52 +1,11 @@
 import { useState } from 'react';
-import mealData from '../data/meals.json';
 import Papa from 'papaparse';
+import mealData from '../data/meals.json';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid } from 'recharts';
 
 export default function MenuGenerator() {
   const [homes, setHomes] = useState([]);
   const [menus, setMenus] = useState({});
-
-  const calculateMealCycle = (residents, servingsPerMeal) => {
-    // Returns array of objects representing each day in the cycle
-    const cycle = [];
-    let leftoverServings = 0;
-    let dayInCycle = 0;
-    
-    while (true) {
-      const todaysPlan = {
-        day: dayInCycle + 1,
-        needNewMeal: false,
-        servingsFromPrevious: 0,
-        servingsNeededToday: residents,
-        leftoverForNext: 0
-      };
-
-      // First, use any leftovers from previous day
-      if (leftoverServings > 0) {
-        todaysPlan.servingsFromPrevious = Math.min(leftoverServings, residents);
-        leftoverServings -= todaysPlan.servingsFromPrevious;
-      }
-
-      // If we still need more servings, make a new meal
-      if (todaysPlan.servingsFromPrevious < residents) {
-        todaysPlan.needNewMeal = true;
-        const additionalServingsNeeded = residents - todaysPlan.servingsFromPrevious;
-        leftoverServings = servingsPerMeal - additionalServingsNeeded;
-      }
-
-      todaysPlan.leftoverForNext = leftoverServings;
-      cycle.push(todaysPlan);
-      dayInCycle++;
-
-      // Check if we've found a repeating pattern
-      if (dayInCycle > 1 && leftoverServings === cycle[0].leftoverForNext) {
-        break;
-      }
-    }
-
-    return cycle;
-  };
 
   const handleFileUpload = (e) => {
     const file = e.target.files[0];
@@ -67,6 +26,124 @@ export default function MenuGenerator() {
     });
   };
 
+  const generateMenuFor3Residents = (preferences, mealType) => {
+    const menuForType = [];
+    let currentPreferenceIndex = 0;
+    let day = 1;
+    
+    while (day <= 28) {
+      const cycleDay = (day - 1) % 4;
+      const dishId = preferences[currentPreferenceIndex];
+      const dish = mealData[mealType].find(d => d.id === dishId);
+      
+      if (!dish) {
+        day++;
+        continue;
+      }
+
+      switch (cycleDay) {
+        case 0: // Day 1 of cycle
+          menuForType.push({
+            day,
+            dish: dish.name,
+            isNewMeal: true,
+            totalServings: 4,
+            useTodayServings: 3,
+            leftoverServings: 1
+          });
+          currentPreferenceIndex = (currentPreferenceIndex + 1) % preferences.length;
+          break;
+
+        case 1: // Day 2 of cycle
+          menuForType.push({
+            day,
+            dish: dish.name,
+            isNewMeal: true,
+            totalServings: 4,
+            useTodayServings: 2,
+            leftoverServings: 2,
+            useLeftoverServings: 1,
+            fromDay: day - 1
+          });
+          currentPreferenceIndex = (currentPreferenceIndex + 1) % preferences.length;
+          break;
+
+        case 2: // Day 3 of cycle
+          menuForType.push({
+            day,
+            dish: dish.name,
+            isNewMeal: true,
+            totalServings: 4,
+            useTodayServings: 1,
+            leftoverServings: 3,
+            useLeftoverServings: 2,
+            fromDay: day - 1
+          });
+          currentPreferenceIndex = (currentPreferenceIndex + 1) % preferences.length;
+          break;
+
+        case 3: // Day 4 of cycle
+          menuForType.push({
+            day,
+            dish: menuForType[day - 2].dish, // Use dish from Day 3
+            isNewMeal: false,
+            useLeftoverServings: 3,
+            fromDay: day - 1
+          });
+          break;
+      }
+      
+      day++;
+    }
+    return menuForType;
+  };
+
+  const generateRegularMenu = (preferences, mealType, residents) => {
+    const menuForType = [];
+    let currentPreferenceIndex = 0;
+    let day = 1;
+    let leftoverServings = 0;
+    let currentDish = null;
+
+    while (day <= 28) {
+      if (leftoverServings >= residents) {
+        // Use leftovers
+        menuForType.push({
+          day,
+          dish: currentDish.name,
+          isNewMeal: false,
+          servingsUsed: residents,
+          fromDay: day - 1,
+          leftoverServings: leftoverServings - residents
+        });
+        leftoverServings -= residents;
+      } else {
+        // Make new meal
+        const dishId = preferences[currentPreferenceIndex];
+        const dish = mealData[mealType].find(d => d.id === dishId);
+        currentPreferenceIndex = (currentPreferenceIndex + 1) % preferences.length;
+
+        if (dish) {
+          const servingsPerMeal = 4;
+          menuForType.push({
+            day,
+            dish: dish.name,
+            isNewMeal: true,
+            servingsNeeded: residents,
+            totalServings: servingsPerMeal,
+            useTodayServings: residents,
+            leftoverServings: servingsPerMeal - residents
+          });
+
+          currentDish = dish;
+          leftoverServings = servingsPerMeal - residents;
+        }
+      }
+      day++;
+    }
+    return menuForType;
+  };
+
   const generateMenus = (homesData) => {
     const generatedMenus = {};
     
@@ -76,48 +153,11 @@ export default function MenuGenerator() {
 
       ['breakfast', 'lunch', 'dinner'].forEach(mealType => {
         const preferences = home[`${mealType}_preferences`]?.split(',') || [];
-        let currentPreferenceIndex = 0;
         
-        // Get the cycle pattern for this home's residents
-        const servingsPerMeal = 4; // Standard serving size
-        const mealCycle = calculateMealCycle(residents, servingsPerMeal);
-        const cycleLength = mealCycle.length;
-
-        // Generate 28 days of meals using the cycle
-        for (let day = 1; day <= 28; day++) {
-          const cycleDay = mealCycle[(day - 1) % cycleLength];
-          const dayMeals = [];
-
-          // If we have servings from previous day
-          if (cycleDay.servingsFromPrevious > 0) {
-            dayMeals.push({
-              day,
-              dish: mealData[mealType][currentPreferenceIndex]?.name,
-              isNewMeal: false,
-              servingsUsed: cycleDay.servingsFromPrevious,
-              fromDay: day - 1
-            });
-          }
-
-          // If we need to make a new meal
-          if (cycleDay.needNewMeal) {
-            currentPreferenceIndex = (currentPreferenceIndex + 1) % preferences.length;
-            const dishId = preferences[currentPreferenceIndex];
-            const dish = mealData[mealType].find(d => d.id === dishId);
-
-            if (dish) {
-              dayMeals.push({
-                day,
-                dish: dish.name,
-                isNewMeal: true,
-                servingsNeeded: residents - cycleDay.servingsFromPrevious,
-                totalServings: servingsPerMeal,
-                leftoverForNext: cycleDay.leftoverForNext
-              });
-            }
-          }
-
-          generatedMenus[home.phone][mealType].push(...dayMeals);
+        if (residents === 3) {
+          generatedMenus[home.phone][mealType] = generateMenuFor3Residents(preferences, mealType);
+        } else {
+          generatedMenus[home.phone][mealType] = generateRegularMenu(preferences, mealType, residents);
         }
       });
     });
@@ -141,26 +181,96 @@ export default function MenuGenerator() {
                       {meal.isNewMeal ? (
                         <>
                           <div className="text-green-600">
-                            Make new meal ({meal.totalServings} servings)
+                            Make new meal (4 servings)
                           </div>
+                          {meal.useLeftoverServings > 0 && (
+                            <div className="text-amber-600">
+                              Use {meal.useLeftoverServings} leftover serving(s) from Day {meal.fromDay}
+                            </div>
+                          )}
                           <div className="text-blue-600">
-                            Use {meal.servingsNeeded} serving(s) today
+                            Use {meal.useTodayServings} serving(s) from new meal
                           </div>
-                          {meal.leftoverForNext > 0 && (
+                          {meal.leftoverServings > 0 && (
                             <div className="text-blue-600">
-                              Save {meal.leftoverForNext} serving(s) for Day {day + 1}
+                              Save {meal.leftoverServings} serving(s) for Day {day + 1}
                             </div>
                           )}
                         </>
                       ) : (
-                        <div className="text-amber-600">
-                          Use {meal.servingsUsed} leftover serving(s) from Day {meal.fromDay}
-                        </div>
+                        <>
+                          <div className="text-amber-600">
+                            Use {meal.useLeftoverServings} leftover serving(s) from Day {meal.fromDay}
+                          </div>
+                        </>
                       )}
                     </div>
                   </div>
                 ))}
               </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  };
+
+  const calculateMealPopularity = (homes, mealType) => {
+    const mealCounts = {};
+    const mealHomes = {};
+    
+    homes.forEach(home => {
+      const preferences = home[`${mealType}_preferences`]?.split(',') || [];
+      preferences.forEach(mealId => {
+        if (mealId) {
+          const meal = mealData[mealType].find(m => m.id === mealId);
+          if (meal) {
+            mealCounts[meal.name] = (mealCounts[meal.name] || 0) + 1;
+            if (!mealHomes[meal.name]) mealHomes[meal.name] = [];
+            mealHomes[meal.name].push(home.phone);
+          }
+        }
+      });
+    });
+  
+    return Object.entries(mealCounts)
+      .map(([name, count]) => ({ 
+        name, 
+        count,
+        homes: mealHomes[name]
+      }))
+      .sort((a, b) => b.count - a.count)
+      .slice(0, 10); // Show top 10 most popular meals
+  };
+  
+  const PopularityCharts = ({ homes }) => {
+    if (homes.length === 0) return null;
+  
+    return (
+      <div className="mb-8">
+        <h2 className="text-xl font-semibold mb-4">Meal Popularity</h2>
+        <div className="space-y-8">
+          {['breakfast', 'lunch', 'dinner'].map(mealType => (
+            <div key={mealType} className="bg-white p-4 rounded-lg shadow-sm w-full">
+              <h3 className="text-lg font-medium mb-4 capitalize">{mealType} Popularity</h3>
+              <BarChart width={1000} height={400} data={calculateMealPopularity(homes, mealType)}>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="name" angle={-45} textAnchor="end" height={100} />
+                <YAxis type="number" tickCount={5} domain={[0, 'dataMax']} allowDecimals={false} />
+                <Tooltip 
+                  formatter={(value, name, props) => {
+                    if (name === 'count') {
+                      return [
+                        `${Math.round(value)}`,
+                        'Count'
+                      ];
+                    }
+                    return [value, name];
+                  }}
+                  wrapperStyle={{ whiteSpace: 'pre-line' }}
+                />
+                <Bar dataKey="count" fill="#8884d8" barSize={20} />
+              </BarChart>
             </div>
           ))}
         </div>
@@ -177,7 +287,9 @@ export default function MenuGenerator() {
         onChange={handleFileUpload}
         className="mb-6 block"
       />
-
+  
+      <PopularityCharts homes={homes} />
+  
       {/* Generated Menus */}
       {Object.entries(menus).map(([phone, homeMenu]) => {
         const daysMenu = Array.from({ length: 28 }, (_, i) => {
