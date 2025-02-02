@@ -1,1 +1,0 @@
-export { default as MenuGenerator } from './MenuGenerator';

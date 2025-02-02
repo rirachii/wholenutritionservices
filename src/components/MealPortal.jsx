@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Checkbox, Label } from '../components/ui/checkbox';
+import Papa from 'papaparse';
 import mealData from '../data/meals.json';
 import { SettingsModal } from './SettingsModal';
 import { LoginPage } from './LoginPage';
@@ -307,44 +308,29 @@ const MealPortal = () => {
       return;
     }
 
-    // Create CSV header
-    const headers = ['ID', 'Name', 'Calories', 'Prep Time', 'Servings', 'Season', 'Sodium', 'Carbs', 'Protein', 'Type'];
-    const dietaryHeaders = ['Gluten Free', 'Dairy Free', 'Tree Nut Free', 'Egg Free', 'Peanut Free', 'Soy Free', 'Shellfish Free'];
-    
-    // Combine all headers
-    const allHeaders = [...headers, ...dietaryHeaders];
-    
-    // Create CSV content
-    const csvContent = [
-      allHeaders.join(','),
-      ...likedMeals.map(meal => {
-        const values = [
-          `"${meal.id}"`,
-          `"${meal.name}"`,
-          meal.calories,
-          `"${meal.prepTime}"`,
-          `"${meal.servings}"`,
-          `"${meal.season}"`,
-          meal.sodium,
-          meal.carbs,
-          `"${meal.Protein}"`,
-          `"${meal.type}"`
-        ];
-        
-        // Add dietary information
-        const dietary = [
-          meal.Gluten === 'no',
-          meal.Dairy === 'no',
-          meal['Tree Nuts'] === 'no',
-          meal.Eggs === 'no',
-          meal.Peanuts === 'no',
-          meal.Soy === 'no',
-          meal.Shellfish === 'no'
-        ].map(val => val.toString());
-        
-        return [...values, ...dietary].join(',');
-      })
-    ].join('\n');
+    // Group meals by type
+    const mealsByType = likedMeals.reduce((acc, meal) => {
+      if (!acc[meal.type]) acc[meal.type] = [];
+      acc[meal.type].push(meal.id);
+      return acc;
+    }, { breakfast: [], lunch: [], dinner: [] });
+
+    // Create CSV data
+    const csvData = [{
+      phone: userInfo.phoneNumber || '',
+      email: userInfo.email || '',
+      residents: userInfo.householdSize || '',
+      dietary_restrictions: Object.entries(userInfo.dietaryRestrictions || {})
+        .filter(([_, value]) => value)
+        .map(([key]) => key)
+        .join(','),
+      breakfast_preferences: mealsByType.breakfast.join(','),
+      lunch_preferences: mealsByType.lunch.join(','),
+      dinner_preferences: mealsByType.dinner.join(',')
+    }];
+
+    // Convert to CSV using PapaParse
+    const csvContent = Papa.unparse(csvData);
 
     // Create and download the file
     const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
@@ -363,29 +349,23 @@ const MealPortal = () => {
     const file = event.target.files[0];
     if (!file) return;
   
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      try {
-        const text = e.target.result;
-        const rows = text.split('\n');
-        const headers = rows[0].split(',');
-        const idIndex = headers.indexOf('"ID"');
-        
-        if (idIndex === -1) {
-          setError('Invalid file format');
-          return;
-        }
-  
-        const importedMeals = rows.slice(1)
-          .filter(row => row.trim())
-          .map(row => {
-            const columns = row.split(',');
-            const mealId = columns[idIndex].replace(/"/g, '');
-            return Object.values(mealData)
-              .flat()
-              .find(meal => meal.id === mealId);
-          })
-          .filter(meal => meal); // Remove any undefined meals
+    Papa.parse(file, {
+      header: true,
+      complete: (results) => {
+        try {
+          if (!results.data || !results.data.length) {
+            setError('Invalid file format');
+            return;
+          }
+
+          const importedMeals = results.data
+            .filter(row => row.ID)
+            .map(row => {
+              return Object.values(mealData)
+                .flat()
+                .find(meal => meal.id === row.ID);
+            })
+            .filter(meal => meal); // Remove any undefined meals
   
         setLikedMeals(prev => {
           const newMeals = [...prev];
@@ -400,8 +380,8 @@ const MealPortal = () => {
       } catch (error) {
         setError('Error importing meals');
       }
-    };
-    reader.readAsText(file);
+    }});
+
   };
 
   const handleSignOut = () => {
@@ -638,12 +618,6 @@ const MealPortal = () => {
                           }}
                         >
                           Send to Sarah!
-                        </button>
-                        <button
-                          className="w-full bg-green-600 text-white rounded-md py-2 px-4 hover:bg-green-700 transition-colors mt-2"
-                          onClick={handleExportCSV}
-                        >
-                          Export to CSV
                         </button>
                       </div>
                     )}

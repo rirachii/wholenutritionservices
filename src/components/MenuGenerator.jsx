@@ -1,282 +1,269 @@
-import React, { useState } from 'react';
-import { Card, CardHeader, CardContent } from '@/components/ui/card';
+import { useState } from 'react';
 import Papa from 'papaparse';
+import mealData from '../data/meals.json';
+import { BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid } from 'recharts';
 
-const MEAL_DATA = {
-  breakfast: [
-    {
-      id: "apple-spice-oatmeal",
-      name: "Apple Spice Oatmeal",
-      servings: "4",
-      type: "breakfast",
-      dietaryTags: ["gluten-free", "dairy-optional", "contains-tree-nuts"]
-    },
-    {
-      id: "cherry-oat-crumble",
-      name: "Cherry Oat Crumble",
-      servings: "4",
-      type: "breakfast",
-      dietaryTags: ["contains-eggs", "contains-dairy", "contains-gluten"]
-    },
-    {
-      id: "banana-nut-oatmeal",
-      name: "Banana Nut Oatmeal",
-      servings: "4",
-      type: "breakfast",
-      dietaryTags: ["gluten-free", "dairy-optional", "contains-tree-nuts"]
-    }
-  ],
-  lunch: [
-    {
-      id: "blt-kale-salad",
-      name: "BLT Kale Salad",
-      servings: "4",
-      type: "lunch",
-      dietaryTags: ["gluten-free", "dairy-free"]
-    },
-    {
-      id: "chicken-caesar-salad",
-      name: "Chicken Caesar Salad",
-      servings: "4",
-      type: "lunch",
-      dietaryTags: ["contains-dairy", "contains-eggs", "contains-gluten"]
-    },
-    {
-      id: "cobb-salad",
-      name: "Cobb Salad",
-      servings: "4",
-      type: "lunch",
-      dietaryTags: ["gluten-free", "contains-dairy"]
-    }
-  ],
-  dinner: [
-    {
-      id: "chicken-curry",
-      name: "Chicken Curry",
-      servings: "6",
-      type: "dinner",
-      dietaryTags: ["gluten-free", "dairy-free", "contains-cashews"]
-    },
-    {
-      id: "butter-chicken",
-      name: "Butter Chicken",
-      servings: "4",
-      type: "dinner",
-      dietaryTags: ["gluten-free", "dairy-optional"]
-    },
-    {
-      id: "lemon-chicken-and-asparagus",
-      name: "Lemon Chicken and Asparagus",
-      servings: "4",
-      type: "dinner",
-      dietaryTags: ["gluten-free", "dairy-free"]
-    }
-  ]
-};
 
-const MenuGenerator = () => {
+
+function mapRestrictionToField(restriction) {
+  const mapping = {
+    'gluten-free': 'Gluten',
+    'dairy-free': 'Dairy',
+    'contains-tree-nuts': 'Tree Nuts',
+    'peanut-free': 'Peanuts',
+    'soy-free': 'Soy',
+    'shellfish-free': 'Shellfish',
+    'egg-free': 'Eggs',
+    'sesame-free': 'Sesame'
+  };
+  return mapping[restriction] || '';
+}
+
+export default function MenuGenerator() {
   const [homes, setHomes] = useState([]);
-  const [generatedMenus, setGeneratedMenus] = useState({});
-  const [status, setStatus] = useState('');
-  
-  // Calculate popularity scores for meals
-  const calculatePopularity = (homes, mealType) => {
-    const popularity = {};
-    
-    homes.forEach(home => {
-      home.preferences[mealType].forEach(pref => {
-        popularity[pref] = (popularity[pref] || 0) + 1;
-      });
-    });
-    
-    return Object.entries(popularity)
-      .sort(([,a], [,b]) => b - a)
-      .map(([id, count]) => ({
-        id,
-        count,
-        percentage: (count / homes.length) * 100
-      }));
-  };
-  
-  // Calculate days a meal can cover based on servings and home size
-  const calculateMealCoverage = (mealServings, homeSize) => {
-    const servingsPerMeal = parseInt(mealServings);
-    return Math.floor(servingsPerMeal / homeSize);
-  };
-  
-  // Generate menu for one home
-  const generateHomeMenu = (home, mealData) => {
-    const DAYS_IN_CYCLE = 28; // 4 weeks
-    const menu = {
-      breakfast: Array(DAYS_IN_CYCLE).fill(null),
-      lunch: Array(DAYS_IN_CYCLE).fill(null),
-      dinner: Array(DAYS_IN_CYCLE).fill(null)
-    };
-    
-    // Helper to find next available slot
-    const findNextSlot = (mealType, startIndex, daysNeeded) => {
-      for (let i = startIndex; i < DAYS_IN_CYCLE; i++) {
-        let canFit = true;
-        for (let j = 0; j < daysNeeded; j++) {
-          if (i + j >= DAYS_IN_CYCLE || menu[mealType][i + j] !== null) {
-            canFit = false;
-            break;
-          }
-        }
-        if (canFit) return i;
-      }
-      return -1;
-    };
-    
-    // Fill menu with popular items that match preferences
-    ['breakfast', 'lunch', 'dinner'].forEach(mealType => {
-      const popularItems = calculatePopularity(homes, mealType);
-      let currentDay = 0;
-      
-      popularItems.forEach(popularItem => {
-        if (home.preferences[mealType].includes(popularItem.id)) {
-          const meal = MEAL_DATA[mealType].find(m => m.id === popularItem.id);
-          if (meal) {
-            const daysCovers = calculateMealCoverage(meal.servings, home.people);
-            const slot = findNextSlot(mealType, currentDay, daysCovers);
-            
-            if (slot !== -1) {
-              for (let i = 0; i < daysCovers; i++) {
-                menu[mealType][slot + i] = meal;
-              }
-              currentDay = slot + daysCovers;
-            }
-          }
-        }
-      });
-      
-      // Fill remaining slots with random preferences if needed
-      while (currentDay < DAYS_IN_CYCLE) {
-        const remainingPrefs = home.preferences[mealType].filter(prefId => {
-          const meal = MEAL_DATA[mealType].find(m => m.id === prefId);
-          return meal && menu[mealType].filter(m => m && m.id === prefId).length === 0;
-        });
-        
-        if (remainingPrefs.length === 0) break;
-        
-        const randomPrefId = remainingPrefs[Math.floor(Math.random() * remainingPrefs.length)];
-        const meal = MEAL_DATA[mealType].find(m => m.id === randomPrefId);
-        
-        if (meal) {
-          const daysCovers = calculateMealCoverage(meal.servings, home.people);
-          const slot = findNextSlot(mealType, currentDay, daysCovers);
-          
-          if (slot !== -1) {
-            for (let i = 0; i < daysCovers; i++) {
-              menu[mealType][slot + i] = meal;
-            }
-            currentDay = slot + daysCovers;
-          } else {
-            break;
-          }
-        }
-      }
-    });
-    
-    return menu;
-  };
-  
-  // Handle file upload
-  const handleFileUpload = async (e) => {
+  const [menus, setMenus] = useState({});
+  const [popularity, setPopularity] = useState({ breakfast: [], lunch: [], dinner: [] });
+
+  const handleFileUpload = (e) => {
     const file = e.target.files[0];
-    if (file) {
-      try {
-        setStatus('Loading file...');
-        const text = await file.text();
-        
-        Papa.parse(text, {
-          header: true,
-          complete: (results) => {
-            setStatus('Processing homes...');
-            
-            try {
-              const processedHomes = results.data.map(row => ({
-                id: row.home_id,
-                people: parseInt(row.residents),
-                dietaryRestrictions: row.dietary_restrictions.split(',').map(s => s.trim()),
-                preferences: {
-                  breakfast: row.breakfast_preferences.split(',').map(s => s.trim()),
-                  lunch: row.lunch_preferences.split(',').map(s => s.trim()),
-                  dinner: row.dinner_preferences.split(',').map(s => s.trim())
-                }
-              }));
-              
-              setHomes(processedHomes);
-              
-              setStatus('Generating menus...');
-              const menus = {};
-              processedHomes.forEach(home => {
-                menus[home.id] = generateHomeMenu(home, MEAL_DATA);
-              });
-              
-              setGeneratedMenus(menus);
-              setStatus('Menus generated successfully!');
-            } catch (error) {
-              setStatus('Error processing CSV: ' + error.message);
-              console.error('Error processing homes:', error);
+    Papa.parse(file, {
+      header: true,
+      complete: (results) => {
+        // Transform data to ensure backward compatibility
+        const transformedData = results.data.map(home => ({
+          ...home,
+          breakfast_preferences: home.breakfast_preferences?.trim() || '',
+          lunch_preferences: home.lunch_preferences?.trim() || '',
+          dinner_preferences: home.dinner_preferences?.trim() || '',
+          dietary_restrictions: home.dietary_restrictions?.trim() || 'none',
+          residents: parseInt(home.residents) || 1
+        }));
+        setHomes(transformedData);
+        generateMenus(transformedData);
+      },
+    });
+  };
+
+  const generateMenus = (homesData) => {
+    // Calculate popularity for each dish
+    const popularity = { breakfast: {}, lunch: {}, dinner: {} };
+    
+    homesData.forEach(home => {
+      ['breakfast', 'lunch', 'dinner'].forEach(meal => {
+        const prefs = home[`${meal}_preferences`]?.split(',') || [];
+        prefs.forEach(dishId => {
+          popularity[meal][dishId] = (popularity[meal][dishId] || 0) + 1;
+        });
+      });
+    });
+
+    // Convert popularity data for charts
+    const popularityChartData = {};
+    ['breakfast', 'lunch', 'dinner'].forEach(meal => {
+      popularityChartData[meal] = Object.entries(popularity[meal])
+        .map(([id, count]) => ({
+          name: mealData[meal].find(dish => dish.id === id)?.name || id,
+          count
+        }))
+        .sort((a, b) => b.count - a.count);
+    });
+
+    setPopularity(popularityChartData);
+
+    // Generate menu for each home
+    const generatedMenus = {};
+    
+    ['breakfast', 'lunch', 'dinner'].forEach(mealType => {
+      // Sort dishes by popularity for each meal type
+      const dishPopularity = {};
+      homesData.forEach(home => {
+        const prefs = home[`${mealType}_preferences`]?.split(',') || [];
+        prefs.forEach(dishId => {
+          dishPopularity[dishId] = (dishPopularity[dishId] || 0) + 1;
+        });
+      });
+
+      // Process homes in order of most popular dishes
+      const sortedDishes = Object.entries(dishPopularity)
+        .sort(([, a], [, b]) => b - a)
+        .map(([id]) => id);
+
+      // Initialize menu tracking for each home
+      homesData.forEach(home => {
+        if (!generatedMenus[home.phone]) {
+          generatedMenus[home.phone] = { breakfast: [], lunch: [], dinner: [] };
+        }
+      });
+
+      // Assign dishes based on popularity
+      sortedDishes.forEach(dishId => {
+        const dish = mealData[mealType].find(d => d.id === dishId);
+        if (!dish) return;
+
+        homesData.forEach(home => {
+          const homeMenu = generatedMenus[home.phone][mealType];
+          const totalDaysCovered = homeMenu.reduce((sum, item) => sum + item.daysCovered, 0);
+          
+          // Allow repetition after all preferred meals have been used once
+          const hasUsedAllPreferences = home[`${mealType}_preferences`]?.split(',').every(prefId => {
+            return homeMenu.some(item => mealData[mealType].find(d => d.id === prefId)?.name === item.dish);
+          });
+
+          if (totalDaysCovered >= 28) return;
+          if (!hasUsedAllPreferences && !home[`${mealType}_preferences`]?.split(',').includes(dishId)) return;
+
+          // Check dietary restrictions
+          const restrictions = home.dietary_restrictions.split(',');
+          const isCompatible = restrictions.every(restriction => {
+            if (restriction === 'vegetarian') {
+              return dish['Protein'] === 'Meatless' || dish['Protein'] === 'Vegan';
             }
-          },
-          error: (error) => {
-            setStatus('Error parsing CSV: ' + error.message);
-            console.error('Error parsing CSV:', error);
+            if (restriction === 'vegan') {
+              return dish['Protein'] === 'Vegan' && dish['Eggs'] === 'no' && dish['Dairy'] === 'no';
+            }
+            const field = mapRestrictionToField(restriction);
+            if (!field) return true;
+            if (field === 'Tree Nuts') {
+              return dish[field] === 'no' && dish['Almonds'] === 'no' && 
+                     dish['Coconut'] === 'no' && dish['Cashews'] === 'no';
+            }
+            return dish[field] === 'no' || dish[field] === 'optional';
+          });
+          if (!isCompatible) return;
+
+          const residents = parseInt(home.residents) || 1;
+          const servings = parseInt(dish.servings) || 4;
+          let remainingServings = servings;
+          let currentDay = Math.ceil(totalDaysCovered);
+
+          while (remainingServings > 0 && currentDay < 28) {
+            const servingsForDay = Math.min(residents, remainingServings);
+            const isLeftover = remainingServings < servings;
+
+            homeMenu.push({
+              dish: dish.name,
+              daysCovered: 1,
+              startDay: currentDay + 1,
+              endDay: currentDay + 1,
+              servingsUsed: servingsForDay,
+              isLeftover,
+              totalServings: servings
+            });
+
+            remainingServings -= servingsForDay;
+            currentDay++;
           }
         });
-      } catch (error) {
-        setStatus('Error reading file: ' + error.message);
-        console.error('Error reading file:', error);
-      }
-    }
+      });
+    });
+
+    setMenus(generatedMenus);
   };
-  
+
   return (
-    <div className="p-4">
-      <Card className="mb-4">
-        <CardHeader>Menu Generator</CardHeader>
-        <CardContent>
-          <div className="mb-4">
-            <input
-              type="file"
-              accept=".csv"
-              onChange={handleFileUpload}
-              className="mb-2 block"
+    <div className="p-4 max-w-6xl mx-auto">
+      <h1 className="text-2xl font-bold mb-4">Meal Plan Generator</h1>
+      <input
+        type="file"
+        accept=".csv"
+        onChange={handleFileUpload}
+        className="mb-6 block"
+      />
+
+      {homes.length > 0 && (
+        <div className="mb-8">
+          <h2 className="text-xl font-semibold mb-4">Uploaded Homes Information</h2>
+          {homes.map((home) => (
+            <div key={home.phone} className="mb-4 p-4 bg-gray-50 rounded-lg">
+              <h3 className="text-lg font-medium mb-2">Home {home.phone}</h3>
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <p className="text-sm text-gray-600">Residents: {home.residents || 'N/A'}</p>
+                  <p className="text-sm text-gray-600">Dietary Restrictions: {home.dietary_restrictions || 'None'}</p>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-600">Breakfast Preferences: {home.breakfast_preferences || 'None'}</p>
+                  <p className="text-sm text-gray-600">Lunch Preferences: {home.lunch_preferences || 'None'}</p>
+                  <p className="text-sm text-gray-600">Dinner Preferences: {home.dinner_preferences || 'None'}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Add Popularity Charts */}
+      {Object.entries(popularity).map(([mealType, data]) => (
+        <div key={mealType} className="mb-8">
+          <h2 className="text-xl font-semibold mb-4 capitalize">{mealType} Dish Popularity</h2>
+          <BarChart width={800} height={300} data={data}>
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis 
+              dataKey="name" 
+              angle={-45}
+              textAnchor="end"
+              height={100}
+              interval={0}
             />
-            {status && (
-              <div className="text-sm text-gray-600 mt-2">{status}</div>
-            )}
-          </div>
-          
-          {Object.entries(generatedMenus).map(([homeId, menu]) => (
-            <div key={homeId} className="mb-8 border-t pt-4">
-              <h3 className="text-lg font-semibold mb-2">Menu for {homeId}</h3>
-              {['breakfast', 'lunch', 'dinner'].map(mealType => (
-                <div key={mealType} className="mb-4">
-                  <h4 className="font-medium mb-2 capitalize">{mealType}</h4>
-                  <div className="grid grid-cols-7 gap-2">
-                    {menu[mealType].map((meal, i) => (
-                      <div 
-                        key={i} 
-                        className="p-2 border rounded min-h-20 bg-white"
-                      >
-                        <div className="text-sm">Day {i + 1}</div>
-                        <div className="font-medium">
-                          {meal ? meal.name : 'TBD'}
-                        </div>
+            <YAxis />
+            <Tooltip />
+            <Bar dataKey="count" fill="#8884d8" />
+          </BarChart>
+        </div>
+      ))}
+
+      {/* Menus organized by day */}
+      {Object.entries(menus).map(([phone, menu]) => {
+        const daysMenu = Array.from({ length: 28 }, (_, i) => {
+          const day = i + 1;
+          return {
+            day,
+            meals: {
+              breakfast: menu.breakfast.find(entry => day === entry.startDay),
+              lunch: menu.lunch.find(entry => day === entry.startDay),
+              dinner: menu.dinner.find(entry => day === entry.startDay)
+            }
+          };
+        });
+
+        return (
+          <div key={phone} className="mb-8 p-4 bg-gray-50 rounded-lg">
+            <h2 className="text-xl font-semibold mb-4">Home {phone}</h2>
+            <div className="text-sm text-gray-600 mb-4">
+              <p>Residents: {homes.find(h => h.phone === phone)?.residents || 'N/A'}</p>
+              <p>Dietary Restrictions: {homes.find(h => h.phone === phone)?.dietary_restrictions || 'None'}</p>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+              {daysMenu.map(({ day, meals }) => (
+                <div key={day} className="p-4 bg-white rounded-lg shadow-sm">
+                  <h3 className="font-semibold mb-3">Day {day}</h3>
+                  <div className="space-y-3">
+                    {Object.entries(meals).map(([mealType, mealInfo]) => (
+                      <div key={mealType} className="border-b pb-2 last:border-b-0">
+                        <div className="text-sm font-medium capitalize text-gray-600">{mealType}</div>
+                        {mealInfo ? (
+                          <div className="text-sm">
+                            <div>{mealInfo.dish}</div>
+                            <div className="text-xs text-gray-500">
+                              {mealInfo.isLeftover ? 
+                                `Use ${mealInfo.servingsUsed} leftover serving(s)` : 
+                                `Make new (${mealInfo.totalServings} servings)`}
+                            </div>
+                          </div>
+                        ) : (
+                          <div className="text-sm">No meal assigned</div>
+                        )}
                       </div>
                     ))}
                   </div>
                 </div>
               ))}
             </div>
-          ))}
-        </CardContent>
-      </Card>
-    </div>
-  );
-};
-
-export default MenuGenerator;
+          </div>
+        );
+      })}
+              </div>
+            
+          )}
+    
