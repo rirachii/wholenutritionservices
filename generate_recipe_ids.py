@@ -25,13 +25,14 @@ def process_excel(input_file, output_file):
     for sheet_name in sheets_to_process:
         try:
             df = pd.read_excel(input_file, sheet_name=sheet_name)
-            if 'Recipe Prep' not in df.columns:
-                print(f"Skipping {sheet_name} sheet - no Recipe Prep column found")
+            column_name = 'Recipe Name' if sheet_name == 'Prep' else 'Recipe Prep'
+            if column_name not in df.columns:
+                print(f"Skipping {sheet_name} sheet - no {column_name} column found")
                 continue
                 
             # Generate IDs for recipes
             new_ids = []
-            for recipe_name in df['Recipe Prep']:
+            for recipe_name in df[column_name]:
                 if pd.isna(recipe_name):
                     new_ids.append('')
                     continue
@@ -79,8 +80,8 @@ def main():
     current_dir = os.path.dirname(os.path.abspath(__file__))
     
     # Construct paths
-    input_file = os.path.join(current_dir, '..', 'Recipe Index.xlsx')
-    output_file = os.path.join(current_dir, '..', 'Recipe Index with IDs.xlsx')
+    input_file = 'RecipeIndex.xlsx'
+    output_file = 'RecipeIndexwithIDs.xlsx'
     
     # Process the file
     process_excel(input_file, output_file)

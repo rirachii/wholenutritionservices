@@ -26,21 +26,38 @@ export default function MenuGenerator() {
     });
   };
 
-  const generateMenuFor3Residents = (preferences, mealType) => {
+  const calculateMealPopularityForHome = (preferences, mealType, homesData) => {
+    const mealCounts = {};
+    
+    homesData.forEach(home => {
+      const homePreferences = home[`${mealType}_preferences`]?.split(',') || [];
+      homePreferences.forEach(mealId => {
+        if (mealId) {
+          mealCounts[mealId] = (mealCounts[mealId] || 0) + 1;
+        }
+      });
+    });
+  
+    return preferences
+      .sort((a, b) => (mealCounts[b] || 0) - (mealCounts[a] || 0));
+  };
+
+  const generateMenuFor3Residents = (preferences, mealType, homesData) => {
+    const sortedPreferences = calculateMealPopularityForHome(preferences, mealType, homesData);
     const menuForType = [];
     let currentPreferenceIndex = 0;
     let day = 1;
     
     while (day <= 28) {
       const cycleDay = (day - 1) % 4;
-      const dishId = preferences[currentPreferenceIndex];
+      const dishId = sortedPreferences[currentPreferenceIndex];
       const dish = mealData[mealType].find(d => d.id === dishId);
       
       if (!dish) {
         day++;
         continue;
       }
-
+  
       switch (cycleDay) {
         case 0: // Day 1 of cycle
           menuForType.push({
@@ -98,7 +115,8 @@ export default function MenuGenerator() {
     return menuForType;
   };
 
-  const generateRegularMenu = (preferences, mealType, residents) => {
+  const generateRegularMenu = (preferences, mealType, residents, homesData) => {
+    const sortedPreferences = calculateMealPopularityForHome(preferences, mealType, homesData);
     const menuForType = [];
     let currentPreferenceIndex = 0;
     let day = 1;
@@ -149,15 +167,15 @@ export default function MenuGenerator() {
     
     homesData.forEach(home => {
       const residents = parseInt(home.residents) || 1;
-      generatedMenus[home.phone] = { breakfast: [], lunch: [], dinner: [] };
+      generatedMenus[home.home_id] = { breakfast: [], lunch: [], dinner: [] };
 
       ['breakfast', 'lunch', 'dinner'].forEach(mealType => {
         const preferences = home[`${mealType}_preferences`]?.split(',') || [];
         
         if (residents === 3) {
-          generatedMenus[home.phone][mealType] = generateMenuFor3Residents(preferences, mealType);
+          generatedMenus[home.home_id][mealType] = generateMenuFor3Residents(preferences, mealType, homesData);
         } else {
-          generatedMenus[home.phone][mealType] = generateRegularMenu(preferences, mealType, residents);
+          generatedMenus[home.home_id][mealType] = generateRegularMenu(preferences, mealType, residents, homesData);
         }
       });
     });
@@ -239,8 +257,7 @@ export default function MenuGenerator() {
         count,
         homes: mealHomes[name]
       }))
-      .sort((a, b) => b.count - a.count)
-      .slice(0, 10); // Show top 10 most popular meals
+      .sort((a, b) => b.count - a.count);
   };
   
   const PopularityCharts = ({ homes }) => {
@@ -248,31 +265,108 @@ export default function MenuGenerator() {
   
     return (
       <div className="mb-8">
-        <h2 className="text-xl font-semibold mb-4">Meal Popularity</h2>
-        <div className="space-y-8">
+        <h2 className="text-lg font-semibold mb-4">Meal Popularity</h2>
+        <div className="space-y-6">
           {['breakfast', 'lunch', 'dinner'].map(mealType => (
-            <div key={mealType} className="bg-white p-4 rounded-lg shadow-sm w-full">
-              <h3 className="text-lg font-medium mb-4 capitalize">{mealType} Popularity</h3>
-              <BarChart width={1000} height={400} data={calculateMealPopularity(homes, mealType)}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" angle={-45} textAnchor="end" height={100} />
-                <YAxis type="number" tickCount={5} domain={[0, 'dataMax']} allowDecimals={false} />
-                <Tooltip 
-                  formatter={(value, name, props) => {
-                    if (name === 'count') {
-                      return [
-                        `${Math.round(value)}`,
-                        'Count'
-                      ];
-                    }
-                    return [value, name];
-                  }}
-                  wrapperStyle={{ whiteSpace: 'pre-line' }}
-                />
-                <Bar dataKey="count" fill="#8884d8" barSize={20} />
-              </BarChart>
+            <div key={mealType} className="bg-white p-4 pb-2 rounded-lg shadow-sm w-full">
+              <h3 className="text-base font-medium mb-3 capitalize">{mealType} Popularity</h3>
+              <div className="overflow-y-auto" style={{ maxHeight: '400px' }}>
+                <BarChart width={600} height={Math.max(300, calculateMealPopularity(homes, mealType).length * 25)} data={calculateMealPopularity(homes, mealType)} layout="vertical">
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis type="number" domain={[0, 'dataMax']} tickCount={5} allowDecimals={false} tick={{ fontSize: 10 }} />
+                  <YAxis type="category" dataKey="name" width={150} tick={{ fontSize: 10 }} />
+                  <Tooltip 
+                    formatter={(value, name, props) => {
+                      if (name === 'count') {
+                        return [
+                          `${Math.round(value)}`,
+                          'Count'
+                        ];
+                      }
+                      return [value, name];
+                    }}
+                    contentStyle={{ fontSize: '12px' }}
+                    wrapperStyle={{ whiteSpace: 'pre-line' }}
+                  />
+                  <Bar dataKey="count" fill="#8884d8" barSize={18} />
+                </BarChart>
+              </div>
             </div>
           ))}
+        </div>
+      </div>
+    );
+  };
+
+  const calculateHomeSpecificPopularity = (homeId, homes, mealType) => {
+    const currentHome = homes.find(h => h.home_id === homeId);
+    if (!currentHome) return [];
+
+    const homeMealIds = currentHome[`${mealType}_preferences`]?.split(',') || [];
+    const mealCounts = {};
+    const mealHomes = {};
+    
+    homes.forEach(home => {
+      const preferences = home[`${mealType}_preferences`]?.split(',') || [];
+      preferences.forEach(mealId => {
+        if (mealId && homeMealIds.includes(mealId)) {
+          const meal = mealData[mealType].find(m => m.id === mealId);
+          if (meal) {
+            mealCounts[meal.name] = (mealCounts[meal.name] || 0) + 1;
+            if (!mealHomes[meal.name]) mealHomes[meal.name] = [];
+            mealHomes[meal.name].push(home.phone);
+          }
+        }
+      });
+    });
+  
+    return Object.entries(mealCounts)
+      .map(([name, count]) => ({ 
+        name, 
+        count,
+        homes: mealHomes[name]
+      }))
+      .sort((a, b) => b.count - a.count);
+  };
+
+  const HomePopularityCharts = ({ homeId, homes }) => {
+    if (homes.length === 0) return null;
+  
+    return (
+      <div className="mb-2">
+        <p className="text-lg font-semibold mb-4">Home: {homeId} Meal Rankings</p>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {['breakfast', 'lunch', 'dinner'].map(mealType => {
+            const popularityData = calculateHomeSpecificPopularity(homeId, homes, mealType);
+            if (popularityData.length === 0) return null;
+
+            return (
+              <div key={mealType} className="bg-white p-4 rounded-lg shadow-sm w-full overflow-y-auto" style={{ maxHeight: '400px' }}>
+                <h4 className="text-sm font-medium mb-4 capitalize">{mealType} Popularity</h4>
+                <div className="overflow-y-auto" style={{ maxHeight: '400px' }}>
+                  <BarChart width={280} height={Math.max(150, popularityData.length * 25)} data={popularityData} layout="vertical">
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis type="number" domain={[0, 'dataMax']} tickCount={5} allowDecimals={false} tick={{ fontSize: 9 }} />
+                    <YAxis type="category" dataKey="name" width={120} tick={{ fontSize: 9 }} />
+                    <Tooltip 
+                      formatter={(value, name, props) => {
+                        if (name === 'count') {
+                          return [
+                            `${Math.round(value)}`,
+                            'Count'
+                          ];
+                        }
+                        return [value, name];
+                      }}
+                      contentStyle={{ fontSize: '11px' }}
+                      wrapperStyle={{ whiteSpace: 'pre-line' }}
+                    />
+                    <Bar dataKey="count" fill="#8884d8" barSize={15} />
+                  </BarChart>
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     );
@@ -291,7 +385,7 @@ export default function MenuGenerator() {
       <PopularityCharts homes={homes} />
   
       {/* Generated Menus */}
-      {Object.entries(menus).map(([phone, homeMenu]) => {
+      {Object.entries(menus).map(([home_id, homeMenu]) => {
         const daysMenu = Array.from({ length: 28 }, (_, i) => {
           const day = i + 1;
           const meals = {
@@ -304,11 +398,15 @@ export default function MenuGenerator() {
         });
 
         return (
-          <div key={phone} className="mb-8 p-4 bg-gray-50 rounded-lg">
-            <h2 className="text-xl font-semibold mb-4">Home {phone}</h2>
+          <div key={home_id} className="mb-8 p-4 bg-gray-50 rounded-lg">
+            <h2 className="text-xl font-semibold mb-4">Home {home_id}</h2>
             <div className="text-sm text-gray-600 mb-4">
-              <p>Residents: {homes.find(h => h.phone === phone)?.residents || 'N/A'}</p>
-              <p>Dietary Restrictions: {homes.find(h => h.phone === phone)?.dietary_restrictions || 'None'}</p>
+              <p>Residents: {homes.find(h => h.home_id === home_id)?.residents || 'N/A'}</p>
+              <p>Dietary Restrictions: {homes.find(h => h.home_id === home_id)?.dietary_restrictions || 'None'}</p>
+            </div>
+            
+            <div className="sticky top-4 z-10 bg-gray-50 py-4">
+              <HomePopularityCharts homeId={home_id} homes={homes} />
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">

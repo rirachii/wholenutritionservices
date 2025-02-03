@@ -316,6 +316,7 @@ const MealPortal = () => {
 
     // Create CSV data
     const csvData = [{
+      home_id: userInfo.email.split('@')[0],
       phone: userInfo.phoneNumber || '',
       email: userInfo.email || '',
       residents: userInfo.householdSize || '',
@@ -342,6 +343,48 @@ const MealPortal = () => {
     link.click();
     document.body.removeChild(link);
     setSuccess('Liked meals exported successfully');
+  };
+
+  const handleExportRowBasedCSV = () => {
+    if (likedMeals.length === 0) {
+      setError('No liked meals to export');
+      return;
+    }
+
+    // Create CSV data with one meal per row
+    const csvData = likedMeals.map(meal => ({
+      home_id: userInfo.email.split('@')[0],
+      phone: userInfo.phoneNumber || '',
+      email: userInfo.email || '',
+      residents: userInfo.householdSize || '',
+      dietary_restrictions: Object.entries(userInfo.dietaryRestrictions || {})
+        .filter(([_, value]) => value)
+        .map(([key]) => key)
+        .join(','),
+      meal_type: meal.type,
+      meal_id: meal.id,
+      meal_name: meal.name,
+      calories: meal.calories,
+      prep_time: meal.prepTime,
+      servings: meal.servings,
+      season: meal.season,
+      protein: meal.Protein
+    }));
+
+    // Convert to CSV using PapaParse
+    const csvContent = Papa.unparse(csvData);
+
+    // Create and download the file
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    const url = URL.createObjectURL(blob);
+    link.setAttribute('href', url);
+    link.setAttribute('download', 'liked_meals_detailed.csv');
+    link.style.visibility = 'hidden';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    setSuccess('Detailed meals exported successfully');
   };
 
   const handleImportCSV = (event) => {
@@ -450,7 +493,13 @@ const MealPortal = () => {
                     onClick={handleExportCSV}
                     className="text-blue-600 hover:text-blue-700 transition-colors"
                   >
-                    Export Liked Meals
+                    Export Summary
+                  </button>
+                  <button
+                    onClick={handleExportRowBasedCSV}
+                    className="text-blue-600 hover:text-blue-700 transition-colors"
+                  >
+                    Export Detailed
                   </button>
                   <label className="cursor-pointer text-blue-600 hover:text-blue-700 transition-colors">
                     Import Liked Meals
