@@ -23,7 +23,6 @@ const SEASONS = ['spring/summer', 'fall/winter', 'classic', 'essential'];
 const DUMMY_USER = {
   email: 'home1@example.com',
   password: 'password123',
-  dietaryRestrictions: ['gluten-free']
 };
 
 const MealPortal = () => {
