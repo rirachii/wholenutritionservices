@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import MealPortal from './components/MealPortal';
 import AdminDashboard from './components/AdminDashboard';
 import { AdminLoginPage } from './components/AdminLoginPage';
@@ -19,7 +19,7 @@ function App() {
           path="/admin"
           element={
             isAdminAuthenticated ? (
-              <AdminDashboard />
+              <AdminDashboard onLogin={setIsAdminAuthenticated} />
             ) : (
               <AdminLoginPage onLogin={handleAdminLogin} />
             )

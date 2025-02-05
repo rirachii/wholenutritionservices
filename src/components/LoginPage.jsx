@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const DUMMY_USER = {
   email: 'home1@example.com',
@@ -6,6 +7,7 @@ const DUMMY_USER = {
 };
 
 export function LoginPage({ onLogin }) {
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -80,6 +82,14 @@ export function LoginPage({ onLogin }) {
               </button>
             </div>
           </form>
+          <div className="mt-4">
+            <button
+              onClick={() => navigate('/admin')}
+              className="w-full flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+            >
+              Admin Login
+            </button>
+          </div>
         </div>
       </div>
     </div>

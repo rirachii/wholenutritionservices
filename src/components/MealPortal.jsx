@@ -34,9 +34,6 @@ const MealPortal = () => {
   const [activeTab, setActiveTab] = useState('meals');
   const [showSettingsModal, setShowSettingsModal] = useState(false);
   const [expandedSections, setExpandedSections] = useState(['breakfast', 'lunch', 'dinner']);
-  const [selectedMeal, setSelectedMeal] = useState(null);
-  const [showMealDetails, setShowMealDetails] = useState(false);
-  const [dietaryFilters, setDietaryFilters] = useState([]);
   const [proteinFilters, setProteinFilters] = useState([]);
   const [selectedSeasons, setSelectedSeasons] = useState([]);
   const [likedMeals, setLikedMeals] = useState([]);
@@ -345,48 +342,6 @@ const MealPortal = () => {
     setSuccess('Liked meals exported successfully');
   };
 
-  const handleExportRowBasedCSV = () => {
-    if (likedMeals.length === 0) {
-      setError('No liked meals to export');
-      return;
-    }
-
-    // Create CSV data with one meal per row
-    const csvData = likedMeals.map(meal => ({
-      home_id: userInfo.email.split('@')[0],
-      phone: userInfo.phoneNumber || '',
-      email: userInfo.email || '',
-      residents: userInfo.householdSize || '',
-      dietary_restrictions: Object.entries(userInfo.dietaryRestrictions || {})
-        .filter(([_, value]) => value)
-        .map(([key]) => key)
-        .join(','),
-      meal_type: meal.type,
-      meal_id: meal.id,
-      meal_name: meal.name,
-      calories: meal.calories,
-      prep_time: meal.prepTime,
-      servings: meal.servings,
-      season: meal.season,
-      protein: meal.Protein
-    }));
-
-    // Convert to CSV using PapaParse
-    const csvContent = Papa.unparse(csvData);
-
-    // Create and download the file
-    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-    const link = document.createElement('a');
-    const url = URL.createObjectURL(blob);
-    link.setAttribute('href', url);
-    link.setAttribute('download', 'liked_meals_detailed.csv');
-    link.style.visibility = 'hidden';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    setSuccess('Detailed meals exported successfully');
-  };
-
   const handleImportCSV = (event) => {
     const file = event.target.files[0];
     if (!file) return;
@@ -469,50 +424,33 @@ const MealPortal = () => {
           />
           <nav className="bg-white shadow-sm">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="flex justify-between h-16">
-                <div className="flex">
-                  <div className="flex-shrink-0 flex items-center">
-                    <h1 className="text-xl font-bold">Whole Nutrition Services</h1>
+              <div className="flex flex-col sm:flex-row justify-between py-4 sm:h-16">
+                <div className="flex flex-col sm:flex-row items-center mb-4 sm:mb-0">
+                  <div className="flex-shrink-0 flex items-center mb-4 sm:mb-0">
+                    <h1 className="text-lg sm:text-xl font-bold">Whole Nutrition Services</h1>
                   </div>
-                  <div className="ml-6 flex space-x-8">
-                    <button
-                      className="inline-flex items-center px-1 pt-1 border-b-2 border-blue-500"
-                    >
+                  <div className="flex space-x-4 sm:ml-6 sm:space-x-8">
+                    <button className="inline-flex items-center px-1 pt-1 border-b-2 border-blue-500 text-sm sm:text-base">
                       Meals
                     </button>
                     <button
                       onClick={() => setShowSettingsModal(true)}
-                      className="inline-flex items-center px-1 pt-1 hover:border-b-2 hover:border-blue-500 transition-colors"
+                      className="inline-flex items-center px-1 pt-1 hover:border-b-2 hover:border-blue-500 transition-colors text-sm sm:text-base"
                     >
                       Update Info
                     </button>
                   </div>
                 </div>
-                <div className="flex items-center space-x-4">
+                <div className="flex items-center justify-center space-x-4">
                   <button
                     onClick={handleExportCSV}
-                    className="text-blue-600 hover:text-blue-700 transition-colors"
+                    className="text-blue-600 hover:text-blue-700 transition-colors text-sm sm:text-base"
                   >
                     Export Summary
                   </button>
                   <button
-                    onClick={handleExportRowBasedCSV}
-                    className="text-blue-600 hover:text-blue-700 transition-colors"
-                  >
-                    Export Detailed
-                  </button>
-                  <label className="cursor-pointer text-blue-600 hover:text-blue-700 transition-colors">
-                    Import Liked Meals
-                    <input
-                      type="file"
-                      accept=".csv"
-                      className="hidden"
-                      onChange={handleImportCSV}
-                    />
-                  </label>
-                  <button
                     onClick={handleSignOut}
-                    className="text-red-600 hover:text-red-700 transition-colors"
+                    className="text-blue-600 hover:text-blue-700 transition-colors text-sm sm:text-base"
                   >
                     Sign Out
                   </button>
