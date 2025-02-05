@@ -5,7 +5,6 @@ import mealData from '../data/meals.json';
 import { SettingsModal } from './SettingsModal';
 import { LoginPage } from './LoginPage';
 
-
 const PROTEIN_OPTIONS = [
   { id: 'chicken', label: 'Chicken' },
   { id: 'beef', label: 'Beef' },
@@ -29,14 +28,17 @@ const MealPortal = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
-  const [success, setSuccess] = useState('');
   const [activeTab, setActiveTab] = useState('meals');
   const [showSettingsModal, setShowSettingsModal] = useState(false);
   const [expandedSections, setExpandedSections] = useState(['breakfast', 'lunch', 'dinner']);
   const [proteinFilters, setProteinFilters] = useState([]);
   const [selectedSeasons, setSelectedSeasons] = useState([]);
   const [likedMeals, setLikedMeals] = useState([]);
+  const [dietaryFilters, setDietaryFilters] = useState([]);
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
+  const [selectedMeal, setSelectedMeal] = useState(null);
+  const [showMealDetails, setShowMealDetails] = useState(false);
   const [userInfo, setUserInfo] = useState(() => {
     const savedData = JSON.parse(localStorage.getItem('userData') || '{}');
     return {
@@ -77,14 +79,6 @@ const MealPortal = () => {
     });
   };
 
-  const handleFilterChange = (filterId) => {
-    setDietaryFilters((prev) => {
-      if (prev.includes(filterId)) {
-        return prev.filter((id) => id !== filterId);
-      }
-      return [...prev, filterId];
-    });
-  };
 
   const handleProteinFilterChange = (proteinId) => {
     setProteinFilters((prev) => {
@@ -95,21 +89,21 @@ const MealPortal = () => {
     });
   };
 
-  const handleLogin = (e) => {
-    e.preventDefault();
-    if (email === DUMMY_USER.email && password === DUMMY_USER.password) {
-      setIsLoggedIn(true);
-      setError('');
-      setShowSettingsModal(true);
-    } else {
-      setError('Invalid credentials');
-    }
-  };
+  // const handleLogin = (e) => {
+  //   e.preventDefault();
+  //   if (email === DUMMY_USER.email && password === DUMMY_USER.password) {
+  //     setIsLoggedIn(true);
+  //     setError('');
+  //     setShowSettingsModal(true);
+  //   } else {
+  //     setError('Invalid credentials');
+  //   }
+  // };
 
-  const handleViewDetails = (meal) => {
-    setSelectedMeal(meal);
-    setShowMealDetails(true);
-  };
+  // const handleViewDetails = (meal) => {
+  //   setSelectedMeal(meal);
+  //   setShowMealDetails(true);
+  // };
 
   const toggleSection = (type) => {
     setExpandedSections(prev => {
@@ -450,7 +444,7 @@ const MealPortal = () => {
                   </button>
                   <button
                     onClick={handleSignOut}
-                    className="text-blue-600 hover:text-blue-700 transition-colors text-sm sm:text-base"
+                    className="text-red-600 hover:text-red-700 transition-colors text-sm sm:text-base"
                   >
                     Sign Out
                   </button>

@@ -108,6 +108,10 @@ export default function MenuGenerator() {
             fromDay: day - 1
           });
           break;
+
+        default:
+          console.warn(`Unexpected cycle day: ${cycleDay}`);
+          break;
       }
       
       day++;
@@ -116,7 +120,6 @@ export default function MenuGenerator() {
   };
 
   const generateRegularMenu = (preferences, mealType, residents, homesData) => {
-    const sortedPreferences = calculateMealPopularityForHome(preferences, mealType, homesData);
     const menuForType = [];
     let currentPreferenceIndex = 0;
     let day = 1;
