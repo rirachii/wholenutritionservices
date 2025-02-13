@@ -9,9 +9,12 @@ export default function MenuGenerator() {
 
   const handleFileUpload = (e) => {
     const file = e.target.files[0];
+    console.log('Processing file:', file.name);
+
     Papa.parse(file, {
       header: true,
       complete: (results) => {
+        console.log('File parsing complete. Raw data:', results.data);
         const transformedData = results.data.map(home => ({
           ...home,
           breakfast_preferences: home.breakfast_preferences?.trim() || '',
@@ -20,9 +23,14 @@ export default function MenuGenerator() {
           dietary_restrictions: home.dietary_restrictions?.trim() || 'none',
           residents: parseInt(home.residents) || 1
         }));
+        console.log('Transformed data:', transformedData);
         setHomes(transformedData);
+        console.log('Starting menu generation...');
         generateMenus(transformedData);
       },
+      error: (error) => {
+        console.error('Error parsing file:', error);
+      }
     });
   };
 
@@ -166,13 +174,16 @@ export default function MenuGenerator() {
   };
 
   const generateMenus = (homesData) => {
+    console.log('Generating menus for homes:', homesData.length);
     const generatedMenus = {};
     
     homesData.forEach(home => {
+      console.log(`Processing menu for home ${home.home_id}`);
       const residents = parseInt(home.residents) || 1;
       generatedMenus[home.home_id] = { breakfast: [], lunch: [], dinner: [] };
 
       ['breakfast', 'lunch', 'dinner'].forEach(mealType => {
+        console.log(`Generating ${mealType} menu for home ${home.home_id}`);
         const preferences = home[`${mealType}_preferences`]?.split(',') || [];
         
         if (residents === 3) {
@@ -180,9 +191,11 @@ export default function MenuGenerator() {
         } else {
           generatedMenus[home.home_id][mealType] = generateRegularMenu(preferences, mealType, residents, homesData);
         }
+        console.log(`Completed ${mealType} menu for home ${home.home_id}`);
       });
     });
 
+    console.log('Menu generation complete');
     setMenus(generatedMenus);
   };
 
@@ -376,14 +389,23 @@ export default function MenuGenerator() {
   };
 
   return (
-    <div className="p-4 max-w-6xl mx-auto">
-      <h1 className="text-2xl font-bold mb-4">Meal Plan Generator</h1>
-      <input
-        type="file"
-        accept=".csv"
-        onChange={handleFileUpload}
-        className="mb-6 block"
-      />
+    <div className="bg-white shadow sm:rounded-lg p-6">
+      <div className="space-y-6">
+        <div>
+          <h3 className="text-lg font-medium text-gray-900 mb-4">Menu Generator</h3>
+          <div className="grid grid-cols-1 gap-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700">CSV File</label>
+              <p className="text-sm text-gray-500 mb-2">Upload a CSV file with meal preferences</p>
+              <input
+                type="file"
+                accept=".csv"
+                onChange={handleFileUpload}
+                className="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-medium file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100"
+              />
+            </div>
+          </div>
+        </div>
   
       <PopularityCharts homes={homes} />
   
@@ -425,5 +447,5 @@ export default function MenuGenerator() {
         );
       })}
     </div>
-  );
-}
+  </div>
+)};

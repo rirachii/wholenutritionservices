@@ -1,5 +1,23 @@
 [build]
 command = "npm install --legacy-peer-deps && npm run build"
+functions = "functions"
+publish = "build"
 
 [build.environment]
 CI = ""
+
+[dev]
+command = "npm run start"
+port = 8888
+targetPort = 3000
+publish = "build"
+
+[[redirects]]
+from = "/api/*"
+to = "/.functions/:splat"
+status = 200
+
+[[redirects]]
+from = "/*"
+to = "/index.html"
+status = 200
