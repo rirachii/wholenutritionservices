@@ -5,18 +5,82 @@ import MenuGenerator from './MenuGenerator';
 export default function AdminDashboard({ onLogin }) {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('generator');
-  const [selectedFile, setSelectedFile] = useState(null);
+  const [selectedExcelFile, setSelectedExcelFile] = useState(null);
+  const [selectedJsonFile, setSelectedJsonFile] = useState(null);
   const [isUploading, setIsUploading] = useState(false);
   const [uploadStatus, setUploadStatus] = useState('');
 
-  const handleFileChange = (event) => {
-    console.log('File selected:', event.target.files[0]?.name);
-    setSelectedFile(event.target.files[0]);
+  const handleExcelFileChange = (event) => {
+    console.log('Excel file selected:', event.target.files[0]?.name);
+    setSelectedExcelFile(event.target.files[0]);
     setUploadStatus('');
   };
 
+  const handleJsonFileChange = (event) => {
+    console.log('JSON file selected:', event.target.files[0]?.name);
+    setSelectedJsonFile(event.target.files[0]);
+    setUploadStatus('');
+  };
+
+  const handleJsonUpload = async () => {
+    if (!selectedJsonFile) {
+      setUploadStatus('Please select a JSON file first');
+      return;
+    }
+
+    setIsUploading(true);
+    setUploadStatus('Uploading...');
+
+    try {
+      const reader = new FileReader();
+      reader.onload = async () => {
+        try {
+          const jsonContent = JSON.parse(reader.result);
+          console.log('Parsed JSON content:', jsonContent);
+
+          const response = await fetch('https://lively-crostata-509cae.netlify.app/upload-json', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
+            },
+            body: JSON.stringify(jsonContent)
+          });
+
+          console.log('Server response status:', response.status);
+          const responseText = await response.text();
+          console.log('Server response:', responseText);
+
+          if (!response.ok) {
+            throw new Error(`Server error: ${response.status} - ${responseText}`);
+          }
+
+          setUploadStatus('JSON file uploaded successfully');
+        } catch (error) {
+          console.error('Error details:', {
+            message: error.message,
+            stack: error.stack
+          });
+          setUploadStatus(`Upload failed: ${error.message}`);
+        }
+      };
+
+      reader.onerror = (error) => {
+        console.error('File reading error:', error);
+        setUploadStatus(`Error reading file: ${error.message}`);
+      };
+
+      reader.readAsText(selectedJsonFile);
+    } catch (error) {
+      console.error('Upload process error:', error);
+      setUploadStatus(`Error: ${error.message}`);
+    } finally {
+      setIsUploading(false);
+    }
+  };
+
   const handleUpdateMenu = async () => {
-    if (!selectedFile) {
+    if (!selectedExcelFile) {
       console.log('No file selected');
       setUploadStatus('Please select an Excel file first');
       return;
@@ -24,16 +88,16 @@ export default function AdminDashboard({ onLogin }) {
 
     console.log('Starting menu update process...');
     console.log('File details:', {
-      name: selectedFile.name,
-      type: selectedFile.type,
-      size: `${(selectedFile.size / 1024).toFixed(2)} KB`
+      name: selectedExcelFile.name,
+      type: selectedExcelFile.type,
+      size: `${(selectedExcelFile.size / 1024).toFixed(2)} KB`
     });
 
     setIsUploading(true);
     setUploadStatus('Uploading...');
 
     try {
-      console.log('Reading file:', selectedFile.name);
+      console.log('Reading file:', selectedExcelFile.name);
       const reader = new FileReader();
 
       reader.onload = () => {
@@ -47,7 +111,7 @@ export default function AdminDashboard({ onLogin }) {
         setUploadStatus(`Error reading file: ${error.message}`);
       };
 
-      reader.readAsDataURL(selectedFile);
+      reader.readAsDataURL(selectedExcelFile);
     } catch (error) {
       console.error('Error during file upload:', error);
       setUploadStatus(`Error: ${error.message}`);
@@ -104,12 +168,29 @@ export default function AdminDashboard({ onLogin }) {
                     <input
                       type="file"
                       accept=".xlsx"
-                      onChange={handleFileChange}
+                      onChange={handleExcelFileChange}
                       className="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-medium file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100"
                     />
                   </div>
+                  </div>
                 </div>
-              </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">JSON File</label>
+                  <p className="text-sm text-gray-500 mb-2">Upload a JSON file to update the menu data</p>
+                  <input
+                    type="file"
+                    accept=".json"
+                    onChange={handleJsonFileChange}
+                    className="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-medium file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100"
+                  />
+                  <button
+                    onClick={handleJsonUpload}
+                    disabled={isUploading}
+                    className={`mt-4 px-4 py-2 text-sm font-medium text-white rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 ${isUploading ? 'bg-gray-400 cursor-not-allowed' : 'bg-indigo-600 hover:bg-indigo-700'}`}
+                  >
+                    {isUploading ? 'Uploading...' : 'Upload JSON'}
+                  </button>
+                </div>
               <div className="flex justify-between items-center">
                 <div className="text-sm text-gray-500">
                   {uploadStatus && (

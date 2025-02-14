@@ -1,10 +1,12 @@
 [build]
 command = "npm install --legacy-peer-deps && npm run build"
-functions = "functions"
 publish = "build"
 
 [build.environment]
 CI = ""
+
+[functions]
+directory = "netlify/functions"
 
 [dev]
 command = "npm run start"
@@ -14,7 +16,7 @@ publish = "build"
 
 [[redirects]]
 from = "/api/*"
-to = "/.functions/:splat"
+to = "/.netlify/functions/:splat"
 status = 200
 
 [[redirects]]
