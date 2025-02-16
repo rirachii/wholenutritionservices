@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import Papa from 'papaparse';
-import { fetchMeals } from '../data/api';
+import { fetchMeals, fetchBagging, fetchInstructions } from '../data/api';
 import { PopularityCharts, HomePopularityCharts } from './PopularityCharts';
 import { BarChart, CartesianGrid, XAxis, YAxis, Tooltip, Bar } from 'recharts';
 
@@ -17,7 +17,8 @@ export default function ScheduleGenerator() {
       try {
         const data = await fetchMeals();
         console.log(data);
-        setMealData(data);
+        console.log(await fetchBagging());
+        console.log(await fetchInstructions());
         initializeServingSizes(data);
       } catch (err) {
         setError('Failed to load meal data. Please try again later.');
@@ -486,12 +487,35 @@ export default function ScheduleGenerator() {
   return (
     <div className="p-4 max-w-6xl mx-auto">
       <h1 className="text-2xl font-bold mb-4">Meal Plan Generator</h1>
-      <input
-        type="file"
-        accept=".csv"
-        onChange={handleFileUpload}
-        className="mb-6 block"
-      />
+      <div className="mb-6">
+        <label
+          htmlFor="file-upload"
+          className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors cursor-pointer font-medium"
+        >
+          <svg
+            className="w-5 h-5 mr-2"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"
+            />
+          </svg>
+          Upload CSV
+        </label>
+        <input
+          id="file-upload"
+          type="file"
+          accept=".csv"
+          onChange={handleFileUpload}
+          className="hidden"
+        />
+      </div>
 
       <PopularityCharts homes={homes} mealData={mealData} />
 

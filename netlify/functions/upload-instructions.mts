@@ -25,9 +25,9 @@ export default async (req, context) => {
     const store = getDeployStore(); // Replace "json-store" with your blob store name
     const jsonData = await req.json();
 
-    if (!jsonData || !jsonData.breakfast || !jsonData.lunch || !jsonData.dinner) {
-      return new Response("Invalid JSON structure. Must contain breakfast, lunch, and dinner arrays", { status: 400 });
-    }
+    // if (!jsonData || !jsonData.breakfast || !jsonData.lunch || !jsonData.dinner) {
+    //   return new Response("Invalid JSON structure. Must contain breakfast, lunch, and dinner arrays", { status: 400 });
+    // }
 
     const key = "instructions.json";
     await store.setJSON(key, jsonData);

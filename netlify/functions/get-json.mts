@@ -1,4 +1,4 @@
-import { getStore } from "@netlify/blobs";
+import { getDeployStore } from "@netlify/blobs";
 
 export default async (req, context) => {
   if (req.method !== "GET") {
@@ -13,7 +13,7 @@ export default async (req, context) => {
       return new Response("Missing 'key' parameter", { status: 400 });
     }
 
-    const store = getStore("json-store"); // Replace "json-store" with your blob store name
+    const store = getDeployStore(); // Replace "json-store" with your blob store name
     const jsonBlob = await store.get(key, { type: "json" });
 
     if (!jsonBlob) {
