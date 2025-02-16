@@ -2,7 +2,7 @@ import MEAL_DATA from './meals.json';
 // API endpoint configuration
 export const API_URL = 'https://lively-crostata-509cae.netlify.app/get-meals';
 
-// Fetch meals from the API
+// Fetch meals from the API with fallback to local data
 export const fetchMeals = async () => {
   try {
     const response = await fetch(API_URL);
@@ -21,7 +21,7 @@ export const fetchMeals = async () => {
       throw new Error('Invalid JSON response');
     }
   } catch (error) {
-    console.error('Error fetching meals:', error);
+    console.error('Error fetching meals, using local data:', error);
     return MEAL_DATA;
   }
 };
