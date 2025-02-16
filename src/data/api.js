@@ -1,3 +1,4 @@
+import MEAL_DATA from './meals.json';
 // API endpoint configuration
 export const API_URL = 'https://lively-crostata-509cae.netlify.app/get-meals';
 
@@ -21,6 +22,6 @@ export const fetchMeals = async () => {
     }
   } catch (error) {
     console.error('Error fetching meals:', error);
-    return { breakfast: [], lunch: [], dinner: [] };
+    return MEAL_DATA;
   }
 };
