@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Checkbox, Label } from '../components/ui/checkbox';
 import Papa from 'papaparse';
-import mealData from '../data/meals.json';
+import { fetchMeals } from '../data/api';
 import { SettingsModal } from './SettingsModal';
 import { LoginPage } from './LoginPage';
 
@@ -39,6 +39,7 @@ const MealPortal = () => {
   const [success, setSuccess] = useState('');
   const [selectedMeal, setSelectedMeal] = useState(null);
   const [showMealDetails, setShowMealDetails] = useState(false);
+  const [mealData, setMealData] = useState({});
   const [userInfo, setUserInfo] = useState(() => {
     const savedData = JSON.parse(localStorage.getItem('userData') || '{}');
     return {
@@ -182,7 +183,7 @@ const MealPortal = () => {
 
                 <div className="flex items-center mb-1">
                   <span className="mr-3">{meal.prepTime}</span>
-                  <span>{meal.servings}</span>
+                  <span>Servings: {Array.isArray(meal.servings) ? meal.servings.join(', ') : meal.servings}</span>
                 </div>
                 <div className="flex items-center gap-4 mt-2">
                 <span className="text-gray-700">Sodium: {meal.sodium}mg</span>
@@ -392,6 +393,20 @@ const MealPortal = () => {
     // Update localStorage
     localStorage.setItem('userData', JSON.stringify(data));
   };
+
+  const fetchMealData = async () => {
+    try {
+      const data = await fetchMeals();
+      setMealData(data);
+    } catch (error) {
+      console.error('Error fetching meal data:', error);
+      setError('Failed to load meal data');
+    }
+  };
+
+  useEffect(() => {
+    fetchMealData();
+  }, []);
 
   useEffect(() => {
     if (activeTab === 'settings') {

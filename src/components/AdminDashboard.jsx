@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import MenuGenerator from './MenuGenerator';
+import ScheduleGenerator from './ScheduleGenerator';
+import { processExcelFile } from '../utils/excelProcessor';
 
 export default function AdminDashboard({ onLogin }) {
   const navigate = useNavigate();
@@ -87,36 +88,39 @@ export default function AdminDashboard({ onLogin }) {
     }
 
     console.log('Starting menu update process...');
-    console.log('File details:', {
-      name: selectedExcelFile.name,
-      type: selectedExcelFile.type,
-      size: `${(selectedExcelFile.size / 1024).toFixed(2)} KB`
-    });
-
     setIsUploading(true);
-    setUploadStatus('Uploading...');
+    setUploadStatus('Processing Excel file...');
 
     try {
-      console.log('Reading file:', selectedExcelFile.name);
-      const reader = new FileReader();
+      // Process Excel file in the frontend
+      const mealData = await processExcelFile(selectedExcelFile);
+      console.log('Excel file processed successfully');
+      console.log('Processed JSON data:', JSON.stringify(mealData, null, 2));
+      setUploadStatus('Excel file processed, uploading to server...');
 
-      reader.onload = () => {
-        console.log('File read successfully');
-        console.log('File content type:', typeof reader.result);
-        console.log('File content length:', reader.result.length);
-      };
+      // Send processed JSON to server
+      const response = await fetch('https://lively-crostata-509cae.netlify.app/upload-json', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(mealData)
+      });
 
-      reader.onerror = (error) => {
-        console.error('Error reading file:', error);
-        setUploadStatus(`Error reading file: ${error.message}`);
-      };
+      console.log('Server response status:', response.status);
+      const responseText = await response.text();
+      console.log('Server response:', responseText);
 
-      reader.readAsDataURL(selectedExcelFile);
+      if (!response.ok) {
+        throw new Error(`Server error: ${response.status} - ${responseText}`);
+      }
+
+      setUploadStatus('Excel file processed and uploaded successfully');
     } catch (error) {
-      console.error('Error during file upload:', error);
-      setUploadStatus(`Error: ${error.message}`);
+      console.error('Error processing Excel file:', error);
+      setUploadStatus(`Upload failed: ${error.message}`);
     } finally {
-      console.log('Menu update process completed');
       setIsUploading(false);
     }
   };
@@ -155,7 +159,7 @@ export default function AdminDashboard({ onLogin }) {
 
       <main className="max-w-7xl mx-auto py-6 px-4">
         {activeTab === 'generator' ? (
-          <MenuGenerator />
+          <ScheduleGenerator />
         ) : (
           <div className="bg-white shadow sm:rounded-lg p-6">
             <div className="space-y-6">
@@ -171,7 +175,13 @@ export default function AdminDashboard({ onLogin }) {
                       onChange={handleExcelFileChange}
                       className="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-medium file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100"
                     />
-                  </div>
+                    <button
+                      onClick={handleUpdateMenu}
+                      disabled={isUploading}
+                      className={`mt-4 px-4 py-2 text-sm font-medium text-white rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 ${isUploading ? 'bg-gray-400 cursor-not-allowed' : 'bg-indigo-600 hover:bg-indigo-700'}`}
+                    >
+                      {isUploading ? 'Uploading...' : 'Upload Excel'}
+                    </button>
                   </div>
                 </div>
                 <div>
@@ -191,7 +201,6 @@ export default function AdminDashboard({ onLogin }) {
                     {isUploading ? 'Uploading...' : 'Upload JSON'}
                   </button>
                 </div>
-              <div className="flex justify-between items-center">
                 <div className="text-sm text-gray-500">
                   {uploadStatus && (
                     <p className={`mt-2 ${uploadStatus.includes('Success') ? 'text-green-600' : 'text-red-600'}`}>
@@ -199,13 +208,6 @@ export default function AdminDashboard({ onLogin }) {
                     </p>
                   )}
                 </div>
-                <button
-                  onClick={handleUpdateMenu}
-                  disabled={isUploading}
-                  className={`px-4 py-2 text-sm font-medium text-white rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 ${isUploading ? 'bg-gray-400 cursor-not-allowed' : 'bg-indigo-600 hover:bg-indigo-700'}`}
-                >
-                  {isUploading ? 'Uploading...' : 'Update Menu'}
-                </button>
               </div>
             </div>
           </div>
