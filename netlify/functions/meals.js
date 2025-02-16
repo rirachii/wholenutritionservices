@@ -16,11 +16,11 @@ exports.handler = async (event) => {
     };
   }
 
-    const store = getStore({ name: 'meals-data' });
-    const dataPath = path.join(__dirname, 'data');
-      breakfast: [],
-      lunch: [],
-      dinner: []
+  try {
+    const dataPath = path.join(__dirname, 'data', 'meals.json');
+    const data = await fs.readFile(dataPath, 'utf-8');
+    const meals = JSON.parse(data);
+
     const hasMeals = Object.values(meals).some(mealArray => mealArray.length > 0);
     if (!hasMeals) {
       return {
