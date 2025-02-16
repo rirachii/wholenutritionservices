@@ -49,16 +49,15 @@ const MealPortal = () => {
       dietaryRestrictions: savedData.dietaryRestrictions || {}
     };
   });
-
+        const response = await fetch('http://localhost:8888/.functions/meals');
   const filterMeals = (meals) => {
-    return meals.filter(meal => {
-      // Get dietary restrictions from userInfo
+          throw new Error('Failed to fetch meals');
       const restrictions = userInfo.dietaryRestrictions || {};
       
       // Check dietary restrictions
       if (restrictions.gluten && meal.Gluten === 'yes') return false;
       if (restrictions.dairy && meal.Dairy === 'yes') return false;
-      if (restrictions.treeNuts && meal['Tree Nuts'] === 'yes') return false;
+        setError('Failed to load meal data');
       if (restrictions.peanuts && meal.Peanuts === 'yes') return false;
       if (restrictions.soy && meal.Soy === 'yes') return false;
       if (restrictions.shellfish && meal.Shellfish === 'yes') return false;
