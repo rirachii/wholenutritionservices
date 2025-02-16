@@ -52,10 +52,9 @@ export async function processExcelFile(file) {
           breakfast: [],
           lunch: [],
           dinner: [],
-          prep: []
         };
 
-        const sheets = ['Breakfast', 'Lunch', 'Dinner', 'Prep'];
+        const sheets = ['Breakfast', 'Lunch', 'Dinner'];
         
         for (const sheet of sheets) {
           if (workbook.SheetNames.includes(sheet)) {

@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid } from 'recharts';
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 export const PopularityCharts = ({ homes, mealData }) => {
+  const [customOrder, setCustomOrder] = useState({});
   const calculateMealPopularity = (homes, mealType) => {
     const mealCounts = {};
     const mealHomes = {};
@@ -20,13 +22,21 @@ export const PopularityCharts = ({ homes, mealData }) => {
       });
     });
   
-    return Object.entries(mealCounts)
+    const sortedData = Object.entries(mealCounts)
       .map(([name, count]) => ({ 
         name, 
         count,
         homes: mealHomes[name]
       }))
       .sort((a, b) => b.count - a.count);
+
+    return customOrder[mealType] 
+      ? [...sortedData].sort((a, b) => {
+          const indexA = customOrder[mealType].indexOf(a.name);
+          const indexB = customOrder[mealType].indexOf(b.name);
+          return indexA - indexB;
+        })
+      : sortedData;
   };
 
   if (homes.length === 0) return null;
@@ -38,7 +48,28 @@ export const PopularityCharts = ({ homes, mealData }) => {
         {['breakfast', 'lunch', 'dinner'].map(mealType => (
           <div key={mealType} className="bg-white p-4 pb-2 rounded-lg shadow-sm w-full">
             <h3 className="text-base font-medium mb-3 capitalize">{mealType} Popularity</h3>
-            <div className="overflow-y-auto" style={{ maxHeight: '400px' }}>
+            <DragDropContext
+              onDragEnd={(result) => {
+                if (!result.destination) return;
+                
+                const items = calculateMealPopularity(homes, mealType);
+                const [reorderedItem] = items.splice(result.source.index, 1);
+                items.splice(result.destination.index, 0, reorderedItem);
+                
+                setCustomOrder(prev => ({
+                  ...prev,
+                  [mealType]: items.map(item => item.name)
+                }));
+              }}
+            >
+              <Droppable droppableId={`popularity-${mealType}`}>
+                {(provided) => (
+                  <div 
+                    ref={provided.innerRef}
+                    {...provided.droppableProps}
+                    className="overflow-y-auto" 
+                    style={{ maxHeight: '400px' }}
+                  >
               <BarChart width={600} height={Math.max(300, calculateMealPopularity(homes, mealType).length * 25)} data={calculateMealPopularity(homes, mealType)} layout="vertical">
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis type="number" domain={[0, 'dataMax']} tickCount={5} allowDecimals={false} tick={{ fontSize: 10 }} />
@@ -58,7 +89,10 @@ export const PopularityCharts = ({ homes, mealData }) => {
                 />
                 <Bar dataKey="count" fill="#8884d8" barSize={18} />
               </BarChart>
-            </div>
+                  </div>
+                )}
+              </Droppable>
+            </DragDropContext>
           </div>
         ))}
       </div>
@@ -89,13 +123,21 @@ export const HomePopularityCharts = ({ homeId, homes, mealData }) => {
       });
     });
   
-    return Object.entries(mealCounts)
+    const sortedData = Object.entries(mealCounts)
       .map(([name, count]) => ({ 
         name, 
         count,
         homes: mealHomes[name]
       }))
       .sort((a, b) => b.count - a.count);
+
+    return customOrder[mealType] 
+      ? [...sortedData].sort((a, b) => {
+          const indexA = customOrder[mealType].indexOf(a.name);
+          const indexB = customOrder[mealType].indexOf(b.name);
+          return indexA - indexB;
+        })
+      : sortedData;
   };
 
   if (homes.length === 0) return null;
@@ -111,27 +153,52 @@ export const HomePopularityCharts = ({ homeId, homes, mealData }) => {
           return (
             <div key={mealType} className="bg-white p-4 rounded-lg shadow-sm w-full overflow-y-auto" style={{ maxHeight: '400px' }}>
               <h4 className="text-sm font-medium mb-4 capitalize">{mealType} Popularity</h4>
-              <div className="overflow-y-auto" style={{ maxHeight: '400px' }}>
-                <BarChart width={280} height={Math.max(150, popularityData.length * 25)} data={popularityData} layout="vertical">
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis type="number" domain={[0, 'dataMax']} tickCount={5} allowDecimals={false} tick={{ fontSize: 9 }} />
-                  <YAxis type="category" dataKey="name" width={120} tick={{ fontSize: 9 }} />
-                  <Tooltip 
-                    formatter={(value, name, props) => {
-                      if (name === 'count') {
-                        return [
-                          `${Math.round(value)}`,
-                          'Count'
-                        ];
-                      }
-                      return [value, name];
-                    }}
-                    contentStyle={{ fontSize: '11px' }}
-                    wrapperStyle={{ whiteSpace: 'pre-line' }}
-                  />
-                  <Bar dataKey="count" fill="#8884d8" barSize={15} />
-                </BarChart>
-              </div>
+              <DragDropContext
+                onDragEnd={(result) => {
+                  if (!result.destination) return;
+                  
+                  const items = calculateMealPopularity(homes, mealType);
+                  const [reorderedItem] = items.splice(result.source.index, 1);
+                  items.splice(result.destination.index, 0, reorderedItem);
+                  
+                  setCustomOrder(prev => ({
+                    ...prev,
+                    [mealType]: items.map(item => item.name)
+                  }));
+                }}
+              >
+                <Droppable droppableId={`popularity-${mealType}`}>
+                  {(provided) => (
+                    <div 
+                      ref={provided.innerRef}
+                      {...provided.droppableProps}
+                      className="overflow-y-auto" 
+                      style={{ maxHeight: '400px' }}
+                    >
+                      <BarChart width={280} height={Math.max(150, popularityData.length * 25)} data={popularityData} layout="vertical">
+                        <CartesianGrid strokeDasharray="3 3" />
+                        <XAxis type="number" domain={[0, 'dataMax']} tickCount={5} allowDecimals={false} tick={{ fontSize: 9 }} />
+                        <YAxis type="category" dataKey="name" width={120} tick={{ fontSize: 9 }} />
+                        <Tooltip 
+                          formatter={(value, name, props) => {
+                            if (name === 'count') {
+                              return [
+                                `${Math.round(value)}`,
+                                'Count'
+                              ];
+                            }
+                            return [value, name];
+                          }}
+                          contentStyle={{ fontSize: '11px' }}
+                          wrapperStyle={{ whiteSpace: 'pre-line' }}
+                        />
+                        <Bar dataKey="count" fill="#8884d8" barSize={15} />
+                      </BarChart>
+                      {provided.placeholder}
+                    </div>
+                  )}
+                </Droppable>
+              </DragDropContext>
             </div>
           );
         })}

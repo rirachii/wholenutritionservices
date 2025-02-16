@@ -39,7 +39,7 @@ export default function AdminDashboard({ onLogin }) {
           const jsonContent = JSON.parse(reader.result);
           console.log('Parsed JSON content:', jsonContent);
 
-          const response = await fetch('https://lively-crostata-509cae.netlify.app/upload-json', {
+          const response = await fetch('https://lively-crostata-509cae.netlify.app/upload-meals', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -99,7 +99,7 @@ export default function AdminDashboard({ onLogin }) {
       setUploadStatus('Excel file processed, uploading to server...');
 
       // Send processed JSON to server
-      const response = await fetch('https://lively-crostata-509cae.netlify.app/upload-json', {
+      const response = await fetch('https://lively-crostata-509cae.netlify.app/upload-meals', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

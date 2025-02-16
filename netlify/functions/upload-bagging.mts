@@ -29,7 +29,7 @@ export default async (req, context) => {
       return new Response("Invalid JSON structure. Must contain breakfast, lunch, and dinner arrays", { status: 400 });
     }
 
-    const key = "meals.json";
+    const key = "bagging.json";
     await store.setJSON(key, jsonData);
 
     return new Response(`File uploaded successfully with key: ${key}`, {
@@ -52,5 +52,5 @@ export default async (req, context) => {
 
 export const config = {
   method: "POST",
-  path: "/upload-json", // Define the endpoint path
+  path: "/upload-bagging", // Define the endpoint path
 };
