@@ -3,11 +3,22 @@ import React from 'react';
 export const ServingSizeSelector = ({ homeId, mealType, preferences, mealData, servingSizes, onServingSizeChange }) => {
   if (!preferences || preferences.length === 0) return null;
 
+  // Convert preferences string to array and count meal frequencies
+  const mealFrequencies = preferences.split(',').reduce((acc, mealId) => {
+    acc[mealId] = (acc[mealId] || 0) + 1;
+    return acc;
+  }, {});
+
+  // Create sorted array of meal IDs based on frequency
+  const sortedMealIds = preferences.split(',').sort((a, b) => {
+    return mealFrequencies[b] - mealFrequencies[a];
+  });
+
   return (
     <div className="mb-4">
       <h4 className="text-sm font-medium mb-2 capitalize">{mealType} Serving Sizes</h4>
       <div className="space-y-2">
-        {preferences.split(',').map(mealId => {
+        {sortedMealIds.map(mealId => {
           const meal = mealData[mealType]?.find(m => m.id === mealId);
           if (!meal) return null;
 
@@ -28,7 +39,7 @@ export const ServingSizeSelector = ({ homeId, mealType, preferences, mealData, s
                   ))}
                 </select>
               ) : (
-                <span className="text-sm text-gray-600">{servingSize} servings</span>
+                <span className="text-sm text-gray-600">{typeof servingSize === 'number' ? servingSize : servingSize[0]} servings</span>
               )}
             </div>
           );

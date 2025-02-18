@@ -15,7 +15,7 @@ export function LoginPage({ onLogin }) {
   const handleLogin = (e) => {
     e.preventDefault();
     if (email === DUMMY_USER.email && password === DUMMY_USER.password) {
-      onLogin();
+      onLogin({ email, password });
       setError('');
     } else {
       setError('Invalid credentials');

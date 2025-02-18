@@ -1,4 +1,6 @@
 import MEAL_DATA from './meals.json';
+import BAGGING_DATA from './bagging.json';
+import INSTRUCTIONS from './instructions.json';
 
 // API endpoint configuration
 const BASE_URL = 'https://lively-crostata-509cae.netlify.app';
@@ -39,10 +41,10 @@ export const fetchMeals = async () => {
 
 // Fetch bagging data from the API
 export const fetchBagging = async () => {
-  return fetchData(API_ENDPOINTS.bagging, null);
+  return fetchData(API_ENDPOINTS.bagging, BAGGING_DATA);
 };
 
 // Fetch instructions data from the API
 export const fetchInstructions = async () => {
-  return fetchData(API_ENDPOINTS.instructions, null);
+  return fetchData(API_ENDPOINTS.instructions, INSTRUCTIONS);
 };

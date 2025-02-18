@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@hello-pangea/dnd": "^18.0.1",
     "@netlify/blobs": "^8.1.1",
     "@netlify/functions": "^3.0.0",
     "@radix-ui/react-checkbox": "^1.1.3",
@@ -27,9 +28,14 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "jest",
     "eject": "react-scripts eject",
     "netlify:dev": "netlify dev"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.jsx?$": "babel-jest"
+    }
   },
   "eslintConfig": {
     "extends": [
@@ -51,6 +57,8 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@babel/preset-env": "^7.26.9",
+    "jest": "^27.5.1",
     "netlify-cli": "^18.0.4"
   }
 }

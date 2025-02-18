@@ -5,17 +5,28 @@ import { PopularityCharts, HomePopularityCharts } from './PopularityCharts';
 import { BarChart, CartesianGrid, XAxis, YAxis, Tooltip, Bar } from 'recharts';
 
 export default function ScheduleGenerator() {
+  const [activeTab, setActiveTab] = useState('generator');
   const [homes, setHomes] = useState([]);
   const [menus, setMenus] = useState({});
   const [mealData, setMealData] = useState({});
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(true);
   const [servingSizes, setServingSizes] = useState({});
+  const [currentHomeIndex, setCurrentHomeIndex] = useState(0);
+
+  const nextHome = () => {
+    setCurrentHomeIndex(prev => (prev + 1) % homes.length);
+  };
+
+  const previousHome = () => {
+    setCurrentHomeIndex(prev => (prev - 1 + homes.length) % homes.length);
+  };
 
   useEffect(() => {
     const loadMealData = async () => {
       try {
         const data = await fetchMeals();
+        setMealData(data);
         console.log(data);
         console.log(await fetchBagging());
         console.log(await fetchInstructions());
@@ -484,88 +495,183 @@ export default function ScheduleGenerator() {
     );
   };
 
-  return (
-    <div className="p-4 max-w-6xl mx-auto">
-      <h1 className="text-2xl font-bold mb-4">Meal Plan Generator</h1>
-      <div className="mb-6">
-        <label
-          htmlFor="file-upload"
-          className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors cursor-pointer font-medium"
-        >
-          <svg
-            className="w-5 h-5 mr-2"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"
-            />
-          </svg>
-          Upload CSV
-        </label>
-        <input
-          id="file-upload"
-          type="file"
-          accept=".csv"
-          onChange={handleFileUpload}
-          className="hidden"
-        />
-      </div>
+  const renderTabContent = () => {
+    if (isLoading) {
+      return <div className="text-center py-8">Loading...</div>;
+    }
 
-      <PopularityCharts homes={homes} mealData={mealData} />
+    if (error) {
+      return <div className="text-center py-8 text-red-600">{error}</div>;
+    }
 
-      {/* Generated Menus */}
-      {Object.entries(menus).map(([home_id, homeMenu]) => {
-        const home = homes.find(h => h.home_id === home_id);
-        if (!home) return null;
-
+    switch (activeTab) {
+      case 'generator':
         return (
-          <div key={home_id} className="mb-8">
-            <div className="flex items-center justify-between mb-4">
-              <h2 className="text-xl font-semibold">Home {home_id}</h2>
-              <div className="text-sm text-gray-600">
-                {home.residents} resident(s)
-              </div>
-            </div>
+          <div className="space-y-6">
+            
 
-            {/* Serving Size Configuration */}
-            <div className="mb-6 bg-white p-4 rounded-lg shadow-sm">
-              <h3 className="text-lg font-medium mb-4">Serving Size Configuration</h3>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {['breakfast', 'lunch', 'dinner'].map(mealType => (
-                  <div key={mealType}>
-                    <ServingSizeSelector
-                      homeId={home_id}
-                      mealType={mealType}
-                      preferences={home[`${mealType}_preferences`]}
-                    />
-                  </div>
-                ))}
+            {homes.length > 0 && (
+              <div className="space-y-6">
+                <div className="flex justify-between items-center mb-4">
+                  <button
+                    onClick={previousHome}
+                    className="px-4 py-2 bg-gray-100 text-gray-700 rounded hover:bg-gray-200 transition-colors"
+                    disabled={homes.length <= 1}
+                  >
+                    Previous Home
+                  </button>
+                  <span className="text-sm text-gray-600">
+                    Home {currentHomeIndex + 1} of {homes.length}
+                  </span>
+                  <button
+                    onClick={nextHome}
+                    className="px-4 py-2 bg-gray-100 text-gray-700 rounded hover:bg-gray-200 transition-colors"
+                    disabled={homes.length <= 1}
+                  >
+                    Next Home
+                  </button>
+                </div>
+                {Object.entries(menus)
+                  .filter(([homeId]) => homeId === homes[currentHomeIndex].home_id)
+                  .map(([homeId, homeMeals]) => (
+                    <div key={homeId} className="bg-white p-6 rounded-lg shadow-sm">
+                      <h3 className="text-xl font-semibold mb-4">Home: {homeId}</h3>
+                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                        {[...Array(28)].map((_, index) => (
+                          <MealCard
+                            key={index + 1}
+                            day={index + 1}
+                            meals={{
+                              breakfast: homeMeals.breakfast.find(m => m.day === index + 1) ? [homeMeals.breakfast.find(m => m.day === index + 1)] : [],
+                              lunch: homeMeals.lunch.find(m => m.day === index + 1) ? [homeMeals.lunch.find(m => m.day === index + 1)] : [],
+                              dinner: homeMeals.dinner.find(m => m.day === index + 1) ? [homeMeals.dinner.find(m => m.day === index + 1)] : []
+                            }}
+                          />
+                        ))}
+                      </div>
+                    </div>
+                  ))}
               </div>
-            </div>
-
-            {/* Menu Display */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-              {Array.from({ length: 28 }, (_, i) => i + 1).map(day => (
-                <MealCard
-                  key={day}
-                  day={day}
-                  meals={{
-                    breakfast: homeMenu.breakfast.filter(m => m.day === day),
-                    lunch: homeMenu.lunch.filter(m => m.day === day),
-                    dinner: homeMenu.dinner.filter(m => m.day === day)
-                  }}
-                />
-              ))}
-            </div>
+            )}
           </div>
         );
-      })}
+
+      case 'popularity':
+        return homes.length > 0 ? (
+          <div className="space-y-8">
+            <PopularityCharts homes={homes} mealData={mealData} />
+            {Object.keys(menus).map(homeId => (
+              <HomePopularityCharts
+                key={homeId}
+                homeId={homeId}
+                homes={homes}
+                mealData={mealData}
+              />
+            ))}
+          </div>
+        ) : (
+          <div className="text-center py-8 text-gray-600">
+            Upload menu preferences to view popularity charts
+          </div>
+        );
+
+      case 'prep':
+        return homes.length > 0 ? (
+          <div className="space-y-8">
+            {Object.entries(menus).map(([homeId, homeMeals]) => (
+              <div key={homeId} className="bg-white p-6 rounded-lg shadow-sm">
+                <h3 className="text-xl font-semibold mb-4">Home: {homeId}</h3>
+                <ServingSizeSelector
+                  homeId={homeId}
+                  mealType="breakfast"
+                  preferences={homes.find(h => h.home_id === homeId)?.breakfast_preferences}
+                  mealData={mealData}
+                  servingSizes={servingSizes}
+                  onServingSizeChange={handleServingSizeChange}
+                />
+                <ServingSizeSelector
+                  homeId={homeId}
+                  mealType="lunch"
+                  preferences={homes.find(h => h.home_id === homeId)?.lunch_preferences}
+                  mealData={mealData}
+                  servingSizes={servingSizes}
+                  onServingSizeChange={handleServingSizeChange}
+                />
+                <ServingSizeSelector
+                  homeId={homeId}
+                  mealType="dinner"
+                  preferences={homes.find(h => h.home_id === homeId)?.dinner_preferences}
+                  mealData={mealData}
+                  servingSizes={servingSizes}
+                  onServingSizeChange={handleServingSizeChange}
+                />
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="text-center py-8 text-gray-600">
+            Upload menu preferences to view prep instructions
+          </div>
+        );
+
+      default:
+        return null;
+    }
+  };
+
+  return (
+    <div className="p-4 max-w-6xl mx-auto">
+      <h1 className="text-2xl font-bold mb-6">Meal Plan Generator</h1>
+
+      <div className="bg-white p-6 rounded-lg shadow-sm">
+        <h2 className="text-lg font-semibold mb-4">Upload Menu Preferences</h2>
+        <input
+        type="file"
+        accept=".csv"
+        onChange={handleFileUpload}
+        className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-medium file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+        />
+        {error && <p className="mt-2 text-red-600 text-sm">{error}</p>}
+      </div>
+      
+      <div className="mb-6 bg-white rounded-lg shadow-sm">
+        <div className="border-b border-gray-200">
+          <nav className="-mb-px flex space-x-8 px-4">
+            <button
+              onClick={() => setActiveTab('generator')}
+              className={`${
+                activeTab === 'generator'
+                  ? 'border-blue-500 text-blue-600'
+                  : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+              } whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm`}
+            >
+              Menu Generator
+            </button>
+            <button
+              onClick={() => setActiveTab('popularity')}
+              className={`${
+                activeTab === 'popularity'
+                  ? 'border-blue-500 text-blue-600'
+                  : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+              } whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm`}
+            >
+              Meal Popularity
+            </button>
+            <button
+              onClick={() => setActiveTab('prep')}
+              className={`${
+                activeTab === 'prep'
+                  ? 'border-blue-500 text-blue-600'
+                  : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+              } whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm`}
+            >
+              Prep Instructions
+            </button>
+          </nav>
+        </div>
+      </div>
+
+      {renderTabContent()}
     </div>
   );
 }
