@@ -20,10 +20,13 @@ const MealPlanner = () => {
     const [homePreferences, setHomePreferences] = useState({});
     const [mealServings, setMealServings] = useState({}); // { [mealId]: servingSize }
     const [mealCounts, setMealCounts] = useState({});
+    const [generatedMenu, setGeneratedMenu] = useState(null); // Store generated menu
 
     const homeIds = Object.keys(homes);
     const totalHomes = homeIds.length;
     const currentHomeId = homeIds[currentHomeIndex];
+    const currentHome = homes[currentHomeId];
+    const residents = currentHome?.residents || 1;
 
     const handlePrevHome = () => {
         setCurrentHomeIndex((prev) => (prev > 0 ? prev - 1 : totalHomes - 1));
@@ -152,7 +155,7 @@ const MealPlanner = () => {
             mealPreferences.forEach(meal => {
                 mealCounts[meal] = (mealCounts[meal] || 0) + 1;
             });
-        
+
             // Sort meals by popularity (descending) and then alphabetically by mealId.
             const sortedMeals = Object.entries(mealCounts).sort((
                 [mealIdA, countA],
@@ -163,24 +166,24 @@ const MealPlanner = () => {
                 }
                 return mealIdA.localeCompare(mealIdB); // Then sort alphabetically
             });
-        
+
             const rankedMeals = [];
             let currentRank = 1;
             let previousCount = null;
-        
+
             for (let i = 0; i < sortedMeals.length; i++) {
                 const [mealId, count] = sortedMeals[i];
-        
+
                 if (previousCount === null) {
                     // For the first meal, always assign rank 1
                 } else if (count < previousCount) {
                     currentRank = rankedMeals.length + 1; // Number of all meals that have already been ranked + 1
                 }
-        
+
                 rankedMeals.push({ mealId, rank: currentRank });
                 previousCount = count;
             }
-        
+
             // Return the rankedMeals as an array of mealIds, preserving the order.
             return rankedMeals.map(({ mealId }) => mealId);
         };
@@ -344,8 +347,87 @@ const MealPlanner = () => {
         return rank.toString();
     };
 
-    const generateMenuClick = () => {
-        console.log('Meal Plan Generator');
+    const generateMenu = (mealType) => {
+        if (!currentHomeId) {
+            alert("No home selected.");
+            return;
+        }
+
+        const rankedMeals = homePreferences[currentHomeId][mealType];
+        const servingSizes = mealServings;
+        const totalDays = 28;
+        const menu = [];
+
+        let availableMeals = [...rankedMeals]; // Copy of available meals to avoid repetition
+        let leftovers = {}; // Track leftovers, stored by meal type
+
+        for (let day = 0; day < totalDays; day++) {
+            let mealForDay = null;
+
+            // First, check if there are leftovers for this meal type to use
+            if (leftovers[mealType] && leftovers[mealType].mealId && leftovers[mealType].servings > 0) {
+                mealForDay = leftovers[mealType].mealId;
+                let servingsUsed = Math.min(residents, leftovers[mealType].servings);
+                leftovers[mealType].servings -= servingsUsed; // Consume servings
+
+                // Remove if there is nothing left
+                if (leftovers[mealType].servings === 0) {
+                    delete leftovers[mealType];
+                }
+                menu.push({ day: day + 1, mealType: mealType, mealId: mealForDay, servings: servingsUsed, cookedNew: false });
+            } else {
+                // If no leftovers, pick a new meal
+                if (availableMeals.length > 0) {
+                    mealForDay = availableMeals.shift(); // Take the first available meal
+                } else {
+                    // If you run out of meals, reset to the beginning (simplification)
+                    availableMeals = [...rankedMeals];
+                    mealForDay = availableMeals.shift();
+                }
+
+                // Now calculate how much to cook based on residents and the bagging
+                const servingsNeeded = residents;  // Residents per home
+                const mealServingSize = servingSizes[mealForDay] || 1; // serving size
+                let quantityToCook = Math.ceil(servingsNeeded / mealServingSize);  // How many servings needed
+                let actualServingsCooked = quantityToCook * mealServingSize;
+
+                // Update leftovers (assuming you can store leftovers for the next day only)
+                let leftoverServings = Math.max(0, actualServingsCooked - servingsNeeded);
+                if (leftoverServings > 0) {
+                    leftovers[mealType] = {
+                        mealId: mealForDay,
+                        servings: leftoverServings,
+                    };
+                }
+
+                menu.push({ day: day + 1, mealType: mealType, mealId: mealForDay, servings: servingsNeeded, cookedNew: true });
+            }
+        }
+        return menu;
+    };
+
+    const handleGenerateMenuClick = (mealType) => {
+        const menu = generateMenu(mealType);
+        setGeneratedMenu(menu); // set generated menu to be displayed
+    };
+
+    const renderGeneratedMenu = () => {
+        if (!generatedMenu) {
+            return <p>Click "Generate Menu" to see the menu</p>;
+        }
+
+        return (
+            <div>
+                <h3>Generated Menu:</h3>
+                <ul>
+                    {generatedMenu.map(item => (
+                        <li key={`${item.day}-${item.mealType}`}>
+                            Day {item.day}: {item.mealType} - {item.mealId} (Servings: {item.servings}, {item.cookedNew ? 'New' : 'Leftover'})
+                        </li>
+                    ))}
+                </ul>
+            </div>
+        );
     };
 
     const renderTabContent = () => {
@@ -363,6 +445,10 @@ const MealPlanner = () => {
                     <div className="p-4">
                         <h2 className="text-2xl font-semibold mb-4">Home Meal Popularity Ranking</h2>
                         <div className="mb-6 border rounded p-4 shadow-md">
+                            <h3 className="text-xl font-semibold mb-2">Home: {currentHomeId}</h3>
+                            {console.log(homePreferences)}
+                            {console.log(homePreferences[currentHomeId])}
+                            <h3 className="text-xl font-semibold mb-2">Home: {homePreferences[currentHomeId]["email"]}</h3>
                             <h3 className="text-xl font-semibold mb-2">Home: {currentHomeId}</h3>
                             {['breakfast', 'lunch', 'dinner'].map((mealType) => (
                                 <div key={mealType} className="mb-4">
@@ -422,9 +508,16 @@ const MealPlanner = () => {
                                             )}
                                         </Droppable>
                                     </DragDropContext>
+                                    <button
+                                        onClick={() => handleGenerateMenuClick(mealType)}
+                                        className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-2"
+                                    >
+                                        Generate {mealType} Menu
+                                    </button>
                                 </div>
                             ))}
                         </div>
+                        {renderGeneratedMenu()} {/* Display generated menu */}
                     </div>
                 );
             default:
