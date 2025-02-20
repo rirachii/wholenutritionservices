@@ -102,10 +102,17 @@ class MenuGenerator {
 
   generateRegularMenu(preferences, mealType, residents, homesData, servingSizes = {}) {
     const menuForType = [];
-    // Sort preferences by popularity
+    // Sort preferences by popularity and create a ranking map
     const sortedPreferences = Array.isArray(homesData) ? 
       this.calculateMealPopularityForHome(preferences, mealType, homesData) : 
       [...preferences];
+    
+    // Create a map of meal rankings based on popularity
+    const mealRankings = {};
+    sortedPreferences.forEach((mealId, index) => {
+      mealRankings[mealId] = index + 1;
+    });
+    
     let currentPreferenceIndex = 0;
     let day = 1;
     let leftoverServings = 0;

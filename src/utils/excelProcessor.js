@@ -2,23 +2,27 @@ import * as XLSX from 'xlsx';
 
 function formatRecipe(row, mealType) {
   // Parse servings into array of numbers
-  let servingsArray = [];
+  let servingsArr = [];
   const servingsValue = row['Servings'];
 
-  const servingsStr = String(servingsValue);
-  servingsArray = servingsStr
-    .split(/[,\s]+/) // Split on commas or spaces
-    .map(s => s.trim()) // Trim whitespace
-    .filter(s => s !== '') // Remove empty strings
-    .map(Number) // Convert to numbers
-    .filter(n => !isNaN(n)); // Remove non-numbers
+  if (typeof servingsValue === 'string' && servingsValue.trim()) {
+    // Split by comma and handle potential spaces
+    servingsArr = servingsValue.split(', ').map(s => {
+      const num = parseInt(s.trim());
+      return isNaN(num) ? 4 : num;
+    });
+  } else if (typeof servingsValue === 'number') {
+    servingsArr = [servingsValue];
+  } else {
+    servingsArr = [4]; // Default value
+  }
 
   return {
     name: row['Recipe Prep'] || '',
     id: row['Recipe Prep']?.toLowerCase().trim().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '') || '',
     calories: parseInt(row['Calories']) || 0,
     prepTime: row['Prep Time'] || '0 min',
-    servings: servingsArray,
+    servings: servingsArr,
     season: row['Season'] || 'classic',
     sodium: parseInt(row['Sodium']) || 0,
     carbs: parseInt(row['Carbs']) || 0,
@@ -52,9 +56,10 @@ export async function processExcelFile(file) {
           breakfast: [],
           lunch: [],
           dinner: [],
+          prep: []
         };
 
-        const sheets = ['Breakfast', 'Lunch', 'Dinner'];
+        const sheets = ['Breakfast', 'Lunch', 'Dinner', 'Prep'];
         
         for (const sheet of sheets) {
           if (workbook.SheetNames.includes(sheet)) {

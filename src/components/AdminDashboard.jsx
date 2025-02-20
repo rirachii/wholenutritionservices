@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ScheduleGenerator from './ScheduleGenerator';
-import PrepInstructions from './PrepInstructions';
 import MealPlanner from './MealPlanner';
 import { processExcelFile } from '../utils/excelProcessor';
 import { processRecipeData } from '../utils/recipeProcessor';
@@ -124,12 +123,6 @@ export default function AdminDashboard({ onLogin }) {
               >
                 Meal Planner
               </button>
-              <button
-                onClick={() => setActiveTab('prep')}
-                className={`px-3 py-2 text-sm font-medium ${activeTab === 'prep' ? 'text-gray-900 border-b-2 border-indigo-500' : 'text-gray-500 hover:text-gray-700'}`}
-              >
-                Prep Instructions
-              </button>
             </div>
             <button
               onClick={() => {
@@ -147,8 +140,6 @@ export default function AdminDashboard({ onLogin }) {
       <main className="max-w-7xl mx-auto py-6 px-4">
         {activeTab === 'generator' ? (
           <ScheduleGenerator />
-        ) : activeTab === 'prep' ? (
-          <PrepInstructions />
         ) : activeTab === 'planner' ? (
           <MealPlanner />
         ) : (

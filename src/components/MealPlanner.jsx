@@ -2,11 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { DragDropContext, Droppable, Draggable } from '@hello-pangea/dnd';
 import * as XLSX from 'xlsx';
 import { fetchMeals, fetchBagging, fetchInstructions } from "../data/api.js";
+import { generateMenu } from '../utils/generateMenu';
 
 const MealPlanner = () => {
     const [homes, setHomes] = useState({});
     const [meals, setMeals] = useState([]);
     const [bagging, setBagging] = useState({});
+    const [instructions, setInstructions] = useState({});
     const [menus, setMenus] = useState({});
     const [activeTab, setActiveTab] = useState('mealRanking');
     const [loading, setLoading] = useState(true);
@@ -42,24 +44,16 @@ const MealPlanner = () => {
             try {
                 const mealsResponse = await fetchMeals();
                 const baggingData = await fetchBagging();
-                const instructionsResponse = await fetchInstructions();
+                const instructionsResponse = fetchInstructions();
 
-                setBagging(baggingData);
                 setMeals([
                     ...mealsResponse.breakfast,
                     ...mealsResponse.lunch,
                     ...mealsResponse.dinner
                 ]);
-
-                // Using fetch API to read local CSV due to axios issues in some environments
-                fetch('./Master Sheet.csv')
-                    .then(response => response.text())
-                    .then(csvData => {
-                        const parsedHomes = parseCsv(csvData);
-                        setHomes(parsedHomes);
-                        compileMealPopularity(parsedHomes, mealsResponse);
-                    });
-
+                setBagging(baggingData);
+                setInstructions(instructionsResponse);
+                
             } catch (error) {
                 console.error('Error loading data:', error);
             } finally {
@@ -70,34 +64,6 @@ const MealPlanner = () => {
         fetchData();
     }, []);
 
-    const parseCsv = (csvData) => {
-        const lines = csvData.split('\n');
-        const headers = lines[0].split(',');
-        const homes = {};
-
-        for (let i = 1; i < lines.length; i++) {
-            const data = lines[i].split(',');
-            if (data.length !== headers.length) continue;
-
-            const row = {};
-            for (let j = 0; j < headers.length; j++) {
-                row[headers[j].trim()] = data[j].trim();
-            }
-
-            const homeId = row['home_id'];
-            homes[homeId] = {
-                phone: row['phone'] || '',
-                email: row['email'] || '',
-                residents: parseInt(row['residents'] || 0, 10) || 0,
-                dietary_restrictions: row['dietary_restrictions'] ? String(row['dietary_restrictions']).split(',') : [],
-                breakfast_preferences: row['breakfast_preferences'] ? String(row['breakfast_preferences']).split(',') : [],
-                lunch_preferences: row['lunch_preferences'] ? String(row['lunch_preferences']).split(',') : [],
-                dinner_preferences: row['dinner_preferences'] ? String(row['dinner_preferences']).split(',') : [],
-            };
-        }
-
-        return homes;
-    };
 
     const transformXlsxData = (jsonData) => {
         const homes = {};
@@ -136,7 +102,7 @@ const MealPlanner = () => {
         });
     };
 
-    const compileMealPopularity = (homesData, mealsData) => {
+    const compileMealPopularity = (homesData) => {
         const allBreakfasts = Object.values(homesData).flatMap(home => home.breakfast_preferences);
         const allLunches = Object.values(homesData).flatMap(home => home.lunch_preferences);
         const allDinners = Object.values(homesData).flatMap(home => home.dinner_preferences);
@@ -275,14 +241,14 @@ const MealPlanner = () => {
             return;
         }
 
-        const items = Array.from(homePreferences[source.droppableId][mealType]);
+        const items = Array.from(homePreferences[currentHomeId][mealType]);
         const [reorderedItem] = items.splice(source.index, 1);
         items.splice(destination.index, 0, reorderedItem);
 
         setHomePreferences((prevPreferences) => ({
             ...prevPreferences,
-            [source.droppableId]: {
-                ...prevPreferences[source.droppableId],
+            [currentHomeId]: {
+                ...prevPreferences[currentHomeId],
                 [mealType]: items,
             },
         }));
@@ -292,27 +258,8 @@ const MealPlanner = () => {
         setMealServings((prev) => ({ ...prev, [mealId]: parseInt(value) }));
     };
 
-    const optimizeServingsForMeal = (mealId, residents) => {
-        if (!bagging[mealId]) return 1; // Default serving size
-
-        const availableServings = Object.keys(bagging[mealId] || {})
-            .filter(key => !isNaN(parseInt(key)))
-            .map(Number);
-
-        if (availableServings.length === 0) return null; // No serving sizes available
-
-        const targetServings = residents;
-        let bestServing = availableServings[0]; // Default to first serving
-        let minDiff = Math.abs(availableServings[0] - targetServings);
-
-        for (let i = 1; i < availableServings.length; i++) {
-            const diff = Math.abs(availableServings[i] - targetServings);
-            if (diff < minDiff) {
-                minDiff = diff;
-                bestServing = availableServings[i];
-            }
-        }
-        return bestServing;
+    const optimizeServingsForMeal = () => {
+        return 1; // Default serving size
     };
 
     const getMealRanking = (mealId, mealType) => {
@@ -347,68 +294,10 @@ const MealPlanner = () => {
         return rank.toString();
     };
 
-    const generateMenu = (mealType) => {
-        if (!currentHomeId) {
-            alert("No home selected.");
-            return;
-        }
-
-        const rankedMeals = homePreferences[currentHomeId][mealType];
-        const servingSizes = mealServings;
-        const totalDays = 28;
-        const menu = [];
-
-        let availableMeals = [...rankedMeals]; // Copy of available meals to avoid repetition
-        let leftovers = {}; // Track leftovers, stored by meal type
-
-        for (let day = 0; day < totalDays; day++) {
-            let mealForDay = null;
-
-            // First, check if there are leftovers for this meal type to use
-            if (leftovers[mealType] && leftovers[mealType].mealId && leftovers[mealType].servings > 0) {
-                mealForDay = leftovers[mealType].mealId;
-                let servingsUsed = Math.min(residents, leftovers[mealType].servings);
-                leftovers[mealType].servings -= servingsUsed; // Consume servings
-
-                // Remove if there is nothing left
-                if (leftovers[mealType].servings === 0) {
-                    delete leftovers[mealType];
-                }
-                menu.push({ day: day + 1, mealType: mealType, mealId: mealForDay, servings: servingsUsed, cookedNew: false });
-            } else {
-                // If no leftovers, pick a new meal
-                if (availableMeals.length > 0) {
-                    mealForDay = availableMeals.shift(); // Take the first available meal
-                } else {
-                    // If you run out of meals, reset to the beginning (simplification)
-                    availableMeals = [...rankedMeals];
-                    mealForDay = availableMeals.shift();
-                }
-
-                // Now calculate how much to cook based on residents and the bagging
-                const servingsNeeded = residents;  // Residents per home
-                const mealServingSize = servingSizes[mealForDay] || 1; // serving size
-                let quantityToCook = Math.ceil(servingsNeeded / mealServingSize);  // How many servings needed
-                let actualServingsCooked = quantityToCook * mealServingSize;
-
-                // Update leftovers (assuming you can store leftovers for the next day only)
-                let leftoverServings = Math.max(0, actualServingsCooked - servingsNeeded);
-                if (leftoverServings > 0) {
-                    leftovers[mealType] = {
-                        mealId: mealForDay,
-                        servings: leftoverServings,
-                    };
-                }
-
-                menu.push({ day: day + 1, mealType: mealType, mealId: mealForDay, servings: servingsNeeded, cookedNew: true });
-            }
-        }
-        return menu;
-    };
-
     const handleGenerateMenuClick = (mealType) => {
-        const menu = generateMenu(mealType);
-        setGeneratedMenu(menu); // set generated menu to be displayed
+        const preferences = homePreferences[currentHomeId]?.[mealType] || [];
+        const menu = generateMenu(preferences, mealServings, residents, meals);
+        setGeneratedMenu(menu);
     };
 
     const renderGeneratedMenu = () => {
@@ -422,7 +311,7 @@ const MealPlanner = () => {
                 <ul>
                     {generatedMenu.map(item => (
                         <li key={`${item.day}-${item.mealType}`}>
-                            Day {item.day}: {item.mealType} - {item.mealId} (Servings: {item.servings}, {item.cookedNew ? 'New' : 'Leftover'})
+                            Day {item.day}: {item.mealType} - {item.mealName === "Use Leftovers" ? "Use Leftovers" : `${item.mealName}`} (Servings: {item.servings}, LeftOverBeforeCook:{item.leftoverServings}, Total Leftover:{item.totalLeftover} CookNew:{item.cookedNew ? 'Yes' : 'No'} )
                         </li>
                     ))}
                 </ul>
@@ -446,10 +335,9 @@ const MealPlanner = () => {
                         <h2 className="text-2xl font-semibold mb-4">Home Meal Popularity Ranking</h2>
                         <div className="mb-6 border rounded p-4 shadow-md">
                             <h3 className="text-xl font-semibold mb-2">Home: {currentHomeId}</h3>
-                            {console.log(homePreferences)}
-                            {console.log(homePreferences[currentHomeId])}
-                            <h3 className="text-xl font-semibold mb-2">Home: {homePreferences[currentHomeId]["email"]}</h3>
-                            <h3 className="text-xl font-semibold mb-2">Home: {currentHomeId}</h3>
+                            {console.log(homes)}
+                            <h3 className="text-m font-semibold mb-2">Resident: {residents}</h3>
+                            <h3 className="text-m font-semibold mb-2">Dietary Restriction: {homes[currentHomeId].dietary_restrictions?.length ? homes[currentHomeId].dietary_restrictions.join(', ') : 'None'}</h3>
                             {['breakfast', 'lunch', 'dinner'].map((mealType) => (
                                 <div key={mealType} className="mb-4">
                                     <h4 className="text-lg font-semibold">{mealType.charAt(0).toUpperCase() + mealType.slice(1)}</h4>
