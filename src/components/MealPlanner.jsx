@@ -22,7 +22,7 @@ const MealPlanner = () => {
     const [homePreferences, setHomePreferences] = useState({});
     const [mealServings, setMealServings] = useState({}); // { [mealId]: servingSize }
     const [mealCounts, setMealCounts] = useState({});
-    const [generatedMenu, setGeneratedMenu] = useState(null); // Store generated menu
+    const [generatedMenu, setGeneratedMenu] = useState({}); // Store generated menu
 
     const homeIds = Object.keys(homes);
     const totalHomes = homeIds.length;
@@ -63,6 +63,20 @@ const MealPlanner = () => {
 
         fetchData();
     }, []);
+
+    useEffect(() => {
+        if (Object.keys(homes).length > 0) {
+            const initialMenus = {};
+            Object.keys(homes).forEach(homeId => {
+            initialMenus[homeId] = {
+                breakfast: null,
+                lunch: null,
+                dinner: null
+            };
+            });
+            setGeneratedMenus(initialMenus);
+        }
+    }, [homes]);
 
 
     const transformXlsxData = (jsonData) => {
@@ -294,31 +308,6 @@ const MealPlanner = () => {
         return rank.toString();
     };
 
-    const handleGenerateMenuClick = (mealType) => {
-        const preferences = homePreferences[currentHomeId]?.[mealType] || [];
-        const menu = generateMenu(preferences, mealServings, residents, meals);
-        setGeneratedMenu(menu);
-    };
-
-    const renderGeneratedMenu = () => {
-        if (!generatedMenu) {
-            return <p>Click "Generate Menu" to see the menu</p>;
-        }
-
-        return (
-            <div>
-                <h3>Generated Menu:</h3>
-                <ul>
-                    {generatedMenu.map(item => (
-                        <li key={`${item.day}-${item.mealType}`}>
-                            Day {item.day}: {item.mealType} - {item.mealName === "Use Leftovers" ? "Use Leftovers" : `${item.mealName}`} (Servings: {item.servings}, LeftOverBeforeCook:{item.leftoverServings} )
-                        </li>
-                    ))}
-                </ul>
-            </div>
-        );
-    };
-
     // Add new state for separate menus
   const [generatedMenus, setGeneratedMenus] = useState({
     breakfast: null,
@@ -328,12 +317,15 @@ const MealPlanner = () => {
 
   // New function to generate all menus at once
   const handleGenerateAllMenus = () => {
-    const menus = {};
+    const newMenus = {};
     ['breakfast', 'lunch', 'dinner'].forEach(mealType => {
       const preferences = homePreferences[currentHomeId]?.[mealType] || [];
-      menus[mealType] = generateMenu(preferences, mealServings, residents, meals);
+      newMenus[mealType] = generateMenu(preferences, mealServings, residents, meals);
     });
-    setGeneratedMenus(menus);
+    setGeneratedMenus(prevMenus => ({
+      ...prevMenus,
+      [currentHomeId]: newMenus
+    }));
   };
 
   const reorganizeToAvoidDuplicates = (menuArray) => {
@@ -341,13 +333,10 @@ const MealPlanner = () => {
     
     const result = [...menuArray];
     
-    // Start from index 1 and check previous meal
     for (let i = 1; i < result.length; i++) {
       if (result[i].mealName === result[i-1].mealName) {
-        // Look for a different meal to swap with
         let swapIndex = -1;
         for (let j = i + 1; j < result.length; j++) {
-          // Check if swapping wouldn't create new duplicates
           if (result[j].mealName !== result[i-1].mealName && 
               (j === result.length - 1 || result[j].mealName !== result[j+1].mealName) &&
               (i === result.length - 1 || result[j].mealName !== result[i+1].mealName)) {
@@ -356,14 +345,12 @@ const MealPlanner = () => {
           }
         }
         
-        // If found a suitable swap, perform it
         if (swapIndex !== -1) {
           [result[i], result[swapIndex]] = [result[swapIndex], result[i]];
         }
       }
     }
     
-    // Update day numbers
     result.forEach((item, index) => {
       item.day = index + 1;
     });
@@ -372,16 +359,22 @@ const MealPlanner = () => {
   };
 
   const renderMealTypeMenu = (mealType) => {
-    const menu = generatedMenus[mealType];
+    const homeMenus = generatedMenus[currentHomeId];
+    if (!homeMenus) return null;
+    
+    const menu = homeMenus[mealType];
     if (!menu) return null;
 
     const handleReorganizeMealType = () => {
-      const reorganizedMenu = reorganizeToAvoidDuplicates(menu);
-      setGeneratedMenus(prev => ({
-        ...prev,
-        [mealType]: reorganizedMenu
-      }));
-    };
+        const reorganizedMenu = reorganizeToAvoidDuplicates(menu);
+        setGeneratedMenus(prev => ({
+          ...prev,
+          [currentHomeId]: {
+            ...prev[currentHomeId],
+            [mealType]: reorganizedMenu
+          }
+        }));
+      };
 
     // Split the menu into weeks (7 days each)
     const weeks = Array.from({ length: 4 }, (_, weekIndex) => 
@@ -389,31 +382,31 @@ const MealPlanner = () => {
     );
 
     const onDragEndMenu = (result) => {
-      if (!result.destination) return;
-
-      const { source, destination } = result;
-      const sourceWeek = parseInt(source.droppableId);
-      const destWeek = parseInt(destination.droppableId);
-      
-      const newGeneratedMenus = { ...generatedMenus };
-      const updatedMenu = [...menu];
-      
-      // Calculate actual indices in the full menu array
-      const sourceIndex = sourceWeek * 7 + source.index;
-      const destIndex = destWeek * 7 + destination.index;
-      
-      // Move the item
-      const [movedItem] = updatedMenu.splice(sourceIndex, 1);
-      updatedMenu.splice(destIndex, 0, movedItem);
-      
-      // Update days for all items
-      updatedMenu.forEach((item, index) => {
-        item.day = index + 1;
-      });
-      
-      newGeneratedMenus[mealType] = updatedMenu;
-      setGeneratedMenus(newGeneratedMenus);
-    };
+        if (!result.destination) return;
+    
+        const { source, destination } = result;
+        const sourceWeek = parseInt(source.droppableId);
+        const destWeek = parseInt(destination.droppableId);
+        
+        const newGeneratedMenus = { ...generatedMenus };
+        const updatedMenu = [...menu];
+        
+        const sourceIndex = sourceWeek * 7 + source.index;
+        const destIndex = destWeek * 7 + destination.index;
+        
+        const [movedItem] = updatedMenu.splice(sourceIndex, 1);
+        updatedMenu.splice(destIndex, 0, movedItem);
+        
+        updatedMenu.forEach((item, index) => {
+          item.day = index + 1;
+        });
+        
+        newGeneratedMenus[currentHomeId] = {
+          ...newGeneratedMenus[currentHomeId],
+          [mealType]: updatedMenu
+        };
+        setGeneratedMenus(newGeneratedMenus);
+      };
 
     return (
       <div className="mb-6">
