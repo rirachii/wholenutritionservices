@@ -54,8 +54,8 @@ describe('generateMenu Function (Pure Logic)', () => {
         expect(menu[7].mealName).toBe('Strawberry Shortcake');
         expect(menu[8].mealName).toBe('Strawberry Shortcake');
         expect(menu[9].mealName).toBe('Strawberry Shortcake');
-        expect(menu[10].mealName).toBe('Strawberry Shortcake');
-        expect(menu[11].mealName).toBe('Banana Nut Oatmeal'); // Day 12 Restart
+        expect(menu[10].mealName).toBe('Banana Nut Oatmeal'); // Day 12 Restart
+        expect(menu[11].mealName).toBe('Almond Rice Pudding'); 
     });
 
     it('Check if the total leftovers is correctly generated', () => {
@@ -75,10 +75,9 @@ describe('generateMenu Function (Pure Logic)', () => {
       expect(menu[7].mealName).toBe('Strawberry Shortcake');
       expect(menu[8].mealName).toBe('Strawberry Shortcake');
       expect(menu[9].mealName).toBe('Strawberry Shortcake');
-      expect(menu[10].mealName).toBe('Strawberry Shortcake');
-      expect(menu[11].mealName).toBe('Chia Pudding'); // Day 12 Restart
-      expect(menu[12].mealName).toBe('Chia Pudding'); 
-      expect(menu[13].mealName).toBe('Banana Nut Oatmeal'); // Day 1 Cook New
+      expect(menu[10].mealName).toBe('Chia Pudding'); // Day 12 Restart
+      expect(menu[11].mealName).toBe('Chia Pudding'); 
+      expect(menu[12].mealName).toBe('Banana Nut Oatmeal'); // Day 1 Cook New
   });
 
 
@@ -91,18 +90,18 @@ describe('generateMenu Function (Pure Logic)', () => {
     expect(menu[0].mealId).toBe('banana-nut-oatmeal');
     expect(menu[1].mealId).toBe('almond-rice-pudding');
     expect(menu[2].mealId).toBe('apple-spice-oatmeal');
+    expect(menu[3].mealId).toBe('gf-lemon-blueberry-scones');
     expect(menu[4].mealId).toBe('gf-lemon-blueberry-scones');
-    expect(menu[5].mealId).toBe('gf-lemon-blueberry-scones');
-    expect(menu[6].mealId).toBe('avocado-toast-gf');
-    expect(menu[7].mealId).toBe('peanut-butter-chia-toast');
+    expect(menu[5].mealId).toBe('avocado-toast-gf');
+    expect(menu[6].mealId).toBe('peanut-butter-chia-toast');
+    expect(menu[7].mealId).toBe('chia-pudding');
     expect(menu[8].mealId).toBe('chia-pudding');
-    expect(menu[9].mealId).toBe('chia-pudding');
+    expect(menu[9].mealId).toBe('strawberry-shortcake');
     expect(menu[10].mealId).toBe('strawberry-shortcake');
     expect(menu[11].mealId).toBe('strawberry-shortcake');
     expect(menu[12].mealId).toBe('strawberry-shortcake');
-    expect(menu[13].mealId).toBe('strawberry-shortcake');
-    expect(menu[14].mealId).toBe('banana-nut-oatmeal');
-    expect(menu[15].mealId).toBe('almond-rice-pudding');
+    expect(menu[13].mealId).toBe('banana-nut-oatmeal');
+    expect(menu[14].mealId).toBe('almond-rice-pudding');
   });
 
 });

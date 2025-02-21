@@ -30,7 +30,6 @@ export const generateMenu = (preferences, servingSizes, residents, meals) => {
         mealId: mealId,
         mealName: meal.name,
         servings: residents,
-        cookedNew: true,
         leftoverServings: servingSize - residents
       });
       currentDay++;

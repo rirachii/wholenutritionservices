@@ -311,7 +311,7 @@ const MealPlanner = () => {
                 <ul>
                     {generatedMenu.map(item => (
                         <li key={`${item.day}-${item.mealType}`}>
-                            Day {item.day}: {item.mealType} - {item.mealName === "Use Leftovers" ? "Use Leftovers" : `${item.mealName}`} (Servings: {item.servings}, LeftOverBeforeCook:{item.leftoverServings}, Total Leftover:{item.totalLeftover} CookNew:{item.cookedNew ? 'Yes' : 'No'} )
+                            Day {item.day}: {item.mealType} - {item.mealName === "Use Leftovers" ? "Use Leftovers" : `${item.mealName}`} (Servings: {item.servings}, LeftOverBeforeCook:{item.leftoverServings} )
                         </li>
                     ))}
                 </ul>
@@ -319,99 +319,277 @@ const MealPlanner = () => {
         );
     };
 
-    const renderTabContent = () => {
-        if (loading) {
-            return <p className="text-center text-gray-500">Loading...</p>;
-        }
+    // Add new state for separate menus
+  const [generatedMenus, setGeneratedMenus] = useState({
+    breakfast: null,
+    lunch: null,
+    dinner: null
+  });
 
-        if (totalHomes === 0) {
-            return <p className="text-center text-gray-500">No homes available.</p>;
-        }
+  // New function to generate all menus at once
+  const handleGenerateAllMenus = () => {
+    const menus = {};
+    ['breakfast', 'lunch', 'dinner'].forEach(mealType => {
+      const preferences = homePreferences[currentHomeId]?.[mealType] || [];
+      menus[mealType] = generateMenu(preferences, mealServings, residents, meals);
+    });
+    setGeneratedMenus(menus);
+  };
 
-        switch (activeTab) {
-            case 'mealRanking':
-                return (
-                    <div className="p-4">
-                        <h2 className="text-2xl font-semibold mb-4">Home Meal Popularity Ranking</h2>
-                        <div className="mb-6 border rounded p-4 shadow-md">
-                            <h3 className="text-xl font-semibold mb-2">Home: {currentHomeId}</h3>
-                            {console.log(homes)}
-                            <h3 className="text-m font-semibold mb-2">Resident: {residents}</h3>
-                            <h3 className="text-m font-semibold mb-2">Dietary Restriction: {homes[currentHomeId].dietary_restrictions?.length ? homes[currentHomeId].dietary_restrictions.join(', ') : 'None'}</h3>
-                            {['breakfast', 'lunch', 'dinner'].map((mealType) => (
-                                <div key={mealType} className="mb-4">
-                                    <h4 className="text-lg font-semibold">{mealType.charAt(0).toUpperCase() + mealType.slice(1)}</h4>
-                                    <DragDropContext onDragEnd={(result) => onDragEnd(result, mealType)}>
-                                        <Droppable droppableId={currentHomeId.toString()}>
-                                            {(provided) => (
-                                                <ul
-                                                    className="list-none p-0"
-                                                    {...provided.droppableProps}
-                                                    ref={provided.innerRef}
-                                                >
-                                                    {homePreferences[currentHomeId]?.[mealType]?.map((mealId, index) => {
-                                                        const ranking = getMealRanking(mealId, mealType);
-                                                        const meal = meals.find((m) => m.id === mealId);
-                                                        const servingsOptions = meal?.servings || [];
-
-                                                        return (
-                                                            <Draggable
-                                                                key={mealId.toString()}
-                                                                draggableId={mealId.toString()}
-                                                                index={index}
-                                                            >
-                                                                {(provided) => (
-                                                                    <li
-                                                                        ref={provided.innerRef}
-                                                                        {...provided.draggableProps}
-                                                                        {...provided.dragHandleProps}
-                                                                        className="border rounded p-2 mb-2 bg-gray-100 cursor-move flex items-center justify-between"
-                                                                    >
-                                                                        <span className="text-green-500">Rank {ranking}</span>
-                                                                        <span>{mealId}</span>
-                                                                        {servingsOptions.length > 1 ? (
-                                                                            <select
-                                                                                value={mealServings[mealId] || 1}
-                                                                                onChange={(e) =>
-                                                                                    handleServingChange(mealId, e.target.value)
-                                                                                }
-                                                                                className="ml-2"
-                                                                            >
-                                                                                {servingsOptions.map((option) => (
-                                                                                    <option key={option} value={option}>
-                                                                                        {option}
-                                                                                    </option>
-                                                                                ))}
-                                                                            </select>
-                                                                        ) : (
-                                                                            <span className="ml-2">{servingsOptions[0] || 1}</span>
-                                                                        )}
-                                                                    </li>
-                                                                )}
-                                                            </Draggable>
-                                                        );
-                                                    })}
-                                                    {provided.placeholder}
-                                                </ul>
-                                            )}
-                                        </Droppable>
-                                    </DragDropContext>
-                                    <button
-                                        onClick={() => handleGenerateMenuClick(mealType)}
-                                        className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-2"
-                                    >
-                                        Generate {mealType} Menu
-                                    </button>
-                                </div>
-                            ))}
-                        </div>
-                        {renderGeneratedMenu()} {/* Display generated menu */}
-                    </div>
-                );
-            default:
-                return null;
+  const reorganizeToAvoidDuplicates = (menuArray) => {
+    if (!menuArray || menuArray.length <= 1) return menuArray;
+    
+    const result = [...menuArray];
+    
+    // Start from index 1 and check previous meal
+    for (let i = 1; i < result.length; i++) {
+      if (result[i].mealName === result[i-1].mealName) {
+        // Look for a different meal to swap with
+        let swapIndex = -1;
+        for (let j = i + 1; j < result.length; j++) {
+          // Check if swapping wouldn't create new duplicates
+          if (result[j].mealName !== result[i-1].mealName && 
+              (j === result.length - 1 || result[j].mealName !== result[j+1].mealName) &&
+              (i === result.length - 1 || result[j].mealName !== result[i+1].mealName)) {
+            swapIndex = j;
+            break;
+          }
         }
+        
+        // If found a suitable swap, perform it
+        if (swapIndex !== -1) {
+          [result[i], result[swapIndex]] = [result[swapIndex], result[i]];
+        }
+      }
+    }
+    
+    // Update day numbers
+    result.forEach((item, index) => {
+      item.day = index + 1;
+    });
+    
+    return result;
+  };
+
+  const renderMealTypeMenu = (mealType) => {
+    const menu = generatedMenus[mealType];
+    if (!menu) return null;
+
+    const handleReorganizeMealType = () => {
+      const reorganizedMenu = reorganizeToAvoidDuplicates(menu);
+      setGeneratedMenus(prev => ({
+        ...prev,
+        [mealType]: reorganizedMenu
+      }));
     };
+
+    // Split the menu into weeks (7 days each)
+    const weeks = Array.from({ length: 4 }, (_, weekIndex) => 
+      menu.slice(weekIndex * 7, (weekIndex + 1) * 7)
+    );
+
+    const onDragEndMenu = (result) => {
+      if (!result.destination) return;
+
+      const { source, destination } = result;
+      const sourceWeek = parseInt(source.droppableId);
+      const destWeek = parseInt(destination.droppableId);
+      
+      const newGeneratedMenus = { ...generatedMenus };
+      const updatedMenu = [...menu];
+      
+      // Calculate actual indices in the full menu array
+      const sourceIndex = sourceWeek * 7 + source.index;
+      const destIndex = destWeek * 7 + destination.index;
+      
+      // Move the item
+      const [movedItem] = updatedMenu.splice(sourceIndex, 1);
+      updatedMenu.splice(destIndex, 0, movedItem);
+      
+      // Update days for all items
+      updatedMenu.forEach((item, index) => {
+        item.day = index + 1;
+      });
+      
+      newGeneratedMenus[mealType] = updatedMenu;
+      setGeneratedMenus(newGeneratedMenus);
+    };
+
+    return (
+      <div className="mb-6">
+        <div className="flex justify-between items-center mb-2">
+          <h3 className="text-xl font-semibold capitalize">{mealType} Menu</h3>
+          <button
+            onClick={handleReorganizeMealType}
+            className="px-3 py-1 bg-blue-500 text-white text-sm rounded hover:bg-blue-600 transition-colors"
+          >
+            Reorganize to Avoid Duplicates
+          </button>
+        </div>
+        <DragDropContext onDragEnd={onDragEndMenu}>
+          <div className="grid grid-cols-4 gap-4">
+            {weeks.map((week, weekIndex) => (
+              <div key={weekIndex} className="bg-white rounded shadow">
+                <div className="bg-gray-100 px-2 py-1 text-sm font-medium border-b">
+                  Week {weekIndex + 1}
+                </div>
+                <Droppable droppableId={weekIndex.toString()}>
+                  {(provided) => (
+                    <ul 
+                      className="text-sm min-h-[200px]"
+                      ref={provided.innerRef}
+                      {...provided.droppableProps}
+                    >
+                      {week.map((item, itemIndex) => (
+                        <Draggable
+                          key={`${item.day}-${item.mealType}`}
+                          draggableId={`${item.day}-${item.mealType}`}
+                          index={itemIndex}
+                        >
+                          {(provided) => (
+                            <li
+                              ref={provided.innerRef}
+                              {...provided.draggableProps}
+                              {...provided.dragHandleProps}
+                              className="px-2 py-1 border-b last:border-b-0 hover:bg-gray-50 cursor-move"
+                            >
+                              <div className="flex justify-between items-center">
+                                <span className="font-medium">Day {item.day}</span>
+                                <span className="text-xs text-gray-500">
+                                  {item.servings}/{item.leftoverServings}
+                                </span>
+                              </div>
+                              <div className="truncate">
+                                {item.mealName === "Use Leftovers" ? (
+                                  <span className="text-blue-600">Use Leftovers</span>
+                                ) : (
+                                  <span>{item.mealName}</span>
+                                )}
+                              </div>
+                            </li>
+                          )}
+                        </Draggable>
+                      ))}
+                      {provided.placeholder}
+                    </ul>
+                  )}
+                </Droppable>
+              </div>
+            ))}
+          </div>
+        </DragDropContext>
+      </div>
+    );
+    }
+
+  // Modified renderTabContent
+  const renderTabContent = () => {
+    if (loading) {
+      return <p className="text-center text-gray-500">Loading...</p>;
+    }
+
+    if (totalHomes === 0) {
+      return <p className="text-center text-gray-500">No homes available.</p>;
+    }
+
+    switch (activeTab) {
+      case 'mealRanking':
+        return (
+            <div className="p-2">
+            {/* Header info */}
+            <div className="mb-2 bg-white rounded shadow p-2">
+              <div className="grid grid-cols-3 gap-2 items-center text-sm">
+                <div>Home: <span className="font-semibold">{currentHomeId}</span></div>
+                <div>Residents: <span className="font-semibold">{residents}</span></div>
+                <div>
+                  Restrictions: <span className="font-semibold">
+                    {homes[currentHomeId].dietary_restrictions?.length ? 
+                      homes[currentHomeId].dietary_restrictions.join(', ') : 'None'}
+                  </span>
+                </div>
+              </div>
+            </div>
+                
+            {/* Meal rankings grid */}
+            <div className="grid grid-cols-3 gap-4">
+      {['breakfast', 'lunch', 'dinner'].map((mealType) => (
+        <div key={mealType} className="bg-white rounded shadow">
+          <h4 className="text-base font-semibold capitalize bg-gray-100 p-2">{mealType} Rankings</h4>
+          <div className="p-2">
+            <DragDropContext onDragEnd={(result) => onDragEnd(result, mealType)}>
+              <Droppable droppableId={currentHomeId.toString()}>
+                {(provided) => (
+                  <ul className="list-none p-0 space-y-1 text-base"
+                    {...provided.droppableProps}
+                    ref={provided.innerRef}>
+                    {homePreferences[currentHomeId]?.[mealType]?.map((mealId, index) => {
+                      const ranking = getMealRanking(mealId, mealType);
+                      const meal = meals.find((m) => m.id === mealId);
+                      const servingsOptions = meal?.servings || [];
+
+                      return (
+                        <Draggable
+                          key={mealId.toString()}
+                          draggableId={mealId.toString()}
+                          index={index}>
+                          {(provided) => (
+                            <li
+                              ref={provided.innerRef}
+                              {...provided.draggableProps}
+                              {...provided.dragHandleProps}
+                              className="border rounded px-2 py-1 bg-gray-50 cursor-move text-sm">
+                              <div className="flex items-center justify-between">
+                                <span className="text-green-500 font-medium">#{ranking}</span>
+                                <span className="truncate mx-2 flex-grow">{mealId}</span>
+                                {servingsOptions.length > 1 ? (
+                                  <select
+                                    value={mealServings[mealId] || 1}
+                                    onChange={(e) => handleServingChange(mealId, e.target.value)}
+                                    className="border rounded text-sm p-0">
+                                    {servingsOptions.map((option) => (
+                                      <option key={option} value={option}>
+                                        {option}
+                                      </option>
+                                    ))}
+                                  </select>
+                                ) : (
+                                  <span>{servingsOptions[0] || 1}</span>
+                                )}
+                              </div>
+                            </li>
+                          )}
+                        </Draggable>
+                      );
+                    })}
+                    {provided.placeholder}
+                  </ul>
+                )}
+              </Droppable>
+            </DragDropContext>
+          </div>
+        </div>
+      ))}
+              
+              <button
+                onClick={handleGenerateAllMenus}
+                className="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg shadow-md transition duration-200 ease-in-out">
+                Generate All Menus
+              </button>
+            </div>
+
+            {/* Render each meal type menu separately */}
+            <div className="mt-8">
+              {renderMealTypeMenu('breakfast')}
+              {renderMealTypeMenu('lunch')}
+              {renderMealTypeMenu('dinner')}
+            </div>
+          </div>
+        );
+      default:
+        return null;
+    }
+  };
+
 
     return (
         <div className="container mx-auto px-4 py-8">
